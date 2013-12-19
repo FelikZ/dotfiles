@@ -1,0 +1,25 @@
+autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
+augroup vimscript
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END
+
+augroup HTML
+    autocmd!
+    autocmd BufRead,BufWritePre *.html :normal gg=G
+    autocmd FileType html nnoremap <buffer> <leader>c I<!--<esc>A--><esc>
+augroup END
+
+augroup JavaScript
+    autocmd!
+    autocmd FileType javascript setlocal shiftwidth=4 softtabstop=4 tabstop=4
+augroup END
+
+function! OpenUrlUnderCursor()
+    let url=matchstr(getline("."), '[a-z]*:\/\/[^ >,;]*')
+    if url != ""
+        silent exec "!open '".url."'" | redraw! 
+    endif
+endfunction
+map <leader>o :call OpenUrlUnderCursor()<CR>
+

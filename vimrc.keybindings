@@ -1,0 +1,30 @@
+let mapleader=','
+
+map <leader>n :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+nnoremap <leader>. :b
+
+nnoremap / /\v
+vnoremap / /\v
+nnoremap <leader>> :bp<cr>/ /\v
+nnoremap <leader><cr> :noh<cr>
+nnoremap Y y$
+nnoremap & :&&<cr>
+vmap <Enter> <Plug>(EasyAlign)
+nmap <Leader>a <Plug>(EasyAlign)
+nnoremap <leader>A :Ag<cr>
+vnoremap <leader>A :Ag<cr>
+
+map <silent> <Up> gk
+imap <silent> <Up> <C-o>gk
+map <silent> <Down> gj
+imap <silent> <Down> <C-o>gj
+map <silent> <home> g<home>
+map <silent> <Up> gk
+imap <silent> <Up> <C-o>gk
+map <silent> <Down> gj
+nnoremap <silent> j gj
+nnoremap <silent> k gk
+vnoremap <silent> j gj
+vnoremap <silent> k gk

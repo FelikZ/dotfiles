@@ -1,4 +1,13 @@
-dotfiles
+DOTFILES
 ========
 
-my linux dotfiles
+My linux dotfile experiments
+
+to install
+
+$ git clone https://github.com/kapral18/dotfiles.git
+$ cd dotfiles
+$ chmod +x init.sh
+$ /init.sh
+
+And you're done.

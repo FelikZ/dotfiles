@@ -1,0 +1,258 @@
+" Activate NeoBundle.
+if has('vim_starting')
+   set nocompatible               " Be iMproved
+   set runtimepath+=~/.vim/bundle/neobundle.vim/
+ endif
+
+call neobundle#rc(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage itself.
+NeoBundleFetch "Shougo/neobundle.vim"
+
+" Config {{{{ 
+
+" Use Tim Pope's recommended, sane defaults.
+NeoBundle "tpope/vim-sensible"
+" Repeat support for arbitrary plugins.
+NeoBundle "tpope/vim-repeat"
+" Visual repeat for plugins
+NeoBundle "vim-scripts/visualrepeat"
+
+" }}}}
+
+" Integration {{{{
+
+" Async adapters for running Vim's compiler plugins, or arbitrary commands.
+NeoBundle "tpope/vim-dispatch"
+" A thin wrapper around Bundler, and `bundle open` (for editing/viewing the
+" contents of bundled gems).
+NeoBundle "tpope/vim-bundler"
+" A wrapper and integration plugin for Ruby on Rails.  It includes commands
+" for
+" navigating around a Rails project, as well as viewing documentation, running
+" tests, and creating new Rails apps.
+NeoBundle "tpope/vim-rails"
+
+" A plugin that enables Vim to access several database types.  It includes the
+" ability to interact with the database and run queries, and even will
+" configure
+" itself from Rail's `config/database.yml`.
+NeoBundle "dbext.vim"
+
+" Sleuth automatically changes the indent settings based on files of the same
+" type around and above your current file.
+NeoBundle "tpope/vim-sleuth"
+
+"}}}}
+
+" Movement {{{{
+
+" EasyMotion displays possible motions as hints, making it easier to navigate
+" files.
+NeoBundle "Lokaltog/vim-easymotion"
+" Seek adds a two-character seek binding.
+NeoBundle "goldfeld/vim-seek"
+
+" MatchIt adds support for matching 'logical' blocks with %.  This allows
+" quick
+" jumping between language constructs.
+NeoBundle "matchit.zip"
+
+"}}}}
+
+" Editing {{{{
+"
+
+" Surround.vim adds support for manipulating the surroundings of a text
+" object,
+" such as adding/removing quotes, replacing in brackets, and more.
+NeoBundle "tpope/vim-surround"
+" Speeddating adds support for incrementing and decrementing dates.
+NeoBundle "tpope/vim-speeddating"
+
+" Automatically close quotes, parenthesis, braces, and other delimiters.
+NeoBundle "Raimondi/delimitMate"
+" Automatically end block constructs in supported languages.
+NeoBundle "tpope/vim-endwise"
+
+" Commentary adds key bindings to easily comment and uncomment code.
+NeoBundle "tpope/vim-commentary"
+" Tabular.vim adds support for automatically aligning text based on search
+" queries.
+NeoBundle "junegunn/vim-easy-align"
+
+" Pasta adds context-aware (indented) pasting support.
+NeoBundle "sickill/vim-pasta"
+" UnconditionalPaste adds bindings to paste text as a block/line/character,
+" regardless of the original type.
+NeoBundle "UnconditionalPaste"
+" ReplaceWithRegister adds support for replacing a line or a selection with a
+" register.
+NeoBundle "ReplaceWithRegister"
+" Multiple cursors
+NeoBundle "terryma/vim-multiple-cursors"
+"}}}}
+
+" Search/Substitutions {{{{
+
+" A fuzzy file-finder, mru switcher, buffer finder, and more (with a nice
+" collection of plugins), written in pure VimL.
+NeoBundle "kien/ctrlp.vim"
+" Ag is a drop-in replacement for Ack, which itself is a grep replacement
+" tailored for programmers.
+NeoBundle "rking/ag.vim"
+
+" Abolish brings bracket substitutions to Vim abbreviations, searches, and
+" substitutions.
+NeoBundle "tpope/vim-abolish"
+
+"}}}}
+
+" Utilities {{{{
+
+" A Textmate-like 'project drawer' for Vim.
+NeoBundle "scrooloose/nerdtree"
+" A ctags browser as a sidebar.
+NeoBundle "majutsushi/tagbar"
+" A tree-like visualization of undo branches.
+NeoBundle "mbbill/undotree"
+" A simple buffer browser, with very easy-to-use bindings.
+NeoBundle "troydm/easybuffer.vim"
+
+" Various utilities for *nix (and maybe Windows) systems, such as renaming and
+" deleting files, or changing file permissions.
+NeoBundle "tpope/vim-eunuch"
+
+" Edit various binary files, including images in Vim.
+NeoBundle "tpope/vim-afterimage"
+
+" View CSS colors.
+NeoBundle "gorodinskiy/vim-coloresque"
+
+"}}}}
+
+" Keybinds {{{{
+
+" Handy bracket-prefixed pairs of mappings that @tpope finds useful.
+NeoBundle "tpope/vim-unimpaired"
+" Add SGML editing bindings for XML/HTML manipulation.
+NeoBundle "tpope/vim-ragtag"
+
+"}}}}
+
+" Completion/Snippets {{{{
+
+"Preloaders for snipmate and ultra
+NeoBundle "MarcWeber/vim-addon-mw-utils"
+NeoBundle "tomtom/tlib_vim"
+NeoBundle "garbas/vim-snipmate"
+" A powerful snippet engine, with support for nested snippets.
+NeoBundle "honza/vim-snippets"
+" Emmet snippets
+NeoBundle "mattn/emmet-vim"
+
+"}}}}
+
+" Syntax {{{{
+
+" Syntastic adds syntax checking for most languages, and linting for the very
+" popular ones.
+NeoBundle "scrooloose/syntastic"
+
+" Ruby is a language that focuses on clarity and code beauty.  With the
+" extremely popular Rails (Ruby on Rails) framework, it is one of the most
+" common languages used in web applications.
+NeoBundle "vim-ruby/vim-ruby"
+" Python is a language that focuses on semantics.  It is widely used for
+" creating web apps, as well as being popular for scientific research and data
+" processing.
+NeoBundle "python.vim--Vasiliev"
+" Javascript is a language that runs in the browser (and on the server, thanks
+" to Node.js).  It can be used for scripting interactive web pages, or for
+" highly concurrent applications (with Node).
+NeoBundle "pangloss/vim-javascript"
+" Livescript is a fork of Coco, which itself is a fork of Coffeescript.  It
+" aims to bring back more Coffeescript compatibility, add tools and syntax
+" that
+" enable function programming, and make Javascript easier to use.
+NeoBundle "gkz/vim-ls"
+" CoffeeScript is a language that attempts to solve some of Javascript's
+" awkwardness.  The language is very Ruby-like, but compiles to Javascript.
+NeoBundle "kchmck/vim-coffee-script"
+
+" HTML5 is the newest version of the HTML markup language.  It supports new
+" features such as an offline 'appcache', custom data attributes, CORS
+" (Cross-Origin-Resource-Sharing), and more.
+NeoBundle "othree/html5.vim"
+" Haml is a simple markup language that compiles to (X)HTML.  It also supports
+" embedding code from its host language.  Sass and SCSS are a pair of
+" languages
+" that compile to CSS, adding features like variables, mixins, and selector
+" nesting/inheritance/extension.  Sass has a more Haml-like syntax, while SCSS
+" is more CSS-like.
+NeoBundle "tpope/vim-haml"
+" Slim is an ultra-minimal tempesting language, that compiles to (X)HTML.  It
+" can also embed snippets of its host language, and even shortens control
+" logic.
+NeoBundle "slim-template/vim-slim"
+" Mustache is a simple templating language, focusing on clarity.  Instead of
+" having its own syntax, and compiling to HTML, it uses tags embedded in HTML
+" to
+" define logic and flow.
+NeoBundle 'juvenn/mustache.vim'
+
+" CSS3 is the latest and greatest incarnation of CSS.  It comes with new
+" features like @media queries for rules based on screen-size, and animations
+" for creating fancy effects, with pure CSS.
+NeoBundle "hail2u/vim-css3-syntax"
+" Stylus is a minimal language that can be thought of as Slim or Jade for CSS.
+" It drops all unnecessary markup from CSS, producing an extremely minimal and
+" attractive language.  It supports features such as variables, selector
+" inheritance, and other useful features.
+NeoBundle 'wavded/vim-stylus'
+" LESS is a alternative language to CSS, that focuses on minimalism and
+" brevity.
+NeoBundle "groenewege/vim-less"
+"
+" Markdown is a simple plain-text markup language designed by John Gruber.  It
+" can be compiled to (X)HTML, or viewed as plain text and still be readable.
+" Markdown is widely used across the Internet to format comments, blog posts,
+" and other user-created snippets of HTML.
+NeoBundle "tpope/vim-markdown"
+" Todo.txt is a simple text-based todo format, and programs to manage it.
+NeoBundle "freitass/todo.txt-vim"
+
+" CSV, or Comma-Seperated-Values is a spreadsheet-like data exchange format.
+NeoBundle "chrisbra/csv.vim"
+" INI is a simple markup language with wide support.  It supports section
+" headers, but not much more.
+NeoBundle "nvie/vim-ini"
+" JSON (Javascript Object Notation) is a data-transfer language that was
+" 'discovered' by Douglas Crockford hiding inside Javascript.  It has wide
+" support between languages, and is often used in APIs.
+NeoBundle "elzr/vim-json"
+
+"}}}}
+
+" Appearance {{{{
+
+" Airline is a Powerline-like status bar.
+NeoBundle "bling/vim-airline"
+" Bufferline shows a list of buffers in the status bar or command line.
+NeoBundle "bling/vim-bufferline"
+
+" Show markers for indents.
+NeoBundle "nathanaelkane/vim-indent-guides"
+
+"}}}}
+
+" Colors {{{{
+
+" A gorgous colorscheme with light and dark variants.
+NeoBundle "altercation/vim-colors-solarized"
+
+"}}}}
+
+filetype plugin indent on
+
+NeoBundleCheck
