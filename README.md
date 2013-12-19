@@ -29,7 +29,7 @@ My linux dotfile experiments
     
     ```
     $ chmod +x init.sh
-    $ /init.sh
+    $ ./init.sh
     ```
 6. Enjoy.
 
