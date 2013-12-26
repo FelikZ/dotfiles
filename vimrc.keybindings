@@ -3,11 +3,7 @@ let mapleader=','
 map <leader>n :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-nnoremap <leader>. :b
-
-nnoremap / /\v
 vnoremap / /\v
-nnoremap <leader>> :bp<cr>/ /\v
 nnoremap <leader><cr> :noh<cr>
 nnoremap Y y$
 nnoremap & :&&<cr>
@@ -28,3 +24,8 @@ nnoremap <silent> j gj
 nnoremap <silent> k gk
 vnoremap <silent> j gj
 vnoremap <silent> k gk
+
+nnoremap <F2>  za
+inoremap <F3>  <ESC>za
+nnoremap <F9>  :bp<CR>
+nnoremap <F11> :bn<CR>

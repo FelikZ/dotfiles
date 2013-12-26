@@ -8,6 +8,7 @@ augroup HTML
     autocmd!
     autocmd BufRead,BufWritePre *.html :normal gg=G
     autocmd FileType html nnoremap <buffer> <leader>c I<!--<esc>A--><esc>
+    au BufRead,BufNewFile *.phtml  set filetype=html
 augroup END
 
 augroup JavaScript

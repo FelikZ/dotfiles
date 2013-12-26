@@ -1,35 +1,48 @@
-set synmaxcol=120
+" Set heading title
+set title
+
+" Settig max syntax highlight for better memory control
+set synmaxcol=200
+
+" Dont wrap lines by default
 set nowrap
+
+" Setting utf
 set termencoding=utf-8
 set encoding=utf-8
 set fileencoding=utf-8
 
+" Classical search
+set hlsearch                                  
 set incsearch                             
 set showmatch                            
 set smartcase                           
 set ignorecase                         
+set gdefault
 
+" Numberings and text paddings
 set number 
 set linebreak
 set scrolloff=20 
 
-set hlsearch                                  
+" Diggin into darker colors
 set background=dark
 
-
+" If you've ever tried to type :only and had Vim refuse to hide existing
+" buffers because they contain changes, you can use :set hidden to override
+" this behavior. Just remember to keep the possibility of hidden modified
+" buffers in mind when you're doing a :q!.
 set hidden
+
+" Always show status line
 set laststatus=2
 
+" Show typed commands and cursor position
 set showcmd
 set ruler
 
 " Default to Unix line endings.
 set fileformats=unix,dos,mac
-
-" Use UTF-8 for everything.
-set encoding=utf-8
-set termencoding=utf-8
-set fileencoding=utf-8
 
 " Make mapping timeouts faster, and keycode timeouts even faster.
 set timeout
@@ -37,9 +50,15 @@ set timeoutlen=500
 set ttimeout
 set ttimeoutlen=50
 
+"Extracting octal numbering from CTRL-A|CTRL-X commands
 set nrformats-=octal
+
+"Backspace works in Insert mode (e.g. not inserting a ^?), but won't delete
+"over line breaks, or automatically-inserted indentation, or the place where
+"insert mode started:
 set backspace=indent,eol,start
 
+"Indentational magery
 set autoindent
 set smartindent
 set expandtab
@@ -48,23 +67,14 @@ set softtabstop=2
 set tabstop=2
 set shiftround
 
+"Folding code inside 4 curly braces, autofolding on load
 set foldmethod=marker
 set foldmarker={{{{,}}}}
 
+"Autocomplete commands in :-mode on top of the :-line
 set wildmenu
 set wildmode=full
-
-set gdefault 
-
-setlocal linebreak
-setlocal nolist
-setlocal display+=lastline
-
-if has("gui")
-    set go-=T
-endif
 
 set t_Co=256
 syntax on
 colorscheme solarized
-
