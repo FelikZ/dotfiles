@@ -76,7 +76,7 @@ NeoBundle "Raimondi/delimitMate"
 NeoBundle "tpope/vim-endwise"
 
 " Commentary adds key bindings to easily comment and uncomment code.
-NeoBundle "tpope/vim-commentary"
+NeoBundle "scrooloose/nerdcommenter"
 " Tabular.vim adds support for automatically aligning text based on search
 " queries.
 NeoBundle "junegunn/vim-easy-align"

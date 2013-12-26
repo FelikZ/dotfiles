@@ -1,1 +1,3 @@
 .netrwhist
+/vim/bundle/*
+!/vun/bundle/neobundle.vim
