@@ -28,6 +28,9 @@ set scrolloff=20
 " Diggin into darker colors
 set background=dark
 
+" Selected colorscheme
+colorscheme solarized
+
 " If you've ever tried to type :only and had Vim refuse to hide existing
 " buffers because they contain changes, you can use :set hidden to override
 " this behavior. Just remember to keep the possibility of hidden modified
@@ -75,6 +78,8 @@ set foldmarker={{{{,}}}}
 set wildmenu
 set wildmode=full
 
+"Force vim to handle 256 colors for better colorscheming
 set t_Co=256
+
+"Syntax detection on
 syntax on
-colorscheme solarized

@@ -33,6 +33,9 @@ NeoBundle "tpope/vim-bundler"
 " tests, and creating new Rails apps.
 NeoBundle "tpope/vim-rails"
 
+" Nodejs support
+NeoBundle "moll/vim-node"
+
 " A plugin that enables Vim to access several database types.  It includes the
 " ability to interact with the database and run queries, and even will
 " configure
@@ -232,6 +235,8 @@ NeoBundle "nvie/vim-ini"
 " support between languages, and is often used in APIs.
 NeoBundle "elzr/vim-json"
 
+"Nodejs complete wit omnifunc
+NeoBundle "myhere/vim-nodejs-complete"
 "}}}}
 
 " Appearance {{{{
