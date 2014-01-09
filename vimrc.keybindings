@@ -29,4 +29,4 @@ vnoremap <silent> k gk
 nnoremap <F2>  za
 inoremap <F3>  <ESC>za
 nnoremap <F9>  :bp<CR>
-nnoremap <F11> :bn<CR>
+nnoremap <F12> :bn<CR>
