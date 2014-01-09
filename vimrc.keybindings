@@ -5,15 +5,15 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 nnoremap / /\v
 vnoremap / /\v
+
 nnoremap <leader><cr> :noh<cr>
+
 nnoremap Y y$
 nnoremap & :&&<cr>
+
 vmap <Enter> <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
-nnoremap <leader>A :Ag<cr>
-vnoremap <leader>A :Ag<cr>
 
-map <silent> <Up> gk
 imap <silent> <Up> <C-o>gk
 map <silent> <Down> gj
 imap <silent> <Down> <C-o>gj
@@ -22,11 +22,14 @@ map <silent> <Up> gk
 imap <silent> <Up> <C-o>gk
 map <silent> <Down> gj
 nnoremap <silent> j gj
-nnoremap <silent> k gk
 vnoremap <silent> j gj
+nnoremap <silent> k gk
 vnoremap <silent> k gk
+
+vnoremap < <gv
+vnoremap > >gv
 
 nnoremap <F2>  za
 inoremap <F3>  <ESC>za
-nnoremap <F9>  :bp<CR>
-nnoremap <F12> :bn<CR>
+
+nnoremap <F8> :TagbarToggle<br>
