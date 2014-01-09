@@ -17,7 +17,8 @@ NeoBundle "tpope/vim-sensible"
 NeoBundle "tpope/vim-repeat"
 " Visual repeat for plugins
 NeoBundle "vim-scripts/visualrepeat"
-
+" LargeFile handling
+NeoBundle "vim-scripts/LargeFile"
 " }}}}
 
 " Integration {{{{
@@ -128,8 +129,7 @@ NeoBundle "garbas/vim-snipmate"
 " A powerful snippet engine, with support for nested snippets.
 NeoBundle "honza/vim-snippets"
 " Emmet snippets
-NeoBundle "mattn/emmet-vim"
-
+NeoBundle "rstacruz/sparkup"
 "}}}}
 
 " Syntax {{{{

@@ -14,13 +14,12 @@ nnoremap & :&&<cr>
 vmap <Enter> <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
 
+map <silent> <Up> gk
 imap <silent> <Up> <C-o>gk
 map <silent> <Down> gj
 imap <silent> <Down> <C-o>gj
 map <silent> <home> g<home>
-map <silent> <Up> gk
-imap <silent> <Up> <C-o>gk
-map <silent> <Down> gj
+
 nnoremap <silent> j gj
 vnoremap <silent> j gj
 nnoremap <silent> k gk
