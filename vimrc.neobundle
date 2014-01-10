@@ -23,8 +23,6 @@ NeoBundle "vim-scripts/LargeFile"
 
 " Integration {{{{
 
-" Async adapters for running Vim's compiler plugins, or arbitrary commands.
-NeoBundle "tpope/vim-dispatch"
 " A thin wrapper around Bundler, and `bundle open` (for editing/viewing the
 " contents of bundled gems).
 NeoBundle "tpope/vim-bundler"
@@ -46,11 +44,6 @@ NeoBundle "moll/vim-node"
 NeoBundle "Lokaltog/vim-easymotion"
 " Seek adds a two-character seek binding.
 NeoBundle "goldfeld/vim-seek"
-
-" MatchIt adds support for matching 'logical' blocks with %.  This allows
-" quick
-" jumping between language constructs.
-NeoBundle "matchit.zip"
 
 "}}}}
 
@@ -78,10 +71,6 @@ NeoBundle "junegunn/vim-easy-align"
 " Pasta adds context-aware (indented) pasting support.
 NeoBundle "sickill/vim-pasta"
 
-" A vim plugin that simplifies the transition between multiline and
-" single-line code
-NeoBundle "AndrewRadev/splitjoin.vim"
-
 " Multiple cursors
 NeoBundle "terryma/vim-multiple-cursors"
 "}}}}
@@ -93,10 +82,8 @@ NeoBundle "terryma/vim-multiple-cursors"
 
 " Abolish brings bracket substitutions to Vim abbreviations, searches, and
 " Bundle 'kien/ctrlp.vim', {'depends': []}
-NeoBundle 'kien/ctrlp.vim', {'depends': [
-      \ 'iurifq/ctrlp-rails.vim',
-      \ 'ivalkeen/vim-ctrlp-tjump'
-      \ ]}
+NeoBundle 'kien/ctrlp.vim'
+
 " substitutions.
 NeoBundle "tpope/vim-abolish"
 
@@ -106,8 +93,6 @@ NeoBundle "tpope/vim-abolish"
 
 " A Textmate-like 'project drawer' for Vim.
 NeoBundle "scrooloose/nerdtree"
-" A ctags browser as a sidebar.
-NeoBundle "majutsushi/tagbar"
 " View CSS colors.
 NeoBundle "gorodinskiy/vim-coloresque"
 
@@ -142,10 +127,6 @@ NeoBundle "scrooloose/syntastic"
 " extremely popular Rails (Ruby on Rails) framework, it is one of the most
 " common languages used in web applications.
 NeoBundle "vim-ruby/vim-ruby"
-" Python is a language that focuses on semantics.  It is widely used for
-" creating web apps, as well as being popular for scientific research and data
-" processing.
-NeoBundle "python.vim--Vasiliev"
 " Javascript is a language that runs in the browser (and on the server, thanks
 " to Node.js).  It can be used for scripting interactive web pages, or for
 " highly concurrent applications (with Node).
@@ -200,8 +181,6 @@ NeoBundle "nvie/vim-ini"
 " support between languages, and is often used in APIs.
 NeoBundle "elzr/vim-json"
 
-"Nodejs complete wit omnifunc
-NeoBundle "myhere/vim-nodejs-complete"
 "}}}}
 
 " Appearance {{{{
@@ -212,9 +191,6 @@ NeoBundle "bling/vim-bufferline"
 "}}}}
 
 " Colors {{{{
-
-" A gorgous colorscheme with light and dark variants.
-NeoBundle "altercation/vim-colors-solarized"
 
 "}}}}
 

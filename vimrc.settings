@@ -29,7 +29,7 @@ set scrolloff=20
 set background=dark
 
 " Selected colorscheme
-colorscheme solarized
+colorscheme desert
 
 " If you've ever tried to type :only and had Vim refuse to hide existing
 " buffers because they contain changes, you can use :set hidden to override
