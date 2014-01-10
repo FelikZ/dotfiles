@@ -7,11 +7,11 @@ set encoding=utf-8
 set fileencoding=utf-8
 
 " Classical search
-set hlsearch                                  
-set incsearch                             
-set showmatch                            
-set smartcase                           
-set ignorecase                         
+set hlsearch
+set incsearch
+set showmatch
+set smartcase
+set ignorecase
 set gdefault
 
 " Numberings and text paddings
@@ -61,6 +61,7 @@ set shiftwidth=2
 set softtabstop=2
 set tabstop=2
 set shiftround
+set wrapscan
 
 "Folding code inside 4 curly braces, autofolding on load
 set foldmethod=marker
@@ -75,7 +76,13 @@ set noerrorbells
 set novisualbell
 set noeb vb t_vb=
 
+" Show special characters
+set list listchars=tab:→\ ,trail:·,extends:>,precedes:<,nbsp:⋅
 " backups and swap files
 set nobackup
 set nowritebackup
 set noswapfile
+
+set keymap=russian-jcukenwin    " настраиваем переключение раскладок клавиатуры по C-^
+set iminsert=0                  " раскладка по умолчанию для ввода - английская
+set imsearch=0                  " раскладка по умолчанию для поиска - английская

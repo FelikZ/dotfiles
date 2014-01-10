@@ -16,11 +16,23 @@ augroup JavaScript
     autocmd FileType javascript setlocal shiftwidth=4 softtabstop=4 tabstop=4
 augroup END
 
-function! OpenUrlUnderCursor()
-    let url=matchstr(getline("."), '[a-z]*:\/\/[^ >,;]*')
-    if url != ""
-        silent exec "!open '".url."'" | redraw! 
-    endif
-endfunction
-map <leader>o :call OpenUrlUnderCursor()<CR>
 
+" Переключение раскладок и индикация выбранной в данный момент раскладки -->
+" При английской раскладке статусная строка текущего окна будет синего
+" цвета, а при русской - красного
+function MyKeyMapHighlight()
+  if &iminsert == 0
+    hi StatusLine ctermfg=DarkBlue guifg=DarkBlue
+  else
+    hi StatusLine ctermfg=DarkRed guifg=DarkRed
+  endif
+endfunction
+" Вызываем функцию, чтобы она установила цвета при
+" запуске Vim'a
+call MyKeyMapHighlight()
+" При изменении активного окна будет выполняться
+" обновление индикации текущей раскладки
+au WinEnter * :call MyKeyMapHighlight()
+" <--
+" Automatically reload vimrc when it's saved
+au BufWritePost .vimrc so ~/.vimrc
