@@ -48,8 +48,7 @@ set ruler
 set fileformats=unix,dos,mac
 
 " Make mapping timeouts faster, and keycode timeouts even faster.
-set ttimeout
-set ttimeoutlen=50
+set timeout timeoutlen=1000 ttimeoutlen=100
 
 "Extracting octal numbering from CTRL-A|CTRL-X commands
 set nrformats-=octal
