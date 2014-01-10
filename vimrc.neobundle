@@ -114,7 +114,7 @@ NeoBundle "garbas/vim-snipmate"
 " A powerful snippet engine, with support for nested snippets.
 NeoBundle "honza/vim-snippets"
 " Emmet snippets
-NeoBundle "rstacruz/sparkup"
+NeoBundle "mattn/emmet-vim"
 "}}}}
 
 " Syntax {{{{
