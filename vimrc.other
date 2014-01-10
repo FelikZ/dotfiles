@@ -17,9 +17,9 @@ augroup JavaScript
 augroup END
 
 
-" Переключение раскладок и индикация выбранной в данный момент раскладки -->
-" При английской раскладке статусная строка текущего окна будет синего
-" цвета, а при русской - красного
+" Layout switching&indication -->
+" English layout active windows status line is DarkBlue
+" English layout active windows status line is DarkRed
 function MyKeyMapHighlight()
   if &iminsert == 0
     hi StatusLine ctermfg=DarkBlue guifg=DarkBlue
@@ -27,11 +27,9 @@ function MyKeyMapHighlight()
     hi StatusLine ctermfg=DarkRed guifg=DarkRed
   endif
 endfunction
-" Вызываем функцию, чтобы она установила цвета при
-" запуске Vim'a
+" call our func on startup and redraw colors
 call MyKeyMapHighlight()
-" При изменении активного окна будет выполняться
-" обновление индикации текущей раскладки
+" update layout indication on window change
 au WinEnter * :call MyKeyMapHighlight()
 " <--
 " Automatically reload vimrc when it's saved

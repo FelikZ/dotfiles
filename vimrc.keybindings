@@ -33,7 +33,7 @@ inoremap <F3>  <ESC>za
 
 nnoremap <F8> :TagbarToggle<br>
 
-" переключение на русскую/английскую раскладку по ^f (Ctrl + F)
+" ru/en lang switch ^f (Ctrl + F)
 cmap <silent> <C-F> <C-^>
 imap <silent> <C-F> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
 nmap <silent> <C-F> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
