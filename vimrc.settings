@@ -1,6 +1,3 @@
-" Set heading title
-set title
-
 " Settig max syntax highlight for better memory control
 set synmaxcol=200
 
@@ -25,11 +22,12 @@ set number
 set linebreak
 set scrolloff=20 
 
+" Selected colorscheme
+let g:solarized_termcolors=256
+colorscheme solarized
+
 " Diggin into darker colors
 set background=dark
-
-" Selected colorscheme
-colorscheme desert
 
 " If you've ever tried to type :only and had Vim refuse to hide existing
 " buffers because they contain changes, you can use :set hidden to override
