@@ -84,5 +84,5 @@ set nowritebackup
 set noswapfile
 
 set keymap=russian-jcukenwin    " C-^ lang layout switch
-set iminsert=0                  " default input layout - английская
-set imsearch=0                  " default search layout - английская
+set iminsert=0                  " default input layout - english
+set imsearch=0                  " default search layout - english
