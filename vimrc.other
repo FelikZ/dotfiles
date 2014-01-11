@@ -32,5 +32,3 @@ call MyKeyMapHighlight()
 " update layout indication on window change
 au WinEnter * :call MyKeyMapHighlight()
 " <--
-" Automatically reload vimrc when it's saved
-au BufWritePost .vimrc so ~/.vimrc
