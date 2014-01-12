@@ -34,10 +34,6 @@ set hidden
 " Always show status line
 set laststatus=2
 
-" Show typed commands and cursor position
-set showcmd
-set ruler
-
 " Default to Unix line endings.
 set fileformats=unix,dos,mac
 
