@@ -38,7 +38,15 @@ set laststatus=2
 set fileformats=unix,dos,mac
 
 " Make mapping timeouts faster, and keycode timeouts even faster.
-set timeout timeoutlen=1000 ttimeoutlen=100
+set timeout timeoutlen=1000 ttimeoutlen=100 
+
+" When making a change to one line, don't redisplay the
+" line, but put a '$' at the end of the changed text.
+" The changed text will be overwritten when you type the
+" new text.  The line is redisplayed if you type any
+" command that moves the cursor from the insertion
+" point.
+set cpoptions+=$
 
 "Extracting octal numbering from CTRL-A|CTRL-X commands
 set nrformats-=octal
