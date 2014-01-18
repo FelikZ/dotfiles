@@ -44,18 +44,3 @@ cmap <silent> <C-F> <C-^>
 imap <silent> <C-F> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
 nmap <silent> <C-F> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
 vmap <silent> <C-F> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
-
-" Toggle paste mode
-nmap <silent> <leader>p :set invpaste<CR>:set paste?<CR>
-
-" set text wrapping toggles
-nmap <silent> <leader>ww :set invwrap<CR>:set wrap?<CR>
-
-" Underline the current line with '='
-nmap <silent> <leader>u= :t.\|s/./=/g\|:nohls<cr>
-nmap <silent> <leader>u- :t.\|s/./-/g\|:nohls<cr>
-nmap <silent> <leader>u~ :t.\|s/./\\~/g\|:nohls<cr>
-
-" Shrink the current window to fit the number of lines in the buffer.  Useful
-" for those buffers that are only a few lines
-nmap <silent> <leader>sw :execute ":resize " . line('$')<cr>
