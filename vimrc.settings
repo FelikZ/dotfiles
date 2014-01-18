@@ -7,11 +7,11 @@ set encoding=utf-8
 set fileencoding=utf-8
 
 " Classical search
+set ignorecase
+set smartcase
 set hlsearch
 set incsearch
 set showmatch
-set smartcase
-set ignorecase
 set gdefault
 
 " Numberings and text paddings
@@ -31,6 +31,9 @@ colorscheme solarized
 " buffers in mind when you're doing a :q!.
 set hidden
 
+" Set the status line the way i like it
+set stl=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
+
 " Always show status line
 set laststatus=2
 
@@ -38,7 +41,7 @@ set laststatus=2
 set fileformats=unix,dos,mac
 
 " Make mapping timeouts faster, and keycode timeouts even faster.
-set timeout timeoutlen=1000 ttimeoutlen=100 
+set timeout timeoutlen=500 ttimeoutlen=100 
 
 " When making a change to one line, don't redisplay the
 " line, but put a '$' at the end of the changed text.
@@ -46,15 +49,35 @@ set timeout timeoutlen=1000 ttimeoutlen=100
 " new text.  The line is redisplayed if you type any
 " command that moves the cursor from the insertion
 " point.
-set cpoptions+=$
+set cpoptions=ces$
+
+" Don't update the display while executing macros
+set lazyredraw
+
+" Don't show the current command int the lower right corner.  In OSX, if this is
+" set and lazyredraw is set then it's slow as molasses, so we unset this
+set showcmd
+
+" Show the current mode
+set showmode
+
+" Hide the mouse pointer while typing
+set mousehide
+
+" Set up the gui cursor to look nice
+set guicursor=n-v-c:block-Cursor-blinkon0,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor,r-cr:hor20-Cursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
+
+" set the gui options the way I like
+set guioptions=acg
 
 "Extracting octal numbering from CTRL-A|CTRL-X commands
 set nrformats-=octal
 
-"Backspace works in Insert mode (e.g. not inserting a ^?), but won't delete
-"over line breaks, or automatically-inserted indentation, or the place where
-"insert mode started:
-set backspace=indent,eol,start
+" set the search scan to wrap lines
+set wrapscan
+
+" Allow backspacing over indent, eol, and the start of an insert
+set backspace=2
 
 "Indentational magery
 set autoindent
@@ -65,7 +88,9 @@ set shiftwidth=2
 set softtabstop=2
 set tabstop=2
 set shiftround
-set wrapscan
+
+" Printing options
+set printoptions=header:0,duplex:long,paper:letter
 
 "Folding code inside 4 curly braces, autofolding on load
 set foldmethod=marker
@@ -74,6 +99,22 @@ set foldmarker={{{{,}}}}
 "Autocomplete commands in :-mode on top of the :-line
 set wildmenu
 set wildmode=full
+
+" When completing by tag, show the whole tag, not just the function name
+set showfulltag
+
+" get rid of the silly characters in separators
+set fillchars = ""
+
+" Add the unnamed register to the clipboard
+set clipboard+=unnamed
+
+" Automatically read a file that has changed on disk
+set autoread
+
+set grepprg=grep\ -nH\ $*
+
+set synmaxcol=2048
 
 " disable sounds and noise
 set noerrorbells

@@ -1,36 +1,42 @@
+" Operative key for maany commands
+nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
+nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
+nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
+nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
 let mapleader=','
 
+" Toggle NerdTree Plugin
 map <leader>n :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-nnoremap / /\v
-vnoremap / /\v
-
+" Remove the remaining highlight search
 nnoremap <leader><cr> :noh<cr>
 
+" Common replacements for yanking
 nnoremap Y y$
-nnoremap & :&&<cr>
 
+" Easy align plugin  invocation
 vmap <Enter> <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
 
+" Remapping arrow keys to understand wrappings
 map <silent> <Up> gk
 imap <silent> <Up> <C-o>gk
 map <silent> <Down> gj
 imap <silent> <Down> <C-o>gj
 map <silent> <home> g<home>
 
+" Remapping dir keys to understand wrappings
 nnoremap <silent> j gj
 vnoremap <silent> j gj
 nnoremap <silent> k gk
 vnoremap <silent> k gk
 
+" Reselect previous selection and indent it
 vnoremap < <gv
 vnoremap > >gv
 
-nnoremap <F2>  za
-inoremap <F3>  <ESC>za
-
+" Toggle tag bar
 nnoremap <F8> :TagbarToggle<br>
 
 " ru/en lang switch ^f (Ctrl + F)
@@ -38,3 +44,18 @@ cmap <silent> <C-F> <C-^>
 imap <silent> <C-F> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
 nmap <silent> <C-F> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
 vmap <silent> <C-F> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
+
+" Toggle paste mode
+nmap <silent> <leader>p :set invpaste<CR>:set paste?<CR>
+
+" set text wrapping toggles
+nmap <silent> <leader>ww :set invwrap<CR>:set wrap?<CR>
+
+" Underline the current line with '='
+nmap <silent> <leader>u= :t.\|s/./=/g\|:nohls<cr>
+nmap <silent> <leader>u- :t.\|s/./-/g\|:nohls<cr>
+nmap <silent> <leader>u~ :t.\|s/./\\~/g\|:nohls<cr>
+
+" Shrink the current window to fit the number of lines in the buffer.  Useful
+" for those buffers that are only a few lines
+nmap <silent> <leader>sw :execute ":resize " . line('$')<cr>
