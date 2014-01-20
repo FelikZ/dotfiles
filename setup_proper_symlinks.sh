@@ -7,7 +7,7 @@
 ########## Variables
 
 dir=~/dotfiles                    # dotfiles directory
-files="vimrc vimrc.keybindings vimrc.neobundle vimrc.other vimrc.settings vim"    # list of files/folders to symlink in homedir
+files="vimrc vimrc.neobundle vimrc.automation vimrc.settings vim"    # list of files/folders to symlink in homedir
 
 ##########
 

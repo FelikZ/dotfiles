@@ -1,0 +1,173 @@
+autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
+augroup vimscript
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END
+
+augroup HTML
+    autocmd!
+    au BufRead,BufNewFile *.phtml  set filetype=html
+augroup END
+
+augroup JavaScript
+    autocmd!
+    autocmd FileType javascript setlocal shiftwidth=4 softtabstop=4 tabstop=4
+augroup END
+
+
+" Layout switching&indication -->
+" English layout active windows status line is DarkBlue
+" English layout active windows status line is DarkRed
+function MyKeyMapHighlight()
+  if &iminsert == 0
+    hi StatusLine ctermfg=DarkBlue guifg=DarkBlue
+  else
+    hi StatusLine ctermfg=DarkRed guifg=DarkRed
+  endif
+endfunction
+" call our func on startup and redraw colors
+call MyKeyMapHighlight()
+" update layout indication on window change
+au WinEnter * :call MyKeyMapHighlight()
+" <--
+
+" Operative key for maany commands
+nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
+nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
+nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
+nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
+let mapleader=','
+
+" Toggle NerdTree Plugin
+map <leader>n :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" Remove the remaining highlight search
+nnoremap <leader><cr> :noh<cr>
+
+" Common replacements for yanking
+nnoremap Y y$
+
+" Easy align plugin  invocation
+vmap <Enter> <Plug>(EasyAlign)
+nmap <Leader>a <Plug>(EasyAlign)
+
+" Remapping arrow keys to understand wrappings
+map <silent> <Up> gk
+imap <silent> <Up> <C-o>gk
+map <silent> <Down> gj
+imap <silent> <Down> <C-o>gj
+map <silent> <home> g<home>
+
+" Remapping dir keys to understand wrappings
+nnoremap <silent> j gj
+vnoremap <silent> j gj
+nnoremap <silent> k gk
+vnoremap <silent> k gk
+
+" Reselect previous selection and indent it
+vnoremap < <gv
+vnoremap > >gv
+
+" Toggle tag bar
+nnoremap <F8> :TagbarToggle<br>
+
+" ru/en lang switch ^f (Ctrl + F)
+cmap <silent> <C-F> <C-^>
+imap <silent> <C-F> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
+nmap <silent> <C-F> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
+vmap <silent> <C-F> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
+
+"-------------------------
+" Syntastic
+
+" Enable autochecks
+let g:syntastic_check_on_open=1
+let g:syntastic_enable_signs=1
+
+" open quicfix window with all error found
+nmap <silent> <leader>ll :lopen<cr>
+
+"-------------------------
+" DelimitMate
+
+" Delimitmate place cursor correctly n multiline objects e.g.
+" if you press enter in {} cursor still be
+" in the middle line instead of the last
+let delimitMate_expand_cr = 1
+
+" Delimitmate place cursor correctly in singleline pairs e.g.
+" if x - cursor if you press space in {x} result will be { x } instead of { x}
+let delimitMate_expand_space = 1
+
+"-------------------------
+" Neosnippets
+"
+
+" Enable snipMate compatibility
+let g:neosnippet#enable_snipmate_compatibility = 1
+
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+
+" Disables standart snippets. We use vim-snippets bundle instead
+let g:neosnippet#disable_runtime_snippets = { '_' : 1 }
+
+" Expand snippet and jimp to next snippet field on Enter key.
+imap <expr><CR> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<CR>"
+
+"-------------------------
+" neocomplcache
+
+" Enable NeocomplCache at startup
+let g:neocomplcache_enable_at_startup = 1
+
+" Max items in code-complete
+let g:neocomplcache_max_list = 10
+
+" Max width of code-complete window
+let g:neocomplcache_max_keyword_width = 80
+
+" Code complete is ignoring case until no Uppercase letter is in input
+let g:neocomplcache_enable_smart_case = 1
+
+" Auto select first item in code-complete
+let g:neocomplcache_enable_auto_select = 1
+
+" Disable auto popup
+let g:neocomplcache_disable_auto_complete = 1
+
+" Smart tab Behavior
+function! CleverTab()
+    " If autocomplete window visible then select next item in there
+    if pumvisible()
+        return "\<C-n>"
+    endif
+    " If it's begining of the string then return just tab pressed
+    let substr = strpart(getline('.'), 0, col('.') - 1)
+    let substr = matchstr(substr, '[^ \t]*$')
+    if strlen(substr) == 0
+        " nothing to match on empty string
+        return "\<Tab>"
+    else
+        " If not begining of the string, and autocomplete popup is not visible
+        " Open this popup
+        return "\<C-x>\<C-u>"
+    endif
+endfunction
+inoremap <expr><TAB> CleverTab()
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+
+" For cursor moving in insert mode
+inoremap <expr><Left>  neocomplcache#close_popup() . "\<Left>"
+inoremap <expr><Right> neocomplcache#close_popup() . "\<Right>"
+inoremap <expr><Up>    neocomplcache#close_popup() . "\<Up>"
+inoremap <expr><Down>  neocomplcache#close_popup() . "\<Down>"
+
+" disable preview in code complete
+set completeopt-=preview
