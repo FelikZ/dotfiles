@@ -52,9 +52,6 @@ that are listed in vimrc.neobundle file. So here they are (sorted by plugnames):
 1. <http://github.com/vim-scripts/LargeFile>
 1. <http://github.com/gregsexton/MatchTag>
 1. <http://github.com/juvenn/mustache.vim>
-1. <http://github.com/Shougo/neocomplcache>
-1. <http://github.com/Shougo/neosnippet>
-1. <http://github.com/Shougo/neosnippet-snippets>
 1. <http://github.com/scrooloose/nerdcommenter>
 1. <http://github.com/scrooloose/nerdtree>
 1. <http://github.com/scrooloose/syntastic>

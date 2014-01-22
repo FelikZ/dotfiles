@@ -142,9 +142,6 @@ set diffopt+=horizontal
 " Ignore changes in whitespaces characters
 set diffopt+=iwhite
 
-" Make < and > match as well
-set matchpairs+=<:>
-
 " The cursor should stay where you leave it, instead of moving to the first non
 " blank of the line
 set nostartofline
@@ -158,3 +155,4 @@ set ttyfast
 
 " Add '-' as recognized word symbol. e.g dw delete all 'foo-bar' instead just 'foo'
 set iskeyword+=-
+set iskeyword-=.
