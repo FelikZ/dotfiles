@@ -40,7 +40,7 @@ set laststatus=2
 " Default to Unix line endings.
 set fileformats=unix,dos,mac
 
-" Make mapping timeouts faster, and keycode timeouts even faster.
+" Make mapping timeouts faster, and code timeouts even faster.
 set timeout timeoutlen=500 ttimeoutlen=100 
 
 " When making a change to one line, don't redisplay the
@@ -133,7 +133,7 @@ set nowritebackup
 set noswapfile
 
 " remap lang layout change
-set keymap=russian-jcukenwin    " C-^ lang layout switch
+set map=russian-jcukenwin    " C-^ lang layout switch
 set iminsert=0                  " default input layout - english
 set imsearch=0                  " default search layout - english
 
@@ -158,5 +158,8 @@ set shortmess=atI
 set ttyfast
 
 " Add '-' as recognized word symbol. e.g dw delete all 'foo-bar' instead just 'foo'
-set iskeyword+=-
-set iskeyword-=.
+set isword+=-
+set isword-=.
+
+" No double spaces after . ! and ? when joining lines
+set nojoinspaces
