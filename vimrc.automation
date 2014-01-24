@@ -31,11 +31,6 @@ call MyKeyMapHighlight()
 au WinEnter * :call MyKeyMapHighlight()
 " <--
 
-" Operative key for maany commands
-nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
-nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
-nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
-nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
 let mapleader=','
 
 " Toggle NerdTree Plugin
