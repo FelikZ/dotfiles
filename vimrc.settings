@@ -163,3 +163,7 @@ set iskeyword-=.
 
 " No double spaces after . ! and ? when joining lines
 set nojoinspaces
+
+" split below and vsplit to right
+set splitbelow
+set splitright
