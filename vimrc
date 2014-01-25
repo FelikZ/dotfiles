@@ -485,6 +485,14 @@ set splitright
 "-------------------------------------
 let mapleader=','
 
+"-------------------------
+" Change ^ to H and $ to L
+"-------------------------
+nnoremap H ^
+vnoremap H ^
+nnoremap L $
+vnoremap L $
+
 "--------------------------------------
 " Remove the remaining highlight search
 "--------------------------------------
