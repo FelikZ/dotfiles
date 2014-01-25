@@ -519,6 +519,11 @@ vnoremap <silent> k gk
 vnoremap < <gv
 vnoremap > >gv
 
+"-----------------------
+" Access vim config file
+"-----------------------
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+
 "==========================="
 " AUTOCOMMANDS AND FUNCTIONS"
 "==========================="
