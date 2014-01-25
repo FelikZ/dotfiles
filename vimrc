@@ -149,9 +149,9 @@ NeoBundle "vim-ruby/vim-ruby"
 " Javascript is a language that runs in the browser (and on the server, thanks
 " to Node.js).  It can be used for scripting interactive web pages, or for
 " highly concurrent applications (with Node).
-NeoBundle "pangloss/vim-javascript"
-NeoBundle "lukaszb/vim-web-indent"
-NeoBundle "jelera/vim-javascript-syntax"
+NeoBundle "vim-scripts/JavaScript-Indent"
+NeoBundle "jelera/vim-javascript-syntax", {"autoload":{"filetypes":["javascript"]}}
+NeoBundle "othree/javascript-libraries-syntax.vim"
 
 " CoffeeScript is a language that attempts to solve some of Javascript's
 " awkwardness.  The language is very Ruby-like, but compiles to Javascript.
@@ -167,16 +167,14 @@ NeoBundle "othree/html5.vim"
 NeoBundle "gregsexton/MatchTag"
 
 " embedding code from its host language.  Sass and SCSS are a pair of
-" languages
-" that compile to CSS, adding features like variables, mixins, and selector
+" languages that compile to CSS, adding features like variables, mixins, and selector
 " nesting/inheritance/extension.  Sass has a more Haml-like syntax, while SCSS
 " is more CSS-like.
 NeoBundle "tpope/vim-haml"
 
 " Mustache is a simple templating language, focusing on clarity.  Instead of
 " having its own syntax, and compiling to HTML, it uses tags embedded in HTML
-" to
-" define logic and flow.
+" to define logic and flow.
 NeoBundle "juvenn/mustache.vim"
 
 " CSS3 is the latest and greatest incarnation of CSS.  It comes with new
