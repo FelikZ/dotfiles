@@ -50,6 +50,8 @@ that are listed in vimrc.neobundle file. So here they are (sorted by plugnames):
 1. <http://github.com/Raimondi/delimitMate>
 1. <http://github.com/mattn/emmet-vim>
 1. <http://github.com/othree/html5.vim>
+1. <http://github.com/vim-scripts/JavaScript-Indent>
+1. <http://github.com/othree/javascript-libraries-syntax.vim>
 1. <http://github.com/vim-scripts/LargeFile>
 1. <http://github.com/gregsexton/MatchTag>
 1. <http://github.com/juvenn/mustache.vim>
@@ -70,7 +72,6 @@ that are listed in vimrc.neobundle file. So here they are (sorted by plugnames):
 1. <http://github.com/tpope/vim-endwise>
 1. <http://github.com/tpope/vim-haml>
 1. <http://github.com/nvie/vim-ini>
-1. <http://github.com/pangloss/vim-javascript>
 1. <http://github.com/jelera/vim-javascript-syntax>
 1. <http://github.com/elzr/vim-json>
 1. <http://github.com/groenewege/vim-less>
@@ -88,5 +89,4 @@ that are listed in vimrc.neobundle file. So here they are (sorted by plugnames):
 1. <http://github.com/wavded/vim-stylus>
 1. <http://github.com/tpope/vim-surround>
 1. <http://github.com/tpope/vim-unimpaired>
-1. <http://github.com/lukaszb/vim-web-indent>
 1. <http://github.com/vim-scripts/visualrepeat>
