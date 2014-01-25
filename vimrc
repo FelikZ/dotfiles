@@ -493,6 +493,12 @@ vnoremap H ^
 nnoremap L $
 vnoremap L $
 
+"--------------------
+" Experiment with esc
+"--------------------
+inoremap <esc> <nop>
+inoremap jk <esc>
+
 "--------------------------------------
 " Remove the remaining highlight search
 "--------------------------------------
