@@ -34,7 +34,7 @@ au WinEnter * :call MyKeyMapHighlight()
 let mapleader=','
 
 " Toggle NerdTree Plugin
-map <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " Remove the remaining highlight search
@@ -44,15 +44,16 @@ nnoremap <leader><cr> :noh<cr>
 nnoremap Y y$
 
 " Easy align plugin  invocation
-vmap <Enter> <Plug>(EasyAlign)
-nmap <Leader>a <Plug>(EasyAlign)
+vnoremap <Enter> <Plug>(EasyAlign)
+vnoremap <Leader>a <Plug>(EasyAlign)
 
 " Remapping arrow keys to understand wrappings
-map <silent> <Up> gk
-imap <silent> <Up> <C-o>gk
-map <silent> <Down> gj
-imap <silent> <Down> <C-o>gj
-map <silent> <home> g<home>
+nnoremap <silent> <Up> gk
+inoremap <silent> <Up> <C-o>gk
+nnoremap <silent> <Down> gj
+inoremap <silent> <Down> <C-o>gj
+nnoremap <silent> <home> g<home>
+inoremap <silent> <home> <C-o>g<home>
 
 " Remapping dir keys to understand wrappings
 nnoremap <silent> j gj
@@ -68,10 +69,10 @@ vnoremap > >gv
 nnoremap <F8> :TagbarToggle<br>
 
 " ru/en lang switch ^f (Ctrl + F)
-cmap <silent> <C-F> <C-^>
-imap <silent> <C-F> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
-nmap <silent> <C-F> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
-vmap <silent> <C-F> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
+cnoremap <silent> <C-F> <C-^>
+inoremap <silent> <C-F> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
+nnoremap <silent> <C-F> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
+vnoremap <silent> <C-F> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
 
 "-------------------------
 " Syntastic
@@ -81,7 +82,7 @@ let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
 
 " open quicfix window with all error found
-nmap <silent> <leader>ll :lopen<cr>
+nnoremap <silent> <leader>ll :lopen<cr>
 
 "-------------------------
 " DelimitMate

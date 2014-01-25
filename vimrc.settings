@@ -157,10 +157,6 @@ set shortmess=atI
 " Indicates fast terminal connection
 set ttyfast
 
-" Add '-' as recognized word symbol. e.g dw delete all 'foo-bar' instead just 'foo'
-set iskeyword+=-
-set iskeyword-=.
-
 " No double spaces after . ! and ? when joining lines
 set nojoinspaces
 
