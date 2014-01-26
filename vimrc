@@ -296,8 +296,8 @@ set fileformats=unix,dos,mac
 "-------------------------------------------------------------
 " Make mapping timeouts faster, and code timeouts even faster.
 "-------------------------------------------------------------
-set timeout timeoutlen=500 ttimeoutlen=100
-
+set timeoutlen=1200 " A little bit more time for macros
+set ttimeoutlen=50  " Make Esc work faster 
 "---------------------------------
 " Change the 'c' motion's behavior
 "---------------------------------
@@ -373,13 +373,6 @@ set shiftround
 "-----------------
 set printoptions=header:0,duplex:long,paper:letter
 
-"-------------------------------------------------------
-"Folding code inside 4 curly braces, autofolding on load
-"-------------------------------------------------------
-set foldmethod=marker
-set foldmarker={{{{,}}}}
-set foldlevel=99
-
 "----------------------------------------------------
 "Autocomplete commands in :-mode on top of the :-line
 "----------------------------------------------------
@@ -413,7 +406,7 @@ set autoread
 "----------------------------------------------------
 " Maximum column in which to search for syntax items.
 "----------------------------------------------------
-set synmaxcol=2048
+set synmaxcol=800
 
 "-------------------------
 " disable sounds and noise
@@ -427,6 +420,7 @@ set noeb vb t_vb=
 "------------------------
 set list
 set listchars=tab:→\ ,trail:·,extends:>,precedes:<,nbsp:⋅
+set showbreak=↪
 
 "-----------------------
 " backups and swap files
@@ -478,10 +472,11 @@ set splitright
 " MAPPINGS "
 "=========="
 
-"-------------------------------------
-" Declaring the leader key to be comma
-"-------------------------------------
+"------------------------------------------------------
+" Declaring the global and local leader key to be comma
+"------------------------------------------------------
 let mapleader=','
+let maplocalleader='\\'
 
 "-------------------------
 " Change ^ to H and $ to L
@@ -536,38 +531,204 @@ vnoremap > >gv
 "-----------------------
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 
+"-------------------------------------------------
+" Keep search matches and jumpings in the middle of the window.
+"-------------------------------------------------
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap g; g;zz
+nnoremap g, g,zz
+nnoremap <c-o> <c-o>zz
+
+"----------------
+" Don't move on *
+"----------------
+" I'd use a function for this but Vim clobbers the last search when you're in
+" a function so fuck it, practicality beats purity.
+nnoremap <silent> * :let stay_star_view = winsaveview()<cr>*<c-o>:call winrestview(stay_star_view)<cr>
+
+"-----------------
+" Jumping to tags.
+"-----------------
+" Basically, <c-]> jumps to tags (like normal) and <c-\> opens the tag in a new
+" split instead.
+"
+" Both of them will align the destination line to the upper middle part of the
+" screen.  Both will pulse the cursor line so you can see where the hell you
+" are.  <c-\> will also fold everything in the buffer and then unfold just
+" enough for you to see the destination line.
+function! JumpToTag()
+    execute "normal! \<c-]>mzzvzz15\<c-e>"
+    execute "keepjumps normal! `z"
+    Pulse
+endfunction
+function! JumpToTagInSplit()
+    execute "normal! \<c-w>v\<c-]>mzzMzvzz15\<c-e>"
+    execute "keepjumps normal! `z"
+    Pulse
+endfunction
+nnoremap <c-]> :silent! call JumpToTag()<cr>
+nnoremap <c-\> :silent! call JumpToTagInSplit()<cr>
+
+"------------------------------------
+" Split line (sister to [J]oin lines)
+"------------------------------------
+nnoremap <leader>J i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
+
+"-------------
+" Panic Button
+"-------------
+nnoremap <f9> mzggg?G`z
+
 "==========================="
 " AUTOCOMMANDS AND FUNCTIONS"
 "==========================="
 
+"--------------
+" Abbreviations
+"--------------
+function! EatChar(pat)
+    let c = nr2char(getchar(0))
+    return (c =~ a:pat) ? '' : c
+endfunction
+
+function! MakeSpacelessIabbrev(from, to)
+    execute "iabbrev <silent> ".a:from." ".a:to."<C-R>=EatChar('\\s')<CR>"
+endfunction
+function! MakeSpacelessBufferIabbrev(from, to)
+    execute "iabbrev <silent> <buffer> ".a:from." ".a:to."<C-R>=EatChar('\\s')<CR>"
+endfunction
+
+call MakeSpacelessIabbrev('bb/',  'http://bitbucket.org/')
+call MakeSpacelessIabbrev('bbk/', 'http://bitbucket.org/kapral18/')
+call MakeSpacelessIabbrev('gh/',  'http://github.com/')
+call MakeSpacelessIabbrev('ghk/', 'http://github.com/kapral18/')
+
+iabbrev mj@ mjohn.favourite@gmail.com
+iabbrev vrcf `~/.vimrc` file
+
+"-----------------
+" CSS AUTOCOMMANDS
+"-----------------
+aug ft_css
+    au!
+    au Filetype css setlocal foldmethod=marker
+    au Filetype css setlocal foldmarker={,}
+    au Filetype css setlocal iskeyword+=-
+    au BufNewFile,BufRead *.css nnoremap <buffer> <localleader>S ?{<CR>jV/\v^\s*\}?$<CR>k:sort<CR>:noh<CR>
+    au BufNewFile,BufRead *.css inoremap <buffer> {<cr> {}<left><cr><space><space><space><space>.<cr><esc>kA<bs>
+aug END
+
+"------------------
+" HTML AUTOCOMMANDS
+"------------------
+aug ft_html
+    au!
+    au FileType html setlocal foldmethod=manual
+    " Use <localleader>f to fold the current tag.
+    au FileType html nnoremap <buffer> <localleader>f Vatzf
+    " Indent tag
+    au FileType html nnoremap <buffer> <localleader>= Vat=
+aug END
+
+"------------------
+" PHTML AUTCOMMANDS
+"------------------
+aug HTML
+    au!
+    au BufRead,BufNewFile *.phtml  set filetype=html
+aug END
+
+"-----------------
+" XML AUTOCOMMANDS
+"-----------------
+augroup ft_xml
+    au!
+
+    au FileType xml setlocal foldmethod=manual
+
+    " Use <localleader>f to fold the current tag.
+    au FileType xml nnoremap <buffer> <localleader>f Vatzf
+
+    " Indent tag
+    au FileType xml nnoremap <buffer> <localleader>= Vat=
+augroup END
+
+"------------------------
+" JAVASCRIPT AUTOCOMMANDS
+"------------------------
+aug ft_javascript
+    au!
+    au FileType javascript setlocal shiftwidth=4 softtabstop=4 tabstop=4
+    au FileType javascript setlocal foldmethod=marker
+    au FileType javascript setlocal foldmarker={,}
+    au FileType javascript call MakeSpacelessBufferIabbrev('clog', 'console.log();<left><left>')
+aug END
+
+"----------------------
+" MARKDOWN AUTOCOMMANDS
+"----------------------
+augroup ft_markdown
+    au!
+    au BufNewFile,BufRead *.m*down setlocal filetype=markdown foldlevel=1 foldmethod=manual
+    " Use <localleader>1/2/3 to add headings.
+    au Filetype markdown nnoremap <buffer> <localleader>1 yypVr=:redraw<cr>
+    au Filetype markdown nnoremap <buffer> <localleader>2 yypVr-:redraw<cr>
+    au Filetype markdown nnoremap <buffer> <localleader>3 mzI###<space><esc>`zllll
+    au Filetype markdown nnoremap <buffer> <localleader>4 mzI####<space><esc>`zlllll
+augroup END
+
+"-----------------
+" VIM AUTOCOMMANDS
+"-----------------
+aug ft_vim
+    au!
+    au FileType vim setlocal foldmethod=marker
+    au FileType help setlocal textwidth=78
+    au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
+    au BufWritePost $MYVIMRC source $MYVIMRC
+aug END
+
+"------------------------
+" POSTGRESQL AUTOCOMMANDS
+"------------------------
+augroup ft_postgres
+    au!
+    au BufNewFile,BufRead *.sql set filetype=pgsql
+    au FileType pgsql set foldmethod=indent
+    au FileType pgsql set softtabstop=2 shiftwidth=2
+    au FileType pgsql setlocal commentstring=--\ %s comments=:--
+augroup END
+
+"----------------------
+" QUICKFIX AUTOCOMMANDS
+"----------------------
+augroup ft_quickfix
+    au!
+    au Filetype qf setlocal colorcolumn=0 nolist nocursorline nowrap tw=0
+augroup END
+
+"------------------
+" RUBY AUTOCOMMANDS
+"------------------
+augroup ft_ruby
+    au!
+    au Filetype ruby setlocal foldmethod=syntax
+    au BufRead,BufNewFile Capfile setlocal filetype=ruby
+augroup END
+
+"-----------------------------------------
+" Resize splits when the window is resized
+"-----------------------------------------
+au VimResized * :wincmd =
+
 "-------------------------------------------
 " Restore the cursor position from last time
 "-------------------------------------------
-autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
-
-"----------------------
-" Refresh vimrc on save
-"----------------------
-augroup vimscript
-    autocmd!
-    autocmd BufWritePost $MYVIMRC source $MYVIMRC
-augroup END
-
-"---------------------------------------------
-" Make phtml filetype to be perceieved as html
-"---------------------------------------------
-augroup HTML
-    autocmd!
-    au BufRead,BufNewFile *.phtml  set filetype=html
-augroup END
-
-"-------------------------------------------
-" Make javascript locally expand to 4 spaces
-"-------------------------------------------
-augroup JavaScript
-    autocmd!
-    autocmd FileType javascript setlocal shiftwidth=4 softtabstop=4 tabstop=4
-augroup END
+aug line_return
+    au!
+    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
+aug END
 
 "---------------------------
 " EN/RU switching&indication
@@ -596,11 +757,35 @@ inoremap <silent> <C-F> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
 nnoremap <silent> <C-F> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
 vnoremap <silent> <C-F> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
 
+"---------------------------------
+" OPEN URL UNDER CURSOR IN BROWSER
+"---------------------------------
+function! OpenURL(url)
+  if has("win32")
+    exe "!start cmd /cstart /b ".a:url.""
+  elseif $DISPLAY !~ '^\w'
+    exe "silent !sensible-browser \"".a:url."\""
+  else
+    exe "silent !sensible-browser -T \"".a:url."\""
+  endif
+  redraw!
+endfunction
+command! -nargs=1 OpenURL :call OpenURL(<q-args>)
+" open URL under cursor in browser
+nnoremap gb :OpenURL <cfile><CR>
+nnoremap gG :OpenURL http://www.google.com/search?q=<cword><CR>
+
+
+
+"================"
+" PLUGIN SETTINGS"
+"================"
+
 "-----------------------
 " Toggle NerdTree Plugin
 "-----------------------
 nnoremap <leader>n :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+au bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 "------------------------------
 " Easy align plugin  invocation
