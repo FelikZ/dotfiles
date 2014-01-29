@@ -483,8 +483,8 @@ let maplocalleader='\\'
 "-------------------------
 nnoremap H ^
 vnoremap H ^
-nnoremap L $
-vnoremap L $
+nnoremap L g_
+vnoremap L g_
 
 "--------------------
 " Experiment with esc
