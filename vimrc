@@ -761,6 +761,7 @@ vnoremap <silent> <C-F> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
 " OPEN URL UNDER CURSOR IN BROWSER
 "---------------------------------
 function! OpenURL(url)
+
   if has("win32")
     exe "!start cmd /cstart /b ".a:url.""
   elseif $DISPLAY !~ '^\w'
@@ -769,12 +770,12 @@ function! OpenURL(url)
     exe "silent !sensible-browser -T \"".a:url."\""
   endif
   redraw!
+
 endfunction
 command! -nargs=1 OpenURL :call OpenURL(<q-args>)
 " open URL under cursor in browser
-nnoremap gb :OpenURL <cfile><CR>
-nnoremap gG :OpenURL http://www.google.com/search?q=<cword><CR>
-
+nnoremap <leader>us :OpenURL http://www.google.com/search?q=<cword><CR>
+nnoremap <leader>ut :OpenURL http://translate.google.com/\\\#en/ru/<cword><CR>
 
 
 "================"
