@@ -264,9 +264,9 @@ set gdefault
 "-----------------------------
 " Numberings and text paddings
 "-----------------------------
-set number 
+set number
 set linebreak
-set scrolloff=20 
+set scrolloff=20
 
 
 "------------------------
@@ -607,16 +607,24 @@ call MakeSpacelessIabbrev('ghk/', 'http://github.com/kapral18/')
 iabbrev mj@ mjohn.favourite@gmail.com
 iabbrev vrcf `~/.vimrc` file
 
+"-----------
+" Cursorline
+"-----------
+augroup cline
+    au!
+    au WinLeave,InsertEnter * set nocursorline
+    au WinEnter,InsertLeave * set cursorline
+augroup END
+
 "-----------------
 " CSS AUTOCOMMANDS
-"-----------------
+"----------------- 
 aug ft_css
     au!
-    au Filetype css setlocal foldmethod=marker
-    au Filetype css setlocal foldmarker={,}
-    au Filetype css setlocal iskeyword+=-
-    au BufNewFile,BufRead *.css nnoremap <buffer> <localleader>S ?{<CR>jV/\v^\s*\}?$<CR>k:sort<CR>:noh<CR>
-    au BufNewFile,BufRead *.css inoremap <buffer> {<cr> {}<left><cr><space><space><space><space>.<cr><esc>kA<bs>
+    au BufNewFile,BufRead *.less setlocal filetype=less
+    au Filetype less,css setlocal foldmethod=marker
+    au Filetype less,css setlocal foldmarker={,}
+    au Filetype less,css setlocal iskeyword+=-
 aug END
 
 "------------------
@@ -774,9 +782,22 @@ function! OpenURL(url)
 endfunction
 command! -nargs=1 OpenURL :call OpenURL(<q-args>)
 " open URL under cursor in browser
-nnoremap <leader>us :OpenURL http://www.google.com/search?q=<cword><CR>
-nnoremap <leader>ut :OpenURL http://translate.google.com/\\\#en/ru/<cword><CR>
+nnoremap <leader>uhr :OpenURL <cWORD><CR>
+nnoremap <leader>usr :OpenURL http://www.google.com/search?q=<cword><CR>
+nnoremap <leader>utr :OpenURL http://translate.google.com/\\\#en/ru/<cword><CR>
 
+"------
+" Typos
+"------
+command! -bang E e<bang>
+command! -bang Q q<bang>
+command! -bang W w<bang>
+command! -bang QA qa<bang>
+command! -bang Qa qa<bang>
+command! -bang Wa wa<bang>
+command! -bang WA wa<bang>
+command! -bang Wq wq<bang>
+command! -bang WQ wq<bang>
 
 "================"
 " PLUGIN SETTINGS"
@@ -791,8 +812,8 @@ au bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType 
 "------------------------------
 " Easy align plugin  invocation
 "------------------------------
-vnoremap <Enter> <Plug>(EasyAlign)
-vnoremap <Leader>a <Plug>(EasyAlign)
+vmap <Enter> <Plug>(EasyAlign)
+nmap <Leader>a <Plug>(EasyAlign)
 
 "---------------
 " Tag bar
@@ -805,9 +826,6 @@ nnoremap <F8> :TagbarToggle<br>
 " Enable autochecks
 let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
-
-" open quicfix window with all error found
-nnoremap <silent> <leader>ll :lopen<cr>
 
 "------------
 " DelimitMate
