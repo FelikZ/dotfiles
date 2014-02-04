@@ -303,7 +303,7 @@ set fileformats=unix,dos,mac
 " Make mapping timeouts faster, and code timeouts even faster.
 "-------------------------------------------------------------
 set timeoutlen=1200 " A little bit more time for macros
-set ttimeoutlen=50  " Make Esc work faster 
+set ttimeoutlen=120  " Make Esc work faster 
 "---------------------------------
 " Change the 'c' motion's behavior
 "---------------------------------
@@ -515,7 +515,6 @@ vnoremap L g_
 "--------------------
 " Experiment with esc
 "--------------------
-inoremap <esc> <nop>
 inoremap jk <esc>
 
 "--------------------------------------
