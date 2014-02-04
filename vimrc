@@ -96,6 +96,8 @@ NeoBundle "terryma/vim-multiple-cursors"
 " Bundle 'kien/ctrlp.vim', {'depends': []}
 NeoBundle "kien/ctrlp.vim"
 
+" More efficient than grep
+NeoBundle "mileszs/ack.vim"
 
 " substitutions.
 NeoBundle "tpope/vim-abolish"
@@ -115,6 +117,7 @@ NeoBundle "gorodinskiy/vim-coloresque"
 "---------
 
 " Handy bracket-prefixed pairs of mappings that @tpope finds useful.
+
 NeoBundle "tpope/vim-unimpaired"
 
 "--------------------
@@ -131,7 +134,6 @@ NeoBundle "honza/vim-snippets"
 
 " Emmet snippets
 NeoBundle "mattn/emmet-vim"
-
 "-------
 " Syntax
 "-------
@@ -717,7 +719,7 @@ function! s:NumberTextObject(whole)
 endfunction
 
 "------------------------------------
-" Split line (sister to [J]oin lines)
+" Split line (sister to [j]oin lines)
 "------------------------------------
 nnoremap <leader>J i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 
@@ -984,3 +986,225 @@ let delimitMate_expand_cr = 1
 " Delimitmate place cursor correctly in singleline pairs e.g.
 " if x - cursor if you press space in {x} result will be { x } instead of { x}
 let delimitMate_expand_space = 1
+
+"------------
+" Ack motions
+"------------
+
+" Motions to Ack for things.  Works with pretty much everything, including:
+"
+"   w, W, e, E, b, B, t*, f*, i*, a*, and custom text objects
+"
+" Awesome.
+"
+" Note: If the text covered by a motion contains a newline it won't work.  Ack
+" searches line-by-line.
+
+nnoremap <silent> <leader>A :set opfunc=<SID>AckMotion<CR>g@
+xnoremap <silent> <leader>A :<C-U>call <SID>AckMotion(visualmode())<CR>
+
+nnoremap <bs> :Ack! '\b<c-r><c-w>\b'<cr>
+xnoremap <silent> <bs> :<C-U>call <SID>AckMotion(visualmode())<CR>
+
+function! s:CopyMotionForType(type)
+    if a:type ==# 'v'
+        silent execute "normal! `<" . a:type . "`>y"
+    elseif a:type ==# 'char'
+        silent execute "normal! `[v`]y"
+    endif
+endfunction
+
+function! s:AckMotion(type) abort
+    let reg_save = @@
+
+    call s:CopyMotionForType(a:type)
+
+    execute "normal! :Ack! --literal " . shellescape(@@) . "\<cr>"
+
+    let @@ = reg_save
+endfunction
+
+"========"
+" COLORS "
+"========"
+
+"--------------
+" Indent Guides
+"--------------
+let g:indentguides_state = 0
+function! IndentGuides()
+    if g:indentguides_state
+        let g:indentguides_state = 0
+        2match None
+    else
+        let g:indentguides_state = 1
+        execute '2match IndentGuides /\%(\_^\s*\)\@<=\%(\%'.(0*&sw+1).'v\|\%'.(1*&sw+1).'v\|\%'.(2*&sw+1).'v\|\%'.(3*&sw+1).'v\|\%'.(4*&sw+1).'v\|\%'.(5*&sw+1).'v\|\%'.(6*&sw+1).'v\|\%'.(7*&sw+1).'v\)\s/'
+    endif
+endfunction
+hi def IndentGuides guibg=#303030 ctermbg=234
+nnoremap <leader>I :call IndentGuides()<cr>
+
+"-------------
+" Block Colors
+"-------------
+let g:blockcolor_state = 0
+function! BlockColor() "
+    if g:blockcolor_state
+        let g:blockcolor_state = 0
+        call matchdelete(77881)
+        call matchdelete(77882)
+        call matchdelete(77883)
+        call matchdelete(77884)
+        call matchdelete(77885)
+        call matchdelete(77886)
+    else
+        let g:blockcolor_state = 1
+        call matchadd("BlockColor1", '^ \{4}.*', 1, 77881)
+        call matchadd("BlockColor2", '^ \{8}.*', 2, 77882)
+        call matchadd("BlockColor3", '^ \{12}.*', 3, 77883)
+        call matchadd("BlockColor4", '^ \{16}.*', 4, 77884)
+        call matchadd("BlockColor5", '^ \{20}.*', 5, 77885)
+        call matchadd("BlockColor6", '^ \{24}.*', 6, 77886)
+    endif
+endfunction "
+" Default highlights
+hi def BlockColor1 guibg=#222222 ctermbg=234
+hi def BlockColor2 guibg=#2a2a2a ctermbg=235
+hi def BlockColor3 guibg=#353535 ctermbg=236
+hi def BlockColor4 guibg=#3d3d3d ctermbg=237
+hi def BlockColor5 guibg=#444444 ctermbg=238
+hi def BlockColor6 guibg=#4a4a4a ctermbg=239
+
+nnoremap <leader>B :call BlockColor()<cr>
+
+"-----------
+" Pulse Line
+"-----------
+function! s:Pulse() "
+    redir => old_hi
+        silent execute 'hi CursorLine'
+    redir END
+    let old_hi = split(old_hi, '\n')[0]
+    let old_hi = substitute(old_hi, 'xxx', '', '')
+
+    let steps = 8
+    let width = 1
+    let start = width
+    let end = steps * width
+    let color = 233
+
+    for i in range(start, end, width)
+        execute "hi CursorLine ctermbg=" . (color + i)
+        redraw
+        sleep 6m
+    endfor
+    for i in range(end, start, -1 * width)
+        execute "hi CursorLine ctermbg=" . (color + i)
+        redraw
+        sleep 6m
+    endfor
+
+    execute 'hi ' . old_hi
+endfunction "
+command! -nargs=0 Pulse call s:Pulse()
+
+"---------------
+" Highlight Word
+"---------------
+"
+" This mini-plugin provides a few mappings for highlighting words temporarily.
+"
+" Sometimes you're looking at a hairy piece of code and would like a certain
+" word or two to stand out temporarily.  You can search for it, but that only
+" gives you one color of highlighting.  Now you can use <leader>N where N is
+" a number from 1-6 to highlight the current word in a specific color.
+
+function! HiInterestingWord(n) "
+    " Save our location.
+    normal! mz
+
+    " Yank the current word into the z register.
+    normal! "zyiw
+
+    " Calculate an arbitrary match ID.  Hopefully nothing else is using it.
+    let mid = 86750 + a:n
+
+    " Clear existing matches, but don't worry if they don't exist.
+    silent! call matchdelete(mid)
+
+    " Construct a literal pattern that has to match at boundaries.
+    let pat = '\V\<' . escape(@z, '\') . '\>'
+
+    " Actually match the words.
+    call matchadd("InterestingWord" . a:n, pat, 1, mid)
+
+    " Move back to our original location.
+    normal! `z
+endfunction "
+
+" Mappings
+nnoremap <silent> <leader>1 :call HiInterestingWord(1)<cr>
+nnoremap <silent> <leader>2 :call HiInterestingWord(2)<cr>
+nnoremap <silent> <leader>3 :call HiInterestingWord(3)<cr>
+nnoremap <silent> <leader>4 :call HiInterestingWord(4)<cr>
+nnoremap <silent> <leader>5 :call HiInterestingWord(5)<cr>
+nnoremap <silent> <leader>6 :call HiInterestingWord(6)<cr>
+
+" Default Highlights
+hi def InterestingWord1 guifg=#000000 ctermfg=16 guibg=#ffa724 ctermbg=214
+hi def InterestingWord2 guifg=#000000 ctermfg=16 guibg=#aeee00 ctermbg=154
+hi def InterestingWord3 guifg=#000000 ctermfg=16 guibg=#8cffba ctermbg=121
+hi def InterestingWord4 guifg=#000000 ctermfg=16 guibg=#b88853 ctermbg=137
+hi def InterestingWord5 guifg=#000000 ctermfg=16 guibg=#ff9eb8 ctermbg=211
+hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=195
+
+"============"
+" MINI PLUGS "
+"============"
+
+"-----------------
+" Diffwhite Toggle
+"-----------------
+set diffopt-=iwhite
+let g:diffwhitespaceon = 0
+function! ToggleDiffWhitespace()
+    if g:diffwhitespaceon
+        set diffopt-=iwhite
+        let g:diffwhitespaceon = 0
+    else
+        set diffopt+=iwhite
+        let g:diffwhitespaceon = 1
+    endif
+    diffupdate
+endfunc
+
+nnoremap <leader>W :call ToggleDiffWhitespace()<CR>
+
+"--------------
+" Error Toggles
+"--------------
+command! ErrorsToggle call ErrorsToggle()
+function! ErrorsToggle()
+  if exists("w:is_error_window")
+    unlet w:is_error_window
+    exec "q"
+  else
+    exec "Errors"
+    lopen
+    let w:is_error_window = 1
+  endif
+endfunction
+
+command! -bang -nargs=? QFixToggle call QFixToggle(<bang>0)
+function! QFixToggle(forced)
+  if exists("g:qfix_win") && a:forced == 0
+    cclose
+    unlet g:qfix_win
+  else
+    copen 10
+    let g:qfix_win = bufnr("$")
+  endif
+endfunction
+
+nmap <silent> <f3> :ErrorsToggle<cr>
+nmap <silent> <f4> :QFixToggle<cr>
