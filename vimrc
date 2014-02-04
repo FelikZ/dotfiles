@@ -58,6 +58,10 @@ NeoBundle "Lokaltog/vim-easymotion"
 " Seek adds a two-character seek binding.
 NeoBundle "goldfeld/vim-seek"
 
+" Argumentative helps with manipulating and moving between func args and adds
+" new text object
+NeoBundle "PeterRincker/vim-argumentative"
+
 "--------
 " Editing
 "--------
@@ -375,11 +379,30 @@ set shiftround
 "-----------------
 set printoptions=header:0,duplex:long,paper:letter
 
-"----------------------------------------------------
-"Autocomplete commands in :-mode on top of the :-line
-"----------------------------------------------------
+"--------------------
+" Wildmenu completion
+"--------------------
 set wildmenu
 set wildmode=full
+
+set wildignore+=.hg,.git,.svn                    " Version control
+set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.DS_Store                       " OSX bullshit
+
+set wildignore+=*.luac                           " Lua byte code
+
+set wildignore+=migrations                       " Django migrations
+set wildignore+=*.pyc                            " Python byte code
+
+set wildignore+=*.orig                           " Merge resolution files
+
+" Clojure/Leiningen
+set wildignore+=classes
+set wildignore+=lib
 
 "-----------------------------------------------------------------------
 " When completing by tag, show the whole tag, not just the function name
@@ -389,7 +412,8 @@ set showfulltag
 "----------------------------------------------
 " Get rid of the silly characters in separators
 "----------------------------------------------
-set fillchars = ""
+set fillchars=diff:⣿,vert:│
+set fillchars=diff:⣿,vert:\|
 
 "------------------------------------------
 " Add the unnamed register to the clipboard
@@ -421,7 +445,7 @@ set noeb vb t_vb=
 " Show special characters
 "------------------------
 set list
-set listchars=tab:→\ ,trail:·,extends:>,precedes:<,nbsp:⋅
+set listchars=tab:→\ ,extends:>,precedes:<,nbsp:⋅
 set showbreak=↪
 
 "-----------------------
@@ -763,6 +787,17 @@ augroup cline
     au WinLeave,InsertEnter * set nocursorline
     au WinEnter,InsertLeave * set cursorline
 augroup END
+
+"--------------------
+" Trailing whitespace
+"--------------------
+" Only shown when not in insert mode so I don't go insane.
+augroup trailing
+    au!
+    au InsertEnter * :set listchars-=trail:⌴
+    au InsertLeave * :set listchars+=trail:⌴
+augroup END
+
 
 "-----------------
 " CSS AUTOCOMMANDS
