@@ -235,7 +235,7 @@ NeoBundleCheck
 "=================="
 " GENERAL SETTINGS "
 "=================="
-
+set title
 "----------------------------------------------------------
 " Enable syntax and set coloscheme with 256 terminal colors
 "----------------------------------------------------------
@@ -819,14 +819,6 @@ aug ft_html
     au FileType html nnoremap <buffer> <localleader>f Vatzf
     " Indent tag
     au FileType html nnoremap <buffer> <localleader>= Vat=
-aug END
-
-"------------------
-" PHTML AUTCOMMANDS
-"------------------
-aug HTML
-    au!
-    au BufRead,BufNewFile *.phtml  set filetype=html
 aug END
 
 "-----------------
