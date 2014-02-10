@@ -146,6 +146,8 @@ NeoBundle "mattn/emmet-vim"
 " popular ones.
 NeoBundle "scrooloose/syntastic"
 
+" PHTML ptoper indent
+NeoBundle "vim-scripts/php.vim-html-enhanced"
 
 " Ruby is a language that focuses on clarity and code beauty.  With the
 " extremely popular Rails (Ruby on Rails) framework, it is one of the most
@@ -812,13 +814,13 @@ aug END
 "------------------
 " HTML AUTOCOMMANDS
 "------------------
-aug ft_html
+aug ft_p_html
     au!
-    au FileType html setlocal foldmethod=manual
+    au FileType html,phtml setlocal foldmethod=manual
     " Use <localleader>f to fold the current tag.
-    au FileType html nnoremap <buffer> <localleader>f Vatzf
+    au FileType html,phtml nnoremap <buffer> <localleader>f Vatzf
     " Indent tag
-    au FileType html nnoremap <buffer> <localleader>= Vat=
+    au FileType html,phtml nnoremap <buffer> <localleader>= Vat=
 aug END
 
 "-----------------
