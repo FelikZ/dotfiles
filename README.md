@@ -18,7 +18,7 @@ My linux dotfile experiments
 3. Clone the repo
     
     ```
-    $ git clone https://github.com/FelikZ/dotfiles.git ~/dotfiles
+    $ git clone git@github.com:FelikZ/dotfiles.git ~/dotfiles
     ```
 4. Clone the neobundle pm submodule for plugins.
     
