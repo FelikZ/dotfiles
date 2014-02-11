@@ -1,9 +1,12 @@
+let curdir=expand("<sfile>:h")
+
 if has('vim_starting')
     set nocp
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
+    let &runtimepath.=curdir.'/.vim,'.curdir.'/.vim/bundle/neobundle.vim/'
 endif
 
-call neobundle#rc(expand('~/.vim/bundle/'))
+let neobundledir=curdir.'/.vim/bundle/'
+call neobundle#rc(neobundledir)
 
 NeoBundleFetch "Shougo/neobundle.vim"
 
