@@ -129,3 +129,5 @@ nnoremap <up> g<up>
 nnoremap <down> g<down>
 vnoremap <up> g<up>
 vnoremap <down> g<down>
+
+nmap <F8> :TagbarToggle<CR>
