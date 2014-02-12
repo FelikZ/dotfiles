@@ -1,3 +1,6 @@
 .netrwhist
+/*.log
 /.vim/bundle/*
 !/.vim/bundle/neobundle.vim
+/bin/*
+/share/*

@@ -8,34 +8,40 @@ endif
 let neobundledir=curdir.'/.vim/bundle/'
 call neobundle#rc(neobundledir)
 
-NeoBundleFetch "Shougo/neobundle.vim"
+NeoBundleFetch 'Shougo/neobundle.vim'
 
-NeoBundle "tpope/vim-sensible"
-NeoBundle "tpope/vim-repeat"
-NeoBundle "vim-scripts/visualrepeat"
-NeoBundle "Lokaltog/vim-easymotion"
-NeoBundle "goldfeld/vim-seek"
-NeoBundle "tpope/vim-surround"
-NeoBundle "Raimondi/delimitMate"
-NeoBundle "tpope/vim-endwise"
-NeoBundle "junegunn/vim-easy-align"
-NeoBundle "terryma/vim-multiple-cursors"
-NeoBundle "kien/ctrlp.vim"
-NeoBundle "mileszs/ack.vim"
-NeoBundle "tpope/vim-abolish"
-NeoBundle "scrooloose/nerdtree"
-NeoBundle "gorodinskiy/vim-coloresque"
-NeoBundle "tpope/vim-unimpaired"
-NeoBundle "vim-scripts/JavaScript-Indent"
-NeoBundle "jelera/vim-javascript-syntax", {"autoload":{"filetypes":["javascript"]}}
-NeoBundle "othree/javascript-libraries-syntax.vim"
-NeoBundle "othree/html5.vim"
-NeoBundle "gregsexton/MatchTag"
-NeoBundle "hail2u/vim-css3-syntax"
-NeoBundle "nvie/vim-ini"
-NeoBundle "elzr/vim-json"
-NeoBundle "bling/vim-bufferline"
-NeoBundle "shawncplus/phpcomplete.vim"
+NeoBundle 'tpope/vim-sensible'
+NeoBundle 'tpope/vim-repeat'
+NeoBundle 'vim-scripts/visualrepeat'
+NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'goldfeld/vim-seek'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'tpope/vim-endwise'
+NeoBundle 'junegunn/vim-easy-align'
+NeoBundle 'terryma/vim-multiple-cursors'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'mileszs/ack.vim'
+NeoBundle 'tpope/vim-abolish'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'gorodinskiy/vim-coloresque'
+NeoBundle 'tpope/vim-unimpaired'
+NeoBundle 'vim-scripts/JavaScript-Indent'
+NeoBundle 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+NeoBundle 'othree/javascript-libraries-syntax.vim'
+NeoBundle 'othree/html5.vim'
+NeoBundle 'gregsexton/MatchTag'
+NeoBundle 'hail2u/vim-css3-syntax'
+NeoBundle 'nvie/vim-ini'
+NeoBundle 'elzr/vim-json'
+NeoBundle 'bling/vim-bufferline'
+NeoBundle 'shawncplus/phpcomplete.vim'
+
+" Tags
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'xolox/vim-misc'
+NeoBundle 'xolox/vim-easytags'
+let g:easytags_events = ['BufWritePost']
 
 filetype plugin indent on
 NeoBundleCheck
@@ -87,6 +93,8 @@ set nostartofline
 set nojoinspaces
 set splitbelow
 set splitright
+set tags=./tags;/
+
 nnoremap H ^
 vnoremap H ^
 nnoremap L $
