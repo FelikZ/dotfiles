@@ -20,7 +20,7 @@ cd $DIR
 
 str=$(type -t ctags)
 # ctags
-if [ ! -z "$str" -a "$str" != " " ] || [ -f "$DIR/bin/ctags" ]; then
+if [ -f "$DIR/bin/ctags" ]; then
     echo "ctags already installed."
 else
     echo "ctags will be installed."
@@ -36,6 +36,9 @@ else
 fi
 
 echo "Setting up environment..."
+
+# dirs
+mkdir -p "$DIR/tmp/vimswap"
 
 # aliases
 alias vim="vim -u $DIR/.vimrc"

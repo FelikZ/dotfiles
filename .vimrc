@@ -1,11 +1,14 @@
-let curdir=expand("<sfile>:h")
+let $curdir=escape(expand("<sfile>:h"), '\,')
+let $vimhome=$curdir.'/.vim'
+let $neoplugin=$curdir.'/.vim/bundle/neobundle.vim'
+
+set nocp
 
 if has('vim_starting')
-    set nocp
-    let &runtimepath.=curdir.'/.vim,'.curdir.'/.vim/bundle/neobundle.vim/'
+    let &runtimepath.=','.$vimhome.','.$neoplugin
 endif
 
-let neobundledir=curdir.'/.vim/bundle/'
+let neobundledir=$curdir.'/.vim/bundle'
 call neobundle#rc(neobundledir)
 
 NeoBundleFetch 'Shougo/neobundle.vim'
@@ -20,8 +23,8 @@ NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'tpope/vim-endwise'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'terryma/vim-multiple-cursors'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'mileszs/ack.vim'
+"NeoBundle 'kien/ctrlp.vim'
+"NeoBundle 'mileszs/ack.vim'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'gorodinskiy/vim-coloresque'
@@ -36,19 +39,36 @@ NeoBundle 'nvie/vim-ini'
 NeoBundle 'elzr/vim-json'
 NeoBundle 'bling/vim-bufferline'
 NeoBundle 'shawncplus/phpcomplete.vim'
+NeoBundle 'vim-scripts/SyntaxAttr.vim'
+
+" Unite
+NeoBundle 'Shougo/vimproc', {
+\ 'build' : {
+\     'windows' : 'make -f make_mingw32.mak',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make -f make_mac.mak',
+\     'unix' : 'make -f make_unix.mak',
+\    },
+\ }
+NeoBundle 'Shougo/unite.vim'
+let g:unite_enable_start_insert = 1
+let g:unite_candidate_icon="▷"
 
 " Tags
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'xolox/vim-misc'
-NeoBundle 'xolox/vim-easytags'
-let g:easytags_events = ['BufWritePost']
+" NeoBundle 'xolox/vim-easytags'
+set tags=./tags;
+"let g:easytags_events = ['BufWritePost']
+"let g:easytags_dynamic_files = 2
+"let g:easytags_file = $curdir.'/.vimtags'
 
 filetype plugin indent on
 NeoBundleCheck
 
 syntax on
 set number
-color desert
+colorscheme felikz_twilight
 set background=dark
 set ts=4 sts=4 sw=4
 set expandtab
@@ -88,12 +108,13 @@ endif
 set noerrorbells
 set novisualbell
 set noeb vb t_vb=
-set dir-=.
+let &dir=$curdir.'/tmp/vimswap'
 set nostartofline
 set nojoinspaces
 set splitbelow
 set splitright
-set tags=./tags;/
+
+colorscheme felikz_twilight
 
 nnoremap H ^
 vnoremap H ^
@@ -131,3 +152,5 @@ vnoremap <up> g<up>
 vnoremap <down> g<down>
 
 nmap <F8> :TagbarToggle<CR>
+nnoremap <c-p> :<C-u>Unite -buffer-name=files -start-insert buffer file_rec/async:!<cr>
+map <leader>/  :call SyntaxAttr()<CR>

@@ -2,5 +2,9 @@
 /*.log
 /.vim/bundle/*
 !/.vim/bundle/neobundle.vim
+/.vim/colors/*
+!/.vim/colors/felikz_twilight.vim
 /bin/*
 /share/*
+/tmp/*
+tags
