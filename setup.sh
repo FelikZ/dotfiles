@@ -19,6 +19,8 @@ DIR=$PHYS_DIR/$TARGET_FILE
 cd $DIR
 
 # install vim if not detected {{{
+# TODO: check features, if they are not preset - force compile
+# TODO: if root - do not local install
 
 vimversion="7.4"
 vimdest="$cwd/vim.tar.bz2"
@@ -77,6 +79,8 @@ else
     rm -Rf ctags-5.8
     rm -Rf ctags.tar.gz
 fi
+
+# TODO: auto init and update neobundle if its not
 
 echo "Setting up environment..."
 
