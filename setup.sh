@@ -18,8 +18,51 @@ DIR=$PHYS_DIR/$TARGET_FILE
 
 cd $DIR
 
-str=$(type -t ctags)
-# ctags
+# install vim if not detected {{{
+
+vimversion="7.4"
+vimdest="$cwd/vim.tar.bz2"
+
+curVimVersion=`vim --version 2>/dev/null | egrep "VIM - Vi" | sed -E "s/.*([0-9]+)\.([0-9]+).*/\\1\\2/"`
+neededVimVersion=`echo "$vimversion" | sed -E "s/.*([0-9]+)\.([0-9]+).*/\\1\\2/"`
+
+if [ ! $curVimVersion -lt $neededVimVersion ]; then
+    echo "vim already installed."
+else
+    echo "installing vim $vimversion..."
+
+    vimsourcedir="$cwd/vim$neededVimVersion"
+
+    if [ ! -d $vimsourcedir ]; then
+        wget -O $vimdest ftp://ftp.vim.org/pub/vim/unix/vim-$vimversion.tar.bz2
+
+        echo "Extracting..."
+        tar -zxf $vimdest
+        echo "Done."
+    fi
+
+    cd $vimsourcedir
+
+    ./configure --with-features=huge \
+                --enable-rubyinterp \
+                --enable-pythoninterp \
+                --enable-luainterp \
+                --enable-cscope \
+                --disable-gpm \
+                --enable-multibyte \
+                --prefix=$DIR
+
+    make
+    make install DESTDIR=$DIR
+
+    rm -Rf $vimsourcedir
+    rm -Rf $vimdest
+fi
+# }}}
+
+cd $DIR
+
+# ctags {{{
 if [ -f "$DIR/bin/ctags" ]; then
     echo "ctags already installed."
 else
@@ -29,7 +72,7 @@ else
     tar zxf ctags.tar.gz
     cd ctags-5.8
     ./configure --prefix=$DIR
-    make && make install
+    make && make install DESTDIR=$DIR
     cd $DIR
     rm -Rf ctags-5.8
     rm -Rf ctags.tar.gz
@@ -44,6 +87,6 @@ mkdir -p "$DIR/tmp/vimswap"
 alias vim="vim -u $DIR/.vimrc"
 
 # exports
-export PATH="$DIR/bin:$PATH"
+export PATH="$DIR/bin:$DIR/usr/local/bin:$PATH"
 
 echo "Done."
