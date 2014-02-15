@@ -41,8 +41,12 @@ NeoBundle 'bling/vim-bufferline'
 NeoBundle 'shawncplus/phpcomplete.vim'
 NeoBundle 'vim-scripts/SyntaxAttr.vim'
 
+" Testing
+NeoBundle 'hojberg/vest'
+NeoBundle 'Shougo/vesting'
+
 " Unite
-NeoBundle 'Shougo/vimproc', {
+NeoBundle 'FelikZ/vimproc', {
 \ 'build' : {
 \     'windows' : 'make -f make_mingw32.mak',
 \     'cygwin' : 'make -f make_cygwin.mak',
@@ -168,5 +172,5 @@ nmap <F8> :TagbarToggle<CR>
 nnoremap <c-p> :<C-u>Unite -buffer-name=files -start-insert buffer file_rec/async:!<cr>
 map <leader>/  :call SyntaxAttr()<CR>
 
-map ; :
-map : ;
+nnoremap ; :
+nnoremap ; :
