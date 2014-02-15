@@ -14,16 +14,16 @@ vimdest="$DIR/vim.tar.bz2"
 curVimVersion=`vim --version 2>/dev/null | egrep "VIM - Vi" | sed -E "s/.*([0-9]+)\.([0-9]+).*/\\1\\2/"`
 neededVimVersion=`echo "$vimversion" | sed -E "s/.*([0-9]+)\.([0-9]+).*/\\1\\2/"`
 
-if [ ! $curVimVersion -lt $neededVimVersion ]; then
+if [ -d "$DIR/bin/vim" ] || [ -n $curVimVersion ] || ! [[ $curVimVersion -lt $neededVimVersion ]]; then
     echo "vim already installed."
 else
     echo "installing vim $vimversion..."
 
     echo "installing ncurses..."
 
-    ncursesVersion= "5.9"
-    ncursesDest= "$DIR/ncurses.tar.gz"
-    ncursesSourceDir= "$DIR/ncurses-$ncursesVersion"
+    ncursesVersion="5.9"
+    ncursesDest="$DIR/ncurses.tar.gz"
+    ncursesSourceDir="$DIR/ncurses-$ncursesVersion"
 
     wget -O $ncursesDest http://ftp.gnu.org/pub/gnu/ncurses/ncurses-$ncursesVersion.tar.gz
 
