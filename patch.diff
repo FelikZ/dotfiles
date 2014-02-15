@@ -1,0 +1,8 @@
+19a20,22
+> #if defined(__APPLE__)
+> #include <AvailabilityMacros.h>
+> #endif
+830c833
+< 	extern int sigaltstack __ARGS((const struct sigaltstack *ss, struct sigaltstack *oss));
+---
+> 	extern int sigaltstack __ARGS((const stack_t *restrict ss, stack_t *restrict oss));
