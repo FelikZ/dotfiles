@@ -105,11 +105,6 @@ set hidden
 set wildmenu
 set wildmode=full
 set synmaxcol=800
-if has("unix")
-    set clipboard=unnamedplus
-else
-    set clipboard=unnamed
-endif
 set noerrorbells
 set novisualbell
 set noeb vb t_vb=
