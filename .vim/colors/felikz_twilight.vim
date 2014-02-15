@@ -123,3 +123,5 @@ hi phpDefine guifg=#f9ee98 guibg=NONE guisp=NONE gui=NONE ctermfg=229 ctermbg=NO
 hi phpBraces guifg=#ff9800 guibg=NONE guisp=NONE gui=NONE ctermfg=179 ctermbg=NONE cterm=NONE
 hi phpParent guifg=#ff9800 guibg=NONE guisp=NONE gui=NONE ctermfg=179 ctermbg=NONE cterm=NONE
 hi phpRegion guifg=#cea769 guibg=NONE guisp=NONE gui=NONE ctermfg=94 ctermbg=NONE cterm=NONE
+hi phpStructure guifg=#f9ee98 guibg=NONE guisp=NONE gui=NONE ctermfg=229 ctermbg=NONE cterm=NONE
+

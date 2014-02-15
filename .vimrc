@@ -68,6 +68,7 @@ NeoBundleCheck
 
 syntax on
 set number
+set cursorline
 colorscheme felikz_twilight
 set background=dark
 set ts=4 sts=4 sw=4
@@ -140,6 +141,18 @@ endfunction
 inoremap <expr> <Nul> Auto_complete_string()
 inoremap <expr> <C-Space> Auto_complete_string()
 
+" Inspired by https://github.com/tpope/vim-unimpaired "
+" Sets paste on and set nopaste when leaving insert mode "
+" using an autocommand "
+nnoremap <silent> yo  :set paste<cr>o
+nnoremap <silent> yO  :set paste<cr>O
+
+" Disables paste mode when leaving insert mode
+autocmd InsertLeave *
+    \ if &paste == 1 |
+    \     set nopaste |
+    \ endif
+
 nnoremap <tab> >>
 vnoremap <tab> >gv
 nnoremap <s-tab> <<
@@ -154,3 +167,6 @@ vnoremap <down> g<down>
 nmap <F8> :TagbarToggle<CR>
 nnoremap <c-p> :<C-u>Unite -buffer-name=files -start-insert buffer file_rec/async:!<cr>
 map <leader>/  :call SyntaxAttr()<CR>
+
+map ; :
+map : ;
