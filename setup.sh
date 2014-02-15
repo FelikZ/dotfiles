@@ -23,7 +23,7 @@ cd $DIR
 # TODO: if root - do not local install
 
 vimversion="7.4"
-vimdest="$cwd/vim.tar.bz2"
+vimdest="$DIR/vim.tar.bz2"
 
 curVimVersion=`vim --version 2>/dev/null | egrep "VIM - Vi" | sed -E "s/.*([0-9]+)\.([0-9]+).*/\\1\\2/"`
 neededVimVersion=`echo "$vimversion" | sed -E "s/.*([0-9]+)\.([0-9]+).*/\\1\\2/"`
@@ -33,13 +33,13 @@ if [ ! $curVimVersion -lt $neededVimVersion ]; then
 else
     echo "installing vim $vimversion..."
 
-    vimsourcedir="$cwd/vim$neededVimVersion"
-
+    vimsourcedir="$DIR/vim$neededVimVersion"
+echo $vimsourcedir
     if [ ! -d $vimsourcedir ]; then
         wget -O $vimdest ftp://ftp.vim.org/pub/vim/unix/vim-$vimversion.tar.bz2
 
         echo "Extracting..."
-        tar -zxf $vimdest
+        tar -jxf $vimdest
         echo "Done."
     fi
 
