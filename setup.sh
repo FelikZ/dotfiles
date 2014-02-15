@@ -36,10 +36,12 @@ else
 
     export CPPFLAGS="-I$DIR/include"
     export LDFLAGS="-L$DIR/lib"
-    
+
     vimsourcedir="$DIR/vim$neededVimVersion"
 
     if [ ! -d $vimsourcedir ]; then
+        cd $DIR
+
         wget -O $vimdest ftp://ftp.vim.org/pub/vim/unix/vim-$vimversion.tar.bz2
 
         echo "Extracting..."
