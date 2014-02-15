@@ -79,6 +79,18 @@ else
     rm -Rf ctags-5.8
     rm -Rf ctags.tar.gz
 fi
+# }}}
+
+isAck=`ack --version 2>/dev/null`
+# ack {{{
+if [ -n "$isAck" ] || [ -f "$DIR/bin/ack" ]; then
+    echo "ack already installed."
+else
+    echo "ack will be installed."
+
+    curl http://beyondgrep.com/ack-2.12-single-file > ~/felikz/bin/ack && chmod 0755 ~/felikz/bin/ack
+fi
+# }}}
 
 # TODO: auto init and update neobundle if its not
 

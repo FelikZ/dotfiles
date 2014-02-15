@@ -24,7 +24,7 @@ NeoBundle 'tpope/vim-endwise'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'terryma/vim-multiple-cursors'
 "NeoBundle 'kien/ctrlp.vim'
-"NeoBundle 'mileszs/ack.vim'
+NeoBundle 'mileszs/ack.vim'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'gorodinskiy/vim-coloresque'
@@ -169,7 +169,7 @@ vnoremap <up> g<up>
 vnoremap <down> g<down>
 
 nmap <F8> :TagbarToggle<CR>
-nnoremap <c-p> :<C-u>Unite -buffer-name=files -start-insert buffer file_rec/async:!<cr>
+nnoremap <c-p> :<C-u>Unite -buffer-name=files -start-insert buffer file_rec/async<cr>
 map <leader>/  :call SyntaxAttr()<CR>
 
 nnoremap ; :
