@@ -1,23 +1,9 @@
 #!/bin/bash
 ############################
 
-TARGET_FILE=$(dirname ${BASH_SOURCE[0]})
-
-cd `dirname $TARGET_FILE`
-TARGET_FILE=`basename $TARGET_FILE`
-
-while [ -L "$TARGET_FILE" ]
-do
-    TARGET_FILE=`readlink $TARGET_FILE`
-    cd `dirname $TARGET_FILE`
-    TARGET_FILE=`basename $TARGET_FILE`
-done
-
-PHYS_DIR=`pwd -P`
-DIR=$PHYS_DIR/$TARGET_FILE
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 cd $DIR
-
 # install vim if not detected {{{
 # TODO: check features, if they are not preset - force compile
 # TODO: if root - do not local install
@@ -28,19 +14,24 @@ vimdest="$DIR/vim.tar.bz2"
 curVimVersion=`vim --version 2>/dev/null | egrep "VIM - Vi" | sed -E "s/.*([0-9]+)\.([0-9]+).*/\\1\\2/"`
 neededVimVersion=`echo "$vimversion" | sed -E "s/.*([0-9]+)\.([0-9]+).*/\\1\\2/"`
 
-if [ ! $curVimVersion -lt $neededVimVersion ]; then
+if [ $curVimVersion -lt $neededVimVersion ]; then
     echo "vim already installed."
 else
     echo "installing vim $vimversion..."
 
     vimsourcedir="$DIR/vim$neededVimVersion"
-echo $vimsourcedir
+
     if [ ! -d $vimsourcedir ]; then
         wget -O $vimdest ftp://ftp.vim.org/pub/vim/unix/vim-$vimversion.tar.bz2
 
         echo "Extracting..."
         tar -jxf $vimdest
         echo "Done."
+
+        # mac only
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            patch $vimsourcedir/src/os_unix.c patch.diff
+        fi
     fi
 
     cd $vimsourcedir
@@ -55,7 +46,7 @@ echo $vimsourcedir
                 --prefix=$DIR
 
     make
-    make install DESTDIR=$DIR
+    make install
 
     rm -Rf $vimsourcedir
     rm -Rf $vimdest
@@ -74,7 +65,7 @@ else
     tar zxf ctags.tar.gz
     cd ctags-5.8
     ./configure --prefix=$DIR
-    make && make install DESTDIR=$DIR
+    make && make install
     cd $DIR
     rm -Rf ctags-5.8
     rm -Rf ctags.tar.gz
@@ -88,7 +79,7 @@ if [ -n "$isAck" ] || [ -f "$DIR/bin/ack" ]; then
 else
     echo "ack will be installed."
 
-    curl http://beyondgrep.com/ack-2.12-single-file > ~/felikz/bin/ack && chmod 0755 ~/felikz/bin/ack
+    curl http://beyondgrep.com/ack-2.12-single-file > $DIR/bin/ack && chmod 0755 $DIR/bin/ack
 fi
 # }}}
 
