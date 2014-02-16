@@ -9,4 +9,6 @@
 /share/*
 /tmp/*
 /usr/*
+/include/*
+/lib/*
 tags

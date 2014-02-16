@@ -13,8 +13,7 @@ vimdest="$DIR/vim.tar.bz2"
 
 curVimVersion=`vim --version 2>/dev/null | egrep "VIM - Vi" | sed -E "s/.*([0-9]+)\.([0-9]+).*/\\1\\2/"`
 neededVimVersion=`echo "$vimversion" | sed -E "s/.*([0-9]+)\.([0-9]+).*/\\1\\2/"`
-
-if [ -d "$DIR/bin/vim" ] || [ -n $curVimVersion ] || ! [[ $curVimVersion -lt $neededVimVersion ]]; then
+if [ -f "$DIR/bin/vim" ] || ( [ -n $curVimVersion ] && [[ $curVimVersion -ge $neededVimVersion ]] ); then
     echo "vim already installed."
 else
     echo "installing vim $vimversion..."
@@ -33,6 +32,9 @@ else
 
     ./configure --prefix=$DIR
     make && make install
+
+    rm -rf $ncursesSourceDir
+    rm -rf $ncursesDest
 
     export CPPFLAGS="-I$DIR/include"
     export LDFLAGS="-L$DIR/lib"
