@@ -41,7 +41,8 @@ hi StatusLine guifg=#d3d3d5 guibg=#303030 guisp=#303030 gui=NONE ctermfg=188 cte
 hi Normal guifg=#ffffff guibg=#181818 guisp=#181818 gui=NONE ctermfg=15 ctermbg=232 cterm=NONE
 hi Label guifg=#7e8aa2 guibg=NONE guisp=NONE gui=NONE ctermfg=103 ctermbg=NONE cterm=NONE
 "hi CTagsImport -- no settings --
-hi PMenuSel guifg=#000000 guibg=#b1d631 guisp=#b1d631 gui=NONE ctermfg=NONE ctermbg=149 cterm=NONE
+"hi guifg=#000000 guibg=#b1d631 guisp=#b1d631 gui=NONE ctermfg=NONE ctermbg=149 cterm=NONE
+hi PMenuSel guifg=#939395 guibg=#303030 guisp=#303030 gui=NONE ctermfg=246 ctermbg=236 cterm=NONE
 "hi Search -- no settings --
 "hi CTagsGlobalVariable -- no settings --
 hi Delimiter guifg=#ff9800 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE cterm=NONE
@@ -94,7 +95,7 @@ hi Repeat guifg=#cea769 guibg=NONE guisp=NONE gui=NONE ctermfg=179 ctermbg=NONE 
 "hi SpellBad -- no settings --
 "hi CTagsClass -- no settings --
 "hi Directory -- no settings --
-hi Structure guifg=#7e8aa2 guibg=NONE guisp=NONE gui=NONE ctermfg=103 ctermbg=NONE cterm=NONE
+hi Structure guifg=#f9ee98 guibg=NONE guisp=NONE gui=NONE ctermfg=229 ctermbg=NONE cterm=NONE
 hi Macro guifg=#faf4c6 guibg=NONE guisp=NONE gui=NONE ctermfg=230 ctermbg=NONE cterm=NONE
 "hi Underlined -- no settings --
 "hi DiffAdd -- no settings --
@@ -125,3 +126,14 @@ hi phpParent guifg=#ff9800 guibg=NONE guisp=NONE gui=NONE ctermfg=179 ctermbg=NO
 hi phpRegion guifg=#cea769 guibg=NONE guisp=NONE gui=NONE ctermfg=94 ctermbg=NONE cterm=NONE
 hi phpStructure guifg=#f9ee98 guibg=NONE guisp=NONE gui=NONE ctermfg=229 ctermbg=NONE cterm=NONE
 
+" VIM
+hi vimOperParen guifg=#ff9800 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE cterm=NONE
+hi vimSep guifg=#ff9800 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE cterm=NONE
+hi vimSynType guifg=#cf6b4c guibg=NONE guisp=NONE gui=NONE ctermfg=173 ctermbg=NONE cterm=NONE
+hi vimSetEqual guifg=#cf6b4c guibg=NONE guisp=NONE gui=NONE ctermfg=173 ctermbg=NONE cterm=NONE
+hi vimSet guifg=#cf6b4c guibg=NONE guisp=NONE gui=NONE ctermfg=173 ctermbg=NONE cterm=NONE
+hi vimCommand guifg=#cea769 guibg=NONE guisp=NONE gui=NONE ctermfg=179 ctermbg=NONE cterm=NONE
+hi vimIsCommand guifg=#cea769 guibg=NONE guisp=NONE gui=NONE ctermfg=94 ctermbg=NONE cterm=NONE
+
+" Unite
+"hi uniteSourceLine__uniteSource__FileRecAsync
