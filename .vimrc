@@ -4,6 +4,16 @@ let $neoplugin=$curdir.'/.vim/bundle/neobundle.vim'
 
 set nocp
 
+" NEOBUNDLE " {{{
+let neobundle_readme=expand($vimhome.'/bundle/neobundle.vim/README.md')
+if !filereadable(neobundle_readme)
+    echo "Installing NeoBundle.."
+    echo ""
+    silent !mkdir -p $vimhome'/bundle'
+    silent !git clone https://github.com/Shougo/neobundle.vim $vimhome'/bundle/neobundle.vim'
+endif
+" }}}
+
 if has('vim_starting')
     let &runtimepath.=','.$vimhome.','.$neoplugin
 endif
