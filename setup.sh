@@ -4,6 +4,9 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$DIR"
 
+# exports
+export PATH="$DIR/bin:$DIR/usr/local/bin:$PATH"
+
 export CPPFLAGS="-I$DIR/include"
 export CPATH="/home/felikz/felikz/include/"
 
@@ -168,8 +171,5 @@ mkdir -p "$DIR/tmp/vimswap"
 
 # aliases
 alias vim="vim -u $DIR/.vimrc"
-
-# exports
-export PATH="$DIR/bin:$DIR/usr/local/bin:$PATH"
 
 echo "Done."
