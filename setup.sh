@@ -3,15 +3,18 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$DIR"
+
 export CPPFLAGS="-I$DIR/include"
+export CPATH="/home/felikz/felikz/include/"
+
 export LDFLAGS="-L$DIR/lib"
 export LD_LIBRARY_PATH="-L$DIR/lib"
-
+export LIBRARY_PATH="/home/felikz/felikz/lib/"
 
 # install vim if not detected
-# TODO: check features, if they are not preset - force compile
-# TODO: if root - do not local install
-
+# TODO: make custom ./configure and make file for installing vim and features
+# TODO: params to install global / localy / standalone
+# TODO: quite model
 
 vimversion="7.4"
 vimdest="$DIR/vim.tar.bz2"
@@ -72,18 +75,18 @@ else
         wget -O "$luaDest" "http://www.lua.org/ftp/lua-$luaVersion.tar.gz"
         tar -zxf "$luaDest"
         cd "$luaSourceDir"
-        
+
         luaTarget='linux'
         if [[ "$OSTYPE" == "darwin13" ]]; then
-	    luaTarget='macosx'
+            luaTarget='macosx'
         fi
         make $luaTarget INSTALL_TOP="$DIR"
-	make install INSTALL_TOP="$DIR"
+        make install INSTALL_TOP="$DIR"
 
         rm -rf "$luaSourceDir"
         rm -rf "$luaDest"
 
-	export LUA_PREFIX="$DIR"
+        export LUA_PREFIX="$DIR"
     fi
 
     vimsourcedir="$DIR/vim$neededVimVersion"
