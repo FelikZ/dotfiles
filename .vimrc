@@ -68,25 +68,31 @@ call neobundle#rc(neobundledir)
 
 NeoBundleFetch 'Shougo/neobundle.vim'
 
+NeoBundle 'vim-scripts/visualrepeat'
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'tpope/vim-repeat'
-NeoBundle 'vim-scripts/visualrepeat'
+NeoBundle 'tpope/vim-unimpaired'
+NeoBundle 'tpope/vim-abolish'
+NeoBundle 'tpope/vim-endwise'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'goldfeld/vim-seek'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'Raimondi/delimitMate'
-NeoBundle 'tpope/vim-endwise'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'terryma/vim-multiple-cursors'
-"NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'mileszs/ack.vim'
-NeoBundle 'tpope/vim-abolish'
+"NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'gorodinskiy/vim-coloresque'
-NeoBundle 'tpope/vim-unimpaired'
 
 " All-lang syntax {{{
 NeoBundle 'vim-scripts/SyntaxComplete'
+NeoBundle 'vim-scripts/SyntaxAttr.vim'
+NeoBundle 'othree/html5.vim'
+NeoBundle 'gregsexton/MatchTag'
+NeoBundle 'hail2u/vim-css3-syntax'
+NeoBundle 'nvie/vim-ini'
+NeoBundle 'elzr/vim-json'
+NeoBundle 'shawncplus/phpcomplete.vim'
 " NeoBundle 'scrooloose/syntastic'
 " }}}
 
@@ -98,18 +104,42 @@ NeoBundleLazy 'othree/javascript-libraries-syntax.vim', {'autoload':{'filetypes'
 let g:used_javascript_libs = 'jquery,underscore,backbone,angularjs,jasmine'
 " }}}
 
-NeoBundle 'othree/html5.vim'
-NeoBundle 'gregsexton/MatchTag'
-NeoBundle 'hail2u/vim-css3-syntax'
-NeoBundle 'nvie/vim-ini'
-NeoBundle 'elzr/vim-json'
-NeoBundle 'bling/vim-bufferline'
-NeoBundle 'shawncplus/phpcomplete.vim'
-NeoBundle 'vim-scripts/SyntaxAttr.vim'
+" Completion {{{
+NeoBundle 'Shougo/neocomplete.vim'
 
-" Testing
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#enable_refresh_always = 1
+let g:neocomplete#max_list = 30
+let g:neocomplete#min_keyword_length = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 1
+let g:neocomplete#data_directory = $curdir.'/tmp/neocomplete'
+
+" disable the auto select feature by default to speed up writing without
+" obstacles (is optimal for certain situations)
+let g:neocomplete#enable_auto_select = 0
+
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
+let g:neosnippet#enable_snipmate_compatibility = 1
+let g:neosnippet#snippets_directory=$curdir.'/.vim/bundle/vim-snippets/snippets'
+
+NeoBundle 'honza/vim-snippets'
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" }}}
+
+NeoBundle 'bling/vim-bufferline'
+
+" Testing {{{
 NeoBundle 'hojberg/vest'
 NeoBundle 'Shougo/vesting'
+" }}}
 
 NeoBundle 'FelikZ/vimproc.vim', {
 \ 'build' : {
@@ -148,13 +178,26 @@ if executable('ack')
 endif
 
 " Tags {{{
-NeoBundle 'majutsushi/tagbar'
 NeoBundle 'xolox/vim-misc'
 " NeoBundle 'xolox/vim-easytags'
-set tags=./tags;
+set tags=./tags,./TAGS,tags;~,TAGS;~
 "let g:easytags_events = ['BufWritePost']
 "let g:easytags_dynamic_files = 2
 "let g:easytags_file = $curdir.'/.vimtags'
+" }}}
+
+" Projects and indexing {{{
+NeoBundle 'vim-scripts/DfrankUtil'
+NeoBundle 'vim-scripts/vimprj'
+let g:indexer_recurseUpCount = 2
+let g:indexer_debugLogLevel = 3
+
+let vimExecPath = $curdir.'/bin/vim'
+
+if filereadable(vimExecPath)
+    let g:indexer_vimExecutable = vimExecPath
+endif
+NeoBundle 'phreaknerd/vim-indexer'
 " }}}
 
 " Colorschemes {{{
@@ -176,24 +219,6 @@ nnoremap L $
 vnoremap L $
 " inoremap jk <esc>
 
-function! Auto_complete_string()
-    if pumvisible()
-        return "\<C-n>"
-    else
-        return "\<C-x>\<C-o>\<C-r>=Auto_complete_opened()\<CR>"
-    end
-endfunction
-
-function! Auto_complete_opened()
-    if pumvisible()
-        return "\<Down>"
-    end
-    return ""
-endfunction
-
-inoremap <expr> <Nul> Auto_complete_string()
-inoremap <expr> <C-Space> Auto_complete_string()
-
 " Inspired by https://github.com/tpope/vim-unimpaired "
 " Sets paste on and set nopaste when leaving insert mode "
 " using an autocommand "
@@ -212,16 +237,43 @@ nnoremap <s-tab> <<
 vnoremap <s-tab> <gv
 nnoremap <leader><cr> :noh<cr>
 
+" Move throught wrap lines
 nnoremap <up> g<up>
 nnoremap <down> g<down>
 vnoremap <up> g<up>
 vnoremap <down> g<down>
 
-nmap <F8> :TagbarToggle<CR>
+" Unite bindings
 nnoremap <Space>p :<C-u>Unite -buffer-name=files -start-insert buffer file_rec/async<cr>
 nnoremap <Space>t :<C-u>Unite -start-insert tag<cr>
+
+" Show color of current symbol
 map <leader>/  :call SyntaxAttr()<CR>
 
+" enable same functions to ; as :
 nnoremap ; :
+
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" Snippets bindings {{
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+    set conceallevel=2 concealcursor=i
+endif
+" }}
 " }}}
 

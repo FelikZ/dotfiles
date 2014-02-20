@@ -8,11 +8,13 @@ cd "$DIR"
 export PATH="$DIR/bin:$DIR/usr/local/bin:$PATH"
 
 export CPPFLAGS="-I$DIR/include"
-export CPATH="/home/felikz/felikz/include/"
+export CPATH="$DIR/include/"
 
 export LDFLAGS="-L$DIR/lib"
 export LD_LIBRARY_PATH="-L$DIR/lib"
-export LIBRARY_PATH="/home/felikz/felikz/lib/"
+export LIBRARY_PATH="$DIR/lib/"
+
+export LUA_PREFIX="$DIR"
 
 # install vim if not detected
 # TODO: make custom ./configure and make file for installing vim and features
@@ -29,23 +31,28 @@ if [ -f "$DIR/bin/vim" ] || ( [ -n "$curVimVersion" ] && [[ $curVimVersion -ge $
     echo "vim already installed."
 else
     echo "installing vim $vimversion..."
-    echo "installing ncurses..."
 
-    ncursesVersion="5.9"
-    ncursesDest="$DIR/ncurses.tar.gz"
-    ncursesSourceDir="$DIR/ncurses-$ncursesVersion"
+    if [ -f "$DIR/lib/libncurses.a" ]; then
+        echo "Ncurses already installed"
+    else
+        echo "Installing ncurses..."
 
-    wget -O "$ncursesDest" "http://ftp.gnu.org/pub/gnu/ncurses/ncurses-$ncursesVersion.tar.gz"
+        ncursesVersion="5.9"
+        ncursesDest="$DIR/ncurses.tar.gz"
+        ncursesSourceDir="$DIR/ncurses-$ncursesVersion"
 
-    tar -xf "$ncursesDest"
+        wget -O "$ncursesDest" "http://ftp.gnu.org/pub/gnu/ncurses/ncurses-$ncursesVersion.tar.gz"
 
-    cd "$ncursesSourceDir"
+        tar -xf "$ncursesDest"
 
-    ./configure --prefix="$DIR"
-    make && make install
+        cd "$ncursesSourceDir"
 
-    rm -rf "$ncursesSourceDir"
-    rm -rf "$ncursesDest"
+        ./configure --prefix="$DIR"
+        make && make install
+
+        rm -rf "$ncursesSourceDir"
+        rm -rf "$ncursesDest"
+    fi
 
     # Installing LUA
     curLuaVersion=`lua -v 2>/dev/null | egrep "Copyright " | sed -E "s/.*([0-9]+)\.([0-9]+)\.([0-9]+).*/\\1\\2\\3/"`
@@ -83,13 +90,12 @@ else
         if [[ "$OSTYPE" == "darwin13" ]]; then
             luaTarget='macosx'
         fi
-        make $luaTarget INSTALL_TOP="$DIR"
+        make "$luaTarget" INSTALL_TOP="$DIR"
         make install INSTALL_TOP="$DIR"
 
         rm -rf "$luaSourceDir"
         rm -rf "$luaDest"
 
-        export LUA_PREFIX="$DIR"
     fi
 
     vimsourcedir="$DIR/vim$neededVimVersion"
@@ -106,24 +112,49 @@ else
 
         # mac only
         if [[ "$OSTYPE" == "darwin13" ]]; then
-            patch "$vimsourcedir/src/os_unix.c" patch.diff
+            patch "$vimsourcedir/src/os_unix.c" "vim_osx_fix.patch"
         fi
     fi
 
-    cd "$vimsourcedir"
+    # Installing Python 2.7
 
+    pythonVersion="2.7.6"
+    pythonVersionPrecise=`echo $pythonVersion | sed -E "s/([0-9]+)\.([0-9]+)\.([0-9])+/\\1\.\\2/"`
+
+    echo "Installing python $pythonVersion"
+    cd "$DIR"
+    pythonDest="$DIR/python-$pythonVersion.tar.xz"
+    pythonSourceDir="$DIR/Python-$pythonVersion"
+
+    if [ -f "$DIR/bin/python2" ]; then
+        echo "Python2 already installed"
+        else
+        echo "Installing Python2"
+        wget -O "$pythonDest" "http://www.python.org/ftp/python/$pythonVersion/Python-$pythonVersion.tar.xz"
+        tar --xz -xf "$pythonDest"
+        cd "$pythonSourceDir"
+
+        ./configure --prefix="$DIR"
+        make && make install
+
+        rm -rf "$pythonSourceDir"
+        rm -rf "$pythonDest"
+    fi
+
+    cd "$vimsourcedir"
     ./configure --with-features=huge \
-                --enable-rubyinterp=yes \
-                --enable-pythoninterp=yes \
-                --enable-luainterp=yes \
-                --enable-cscope \
-                --disable-gpm \
-                --with-tlib=ncurses \
-                --prefix="$DIR" \
-                --with-x=yes \
-                --enable-acl \
-                --disable-gui \
-                --enable-multibyte
+        --enable-rubyinterp=yes \
+        --enable-pythoninterp=yes \
+        --with-python-config-dir="$DIR/lib/python$pythonVersionPrecise/config" \
+        --enable-luainterp=yes \
+        --enable-cscope \
+        --disable-gpm \
+        --with-tlib=ncurses \
+        --prefix="$DIR" \
+        --with-x=yes \
+        --enable-acl \
+        --disable-gui \
+        --enable-multibyte
     make
     make install
 
@@ -142,7 +173,12 @@ else
 
     wget -O ctags.tar.gz "http://prdownloads.sourceforge.net/ctags/ctags-5.8.tar.gz"
     tar zxf ctags.tar.gz
-    cd ctags-5.8
+
+    # fixing issue described here: http://dfrank.ru/ctags581
+    patch -p1 < "$DIR/ctags_fix.patch"
+
+    cd "ctags-5.8"
+
     ./configure --prefix="$DIR"
     make && make install
     cd "$DIR"
@@ -170,6 +206,6 @@ echo "Setting up environment..."
 mkdir -p "$DIR/tmp/vimswap"
 
 # aliases
-alias vim="vim -u $DIR/.vimrc"
+alias vim="vim -u \"$DIR/.vimrc\""
 
 echo "Done."
