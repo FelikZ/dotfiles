@@ -23,7 +23,7 @@ set showcmd
 set termencoding=utf-8
 set encoding=utf-8
 set fileencoding=utf-8
-set fileformats=unix,dos,mac
+set fileformats=unix
 set ignorecase
 set smartcase
 set hlsearch

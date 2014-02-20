@@ -1,0 +1,5 @@
+[test_project]
+option:ctags_params = "--exclude='services/*' --exclude='.git' --exclude='assets/*' --exclude='test/*'"
+
+$INDEXER_PROJECT_ROOT
+
