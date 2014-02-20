@@ -139,6 +139,7 @@ NeoBundle 'bling/vim-bufferline'
 " Testing {{{
 NeoBundle 'hojberg/vest'
 NeoBundle 'Shougo/vesting'
+NeoBundle 'vim-scripts/Decho'
 " }}}
 
 NeoBundle 'FelikZ/vimproc.vim', {
@@ -188,7 +189,7 @@ set tags=./tags,./TAGS,tags;~,TAGS;~
 
 " Projects and indexing {{{
 NeoBundle 'vim-scripts/DfrankUtil'
-NeoBundle 'vim-scripts/vimprj'
+NeoBundle 'FelikZ/vimprj'
 let g:indexer_recurseUpCount = 2
 let g:indexer_debugLogLevel = 3
 

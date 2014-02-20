@@ -179,7 +179,8 @@ else
 
     cd "ctags-5.8"
 
-    ./configure --prefix="$DIR"
+    ./configure --prefix="$DIR" \
+		--disable-external-sort
     make && make install
     cd "$DIR"
     rm -Rf "ctags-5.8"
