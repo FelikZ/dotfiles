@@ -14,7 +14,6 @@ export LDFLAGS="-L$DIR/lib"
 export LD_LIBRARY_PATH="-L$DIR/lib"
 export LIBRARY_PATH="$DIR/lib/"
 
-export LUA_PREFIX="$DIR"
 
 # install vim if not detected
 # TODO: make custom ./configure and make file for installing vim and features
@@ -96,6 +95,7 @@ else
         rm -rf "$luaSourceDir"
         rm -rf "$luaDest"
 
+        export LUA_PREFIX="$DIR"
     fi
 
     vimsourcedir="$DIR/vim$neededVimVersion"
