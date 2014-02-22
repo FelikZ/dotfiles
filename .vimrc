@@ -47,6 +47,18 @@ set nostartofline
 set nojoinspaces
 set splitbelow
 set splitright
+
+" Performance
+set regexpengine=2
+set ttyfast
+set ttyscroll=3
+set lazyredraw
+set nocursorcolumn
+set nocursorline
+set synmaxcol=400
+" let loaded_matchparen = 1
+let g:matchparen_timeout = 10
+let g:matchparen_insert_timeout = 10
 " }}}
 
 " NeoBundle {{{
@@ -69,17 +81,22 @@ call neobundle#rc(neobundledir)
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'vim-scripts/visualrepeat'
+NeoBundle 'vim-scripts/tComment'
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'tpope/vim-endwise'
+
 NeoBundle 'Lokaltog/vim-easymotion'
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_use_upper = 1
+
 NeoBundle 'goldfeld/vim-seek'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'junegunn/vim-easy-align'
-NeoBundle 'terryma/vim-multiple-cursors'
+NeoBundle 'joedicastro/vim-multiple-cursors'
 NeoBundle 'mileszs/ack.vim'
 "NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'scrooloose/nerdtree'
@@ -102,6 +119,11 @@ NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascr
 NeoBundleLazy 'pangloss/vim-javascript', {'autoload':{'filetypes':['javascript']}}
 NeoBundleLazy 'othree/javascript-libraries-syntax.vim', {'autoload':{'filetypes':['javascript','coffee','coffeescript','typescript']}}
 let g:used_javascript_libs = 'jquery,underscore,backbone,angularjs,jasmine'
+
+" "Node.js
+" NeoBundle 'guileen/vim-node-dict'
+" NeoBundle 'myhere/vim-nodejs-complete'
+" NeoBundle 'ahayman/vim-nodejs-complete
 " }}}
 
 " Completion {{{
@@ -134,7 +156,13 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " }}}
 
-NeoBundle 'bling/vim-bufferline'
+" Airline {{{
+" NeoBundle 'bling/vim-bufferline'
+NeoBundle 'bling/vim-airline'
+let g:airline#extensions#tabline#enabled = 1
+" serene, wombat
+let g:airline_theme='serene'
+" }}}
 
 " Testing {{{
 NeoBundle 'hojberg/vest'
@@ -190,8 +218,9 @@ set tags=./tags,./TAGS,tags;~,TAGS;~
 " Projects and indexing {{{
 NeoBundle 'vim-scripts/DfrankUtil'
 NeoBundle 'FelikZ/vimprj'
+let g:indexer_ctagsWriteFilelist = 1
 let g:indexer_recurseUpCount = 2
-let g:indexer_debugLogLevel = 3
+let g:indexer_debugLogLevel = 1
 
 let vimExecPath = $curdir.'/bin/vim'
 
@@ -205,6 +234,7 @@ NeoBundle 'phreaknerd/vim-indexer'
 " NeoBundle 'nanotech/jellybeans.vim'
 " NeoBundle 'marcelbeumer/twilight.vim'
 " NeoBundle 'altercation/vim-colors-solarized'
+" NeoBundle 'goatslacker/mango.vim'
 " }}}
 
 filetype plugin indent on
@@ -219,6 +249,13 @@ vnoremap H ^
 nnoremap L $
 vnoremap L $
 " inoremap jk <esc>
+
+" Easy-motion
+map <Leader>h <Plug>(easymotion-linebackward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>l <Plug>(easymotion-lineforward)
+nmap s <Plug>(easymotion-s)
 
 " Inspired by https://github.com/tpope/vim-unimpaired "
 " Sets paste on and set nopaste when leaving insert mode "
@@ -276,5 +313,12 @@ if has('conceal')
     set conceallevel=2 concealcursor=i
 endif
 " }}
+
+" Debug
+nnoremap <silent> <leader>DD :exe ":profile start profile.log"<cr>:exe ":profile func *"<cr>:exe ":profile file *"<cr>
+nnoremap <silent> <leader>DP :exe ":profile pause"<cr>
+nnoremap <silent> <leader>DC :exe ":profile continue"<cr>
+nnoremap <silent> <leader>DQ :exe ":profile pause"<cr>:noautocmd qall!<cr>
+
 " }}}
 
