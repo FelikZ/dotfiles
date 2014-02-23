@@ -207,6 +207,8 @@ echo "Setting up environment..."
 mkdir -p "$DIR/tmp/vimswap"
 
 # aliases
-alias vim="vim -u \"$DIR/.vimrc\""
+chmod 0777 "$DIR/bin/vimf"
+alias vim="vimf"
+export EDITOR="vimf"
 
 echo "Done."
