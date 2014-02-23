@@ -220,7 +220,8 @@ NeoBundle 'vim-scripts/DfrankUtil'
 NeoBundle 'FelikZ/vimprj'
 let g:indexer_ctagsWriteFilelist = 1
 let g:indexer_recurseUpCount = 2
-let g:indexer_debugLogLevel = 1
+let g:indexer_debugLogLevel = 0
+let g:indexer_enableWhenProjectDirFound = 0
 
 let vimExecPath = $curdir.'/bin/vim'
 
@@ -285,8 +286,6 @@ vnoremap <down> g<down>
 nnoremap <Space>p :<C-u>Unite -buffer-name=files -start-insert buffer file_rec/async<cr>
 nnoremap <Space>t :<C-u>Unite -start-insert tag<cr>
 
-" Show color of current symbol
-map <leader>/  :call SyntaxAttr()<CR>
 
 " enable same functions to ; as :
 nnoremap ; :
@@ -314,11 +313,20 @@ if has('conceal')
 endif
 " }}
 
+" Leader bindings {{{
 " Debug
 nnoremap <silent> <leader>DD :exe ":profile start profile.log"<cr>:exe ":profile func *"<cr>:exe ":profile file *"<cr>
 nnoremap <silent> <leader>DP :exe ":profile pause"<cr>
 nnoremap <silent> <leader>DC :exe ":profile continue"<cr>
 nnoremap <silent> <leader>DQ :exe ":profile pause"<cr>:noautocmd qall!<cr>
+
+" Show color of current symbol
+map <leader>/  :call SyntaxAttr()<CR>
+
+" Close prev/next buffer
+nmap <silent> [c :bp\|bd #<CR>
+nmap <silent> ]c :bn\|bd #<CR>
+" }}}
 
 " }}}
 
