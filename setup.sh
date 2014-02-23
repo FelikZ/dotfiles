@@ -15,11 +15,47 @@ export LD_LIBRARY_PATH="-L$DIR/lib"
 export LIBRARY_PATH="$DIR/lib/"
 
 
-# install vim if not detected
 # TODO: make custom ./configure and make file for installing vim and features
 # TODO: params to install global / localy / standalone
 # TODO: quite model
 
+cd "$DIR"
+
+# ctags
+if [ -f "$DIR/bin/ctags" ]; then
+    echo "ctags already installed."
+else
+    echo "ctags will be installed."
+
+    wget -O ctags.tar.gz "http://prdownloads.sourceforge.net/ctags/ctags-5.8.tar.gz"
+    tar zxf ctags.tar.gz
+
+    # fixing issue described here: http://dfrank.ru/ctags581
+    patch -p1 < "$DIR/ctags_fix.patch"
+
+    cd "ctags-5.8"
+
+    ./configure --prefix="$DIR" \
+                --disable-external-sort
+    make && make install
+    cd "$DIR"
+    rm -Rf "ctags-5.8"
+    rm -Rf "ctags.tar.gz"
+fi
+#
+
+isAck=`ack --version 2>/dev/null`
+# ack
+if [ -n "$isAck" ] || [ -f "$DIR/bin/ack" ]; then
+    echo "ack already installed."
+else
+    echo "ack will be installed."
+
+    curl "http://beyondgrep.com/ack-2.12-single-file" > "$DIR/bin/ack" && chmod 0755 "$DIR/bin/ack"
+fi
+#
+
+# install vim if not detected
 vimversion="7.4"
 vimdest="$DIR/vim.tar.bz2"
 
@@ -158,44 +194,13 @@ else
     make
     make install
 
+    # cleanup
     rm -Rf "$vimsourcedir"
     rm -Rf "$vimdest"
-fi
-#
-
-cd "$DIR"
-
-# ctags
-if [ -f "$DIR/bin/ctags" ]; then
-    echo "ctags already installed."
-else
-    echo "ctags will be installed."
-
-    wget -O ctags.tar.gz "http://prdownloads.sourceforge.net/ctags/ctags-5.8.tar.gz"
-    tar zxf ctags.tar.gz
-
-    # fixing issue described here: http://dfrank.ru/ctags581
-    patch -p1 < "$DIR/ctags_fix.patch"
-
-    cd "ctags-5.8"
-
-    ./configure --prefix="$DIR" \
-                --disable-external-sort
-    make && make install
-    cd "$DIR"
-    rm -Rf "ctags-5.8"
-    rm -Rf "ctags.tar.gz"
-fi
-#
-
-isAck=`ack --version 2>/dev/null`
-# ack
-if [ -n "$isAck" ] || [ -f "$DIR/bin/ack" ]; then
-    echo "ack already installed."
-else
-    echo "ack will be installed."
-
-    curl "http://beyondgrep.com/ack-2.12-single-file" > "$DIR/bin/ack" && chmod 0755 "$DIR/bin/ack"
+    rm -Rf "$DIR/include"
+    rm -Rf "$DIR/lib"
+    rm -Rf "$DIR/share"
+    rm -Rf "$DIR/tmp"
 fi
 #
 
