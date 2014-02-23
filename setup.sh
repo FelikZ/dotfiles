@@ -199,10 +199,13 @@ else
     rm -Rf "$vimdest"
     rm -Rf "$DIR/include"
     rm -Rf "$DIR/lib"
-    rm -Rf "$DIR/share"
+    rm -Rf "$DIR/share/include"
+    rm -Rf "$DIR/share/lib"
     rm -Rf "$DIR/tmp"
 fi
 #
+
+cd "$DIR"
 
 # TODO: auto init and update neobundle if its not
 
