@@ -110,6 +110,7 @@ NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'nvie/vim-ini'
 NeoBundle 'elzr/vim-json'
 NeoBundle 'shawncplus/phpcomplete.vim'
+NeoBundle 'elentok/plaintasks.vim'
 " NeoBundle 'scrooloose/syntastic'
 " }}}
 
@@ -216,6 +217,7 @@ set tags=./tags,./TAGS,tags;~,TAGS;~
 " }}}
 
 " Projects and indexing {{{
+NeoBundle 'tbknl/vimproject'
 NeoBundle 'vim-scripts/DfrankUtil'
 NeoBundle 'FelikZ/vimprj'
 let g:indexer_ctagsWriteFilelist = 1
