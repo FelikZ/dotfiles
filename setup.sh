@@ -18,6 +18,8 @@ export LIBRARY_PATH="$DIR/lib/"
 # TODO: make custom ./configure and make file for installing vim and features
 # TODO: params to install global / localy / standalone
 # TODO: quite model
+# TODO: fix: check libs not binaries!
+# TODO: NeoBundle check before modules configure
 
 cd "$DIR"
 
@@ -82,7 +84,8 @@ else
 
         cd "$ncursesSourceDir"
 
-        ./configure --prefix="$DIR"
+        ./configure --prefix="$DIR" \
+                    --without-cxx
         make && make install
 
         rm -rf "$ncursesSourceDir"
@@ -213,6 +216,11 @@ echo "Setting up environment..."
 
 # dirs
 mkdir -p "$DIR/tmp/vimswap"
+
+# files
+echo '#!/bin/bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+exec $DIR/vim -u "$DIR/../.vimrc" "$@"' > "$DIR/bin/vimf"
 
 # aliases
 chmod 0777 "$DIR/bin/vimf"
