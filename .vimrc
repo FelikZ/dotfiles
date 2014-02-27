@@ -98,8 +98,15 @@ NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'joedicastro/vim-multiple-cursors'
 NeoBundle 'mileszs/ack.vim'
-"NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'rking/ag.vim'
+NeoBundle 'kien/ctrlp.vim'
+
+NeoBundle 'LimpidTech/vimpy'
+" NeoBundle 'LimpidTech/vimpy_examples'
+
+" NeoBundle 'clones/vim-fuzzyfinder'
+" NeoBundle 'vim-scripts/L9'
+" NeoBundle 'scrooloose/nerdtree'
 
 " All-lang syntax {{{
 NeoBundle 'vim-scripts/SyntaxComplete'
@@ -188,24 +195,42 @@ NeoBundleLazy 'Shougo/unite-outline', {'autoload': {'unite_sources': 'outline'}}
 " "            \ 'unite_sources':['junkfile','junkfile/new']}}
 " let g:junkfile#directory=expand($curdir.'/tmp/junk')
 
-let g:unite_enable_start_insert = 1
+" let g:unite_enable_start_insert = 1
+" let g:unite_data_directory = $curdir.'/tmp/unite'
 
-call unite#custom#source('file_mru,file_rec,file_rec/async,locate', 'filters',
-                \ ['converter_relative_word', 'converter_relative_abbr',
-                \ 'matcher_fuzzy',
-                \ 'sorter_rank'])
-call unite#custom#source('tag', 'filters',
-                \ ['matcher_fuzzy',
-                \ 'sorter_rank'])
-call unite#custom#source('file_mru,file_rec,file_rec/async,grep,locate',
-            \ 'ignore_pattern', '\v'.join(['(\.git\/)', '(\.DS_Store)', '(tmp\/)', '(bundle\/)', '(node_modules\/)', '('.$cwd.'\/assets\/)'], '|'))
-
-if executable('ack')
-    let g:unite_source_grep_command='ack'
-    let g:unite_source_grep_default_opts='--no-group --no-color'
-    let g:unite_source_grep_recursive_opt=''
-    let g:unite_source_grep_search_word_highlight = 1
-endif
+" call unite#custom#source('file_mru,file_rec,file_rec/async,locate', 'filters',
+"                 \ ['converter_relative_word', 'converter_relative_abbr',
+"                 \ 'matcher_fuzzy',
+"                 \ 'sorter_rank'])
+" call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate',
+"                 \ 'max_candidates', 0)
+" call unite#custom#source('tag', 'filters',
+"                 \ ['matcher_fuzzy',
+"                 \ 'sorter_rank'])
+" call unite#custom#source('file_mru,file_rec,file_rec/async,grep,locate',
+"             \ 'ignore_pattern', '\v'.join(['(\.git\/)', '(\.DS_Store)', '(tmp\/)', '(bundle\/)', '(node_modules\/)', '('.$cwd.'\/assets\/)'], '|'))
+" call unite#filters#matcher_default#use(['matcher_glob'])
+" call unite#filters#sorter_default#use(['sorter_rank'])
+" call unite#custom#profile('files', 'filters', 'sorter_rank')
+"
+" if executable('ag')
+"     let g:unite_source_grep_command = 'ag'
+"     let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+"     let g:unite_source_grep_recursive_opt = ''
+"     " let g:unite_source_rec_async_command = 'ag --nocolor --nogroup -g ""'
+"     " let g:unite_source_file_rec_async_command = 'ag --nocolor --nogroup -g ""'
+"     let g:unite_source_rec_async_command = 'ag -l -i --nocolor --nogroup --ignore ''.git'' --ignore ''.DS_Store'' --ignore ''node_modules'' --hidden -g ""'
+"     let g:unite_source_file_rec_async_command = 'ag -l -i --nocolor --nogroup --ignore ''.git'' --ignore ''.DS_Store'' --ignore ''node_modules'' --hidden -g ""'
+" elseif executable('ack')
+"     let g:unite_source_grep_command='ack'
+"     let g:unite_source_grep_default_opts='--column --no-color --nogroup --with-filename'
+"     let g:unite_source_grep_recursive_opt=''
+"     let g:unite_source_grep_search_word_highlight = 1
+" endif
+"
+" let g:unite_source_file_rec_max_cache_files=0
+" let g:unite_source_rec_max_cache_files=0
+" }}}
 
 " Tags {{{
 NeoBundle 'xolox/vim-misc'
@@ -285,9 +310,28 @@ vnoremap <up> g<up>
 vnoremap <down> g<down>
 
 " Unite bindings
-nnoremap <Space>p :<C-u>Unite -buffer-name=files -start-insert buffer file_rec/async<cr>
-nnoremap <Space>t :<C-u>Unite -start-insert tag<cr>
+" nnoremap <Space>p :<C-u>Unite -buffer-name=files -start-insert buffer file_rec/async:!<cr>
+" nnoremap <Space>t :<C-u>Unite -start-insert tag<cr>
+" nnoremap <Space>/ :Unite grep:.<cr>
 
+" CtrlP
+let g:ctrlp_map = '<Space>p'
+let g:ctrlp_cmd = 'CtrlPCurWD'
+
+" let g:ctrlp_by_filename = 1
+let g:ctrlp_match_window = 'top,order:ttb,min:1,max:10,results:20'
+let g:ctrlp_lazy_update = 500
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_cache_dir = $curdir.'/tmp/ctrlp'
+let g:ctrlp_max_files = 0
+if executable("ag")
+    set grepprg=ag\ --nogroup\ --nocolor
+    " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    let g:ctrlp_user_command = 'ag -i --nocolor --nogroup --ignore ''.git'' --ignore ''.DS_Store'' --ignore ''node_modules'' --hidden -g "" %s'
+endif
+
+" FuzzFinder
+" nnoremap <Space>p :FufFile<cr>
 
 " enable same functions to ; as :
 nnoremap ; :

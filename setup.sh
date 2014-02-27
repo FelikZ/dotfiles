@@ -4,14 +4,15 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$DIR"
 
+# TODO: check and export once
 # exports
-export PATH="$DIR/bin:$DIR/usr/local/bin:$PATH"
+export PATH="$DIR/bin:$PATH"
 
 export CPPFLAGS="-I$DIR/include"
 export CPATH="$DIR/include/"
 
-export LDFLAGS="-L$DIR/lib"
-export LD_LIBRARY_PATH="-L$DIR/lib"
+export LDFLAGS="-L$DIR/lib:$LDFLAGS"
+export LD_LIBRARY_PATH="$DIR/lib:$LD_LIBRARY_PATH"
 export LIBRARY_PATH="$DIR/lib/"
 
 
@@ -167,7 +168,7 @@ else
 
     if [ -f "$DIR/bin/python2" ]; then
         echo "Python2 already installed"
-        else
+    else
         echo "Installing Python2"
         wget -O "$pythonDest" "http://www.python.org/ftp/python/$pythonVersion/Python-$pythonVersion.tar.xz"
         tar --xz -xf "$pythonDest"
@@ -179,6 +180,58 @@ else
         rm -rf "$pythonSourceDir"
         rm -rf "$pythonDest"
     fi
+
+    cd "$DIR"
+
+    # Installing PCRE
+    if [ -f "$DIR/lib/libpcre.so" ]; then
+        echo "PCRE installed"
+    else
+        pcreVersion="8.34"
+
+        echo "Installing pcre $pcreVersion"
+        cd "$DIR"
+        pcreDest="$DIR/pcre-$pcreVersion.tar.xz"
+        pcreSourceDir="$DIR/pcre-$pcreVersion"
+        wget -O "$pcreDest" "http://sourceforge.net/projects/pcre/files/pcre/$pcreVersion/pcre-$pcreVersion.tar.bz2/download"
+        tar -jxf "$pcreDest"
+        cd "$pcreSourceDir"
+
+        ./configure --prefix="$DIR" \
+                    --disable-cpp
+        make
+        make install
+
+        rm -Rf "$pcreDest"
+        rm -Rf "$pcreSourceDir"
+
+        # export PCRE_LIBS="-L$DIR/lib -lpcre"
+        export PCRE_LIBS="$DIR/lib/libpcre.a"
+        export PCRE_CFLAGS="-L$DIR/include/pcre"
+    fi
+
+    # Installing ag
+    if [ -f "$DIR/bin/ag" ]; then
+        echo "AG installed"
+    else
+        echo "Installing AG..."
+
+        agSourceDir="$DIR/ag"
+        git clone "https://github.com/ggreer/the_silver_searcher.git" "$agSourceDir"
+
+        cd "$agSourceDir"
+
+        autoconf
+        autoheader
+        automake --add-missing
+        ./configure --prefix="$DIR"
+        make
+        make install
+
+        rm -Rf "$agSourceDir"
+    fi
+
+    # Installing Vim
 
     cd "$vimsourcedir"
     ./configure --with-features=huge \
@@ -200,10 +253,10 @@ else
     # cleanup
     rm -Rf "$vimsourcedir"
     rm -Rf "$vimdest"
-    rm -Rf "$DIR/include"
-    rm -Rf "$DIR/lib"
-    rm -Rf "$DIR/share/include"
-    rm -Rf "$DIR/share/lib"
+    # rm -Rf "$DIR/include"
+    # rm -Rf "$DIR/lib"
+    # rm -Rf "$DIR/share/include"
+    # rm -Rf "$DIR/share/lib"
     rm -Rf "$DIR/tmp"
 fi
 #
