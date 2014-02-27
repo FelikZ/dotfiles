@@ -101,7 +101,7 @@ NeoBundle 'mileszs/ack.vim'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'kien/ctrlp.vim'
 
-NeoBundle 'LimpidTech/vimpy'
+NeoBundle 'FelikZ/vimpy'
 " NeoBundle 'LimpidTech/vimpy_examples'
 
 " NeoBundle 'clones/vim-fuzzyfinder'
