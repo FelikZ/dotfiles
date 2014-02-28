@@ -1,6 +1,7 @@
 #!/bin/bash
 ############################
 
+CWD="$(pwd)"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$DIR"
 
@@ -55,6 +56,30 @@ else
     echo "ack will be installed."
 
     curl "http://beyondgrep.com/ack-2.12-single-file" > "$DIR/bin/ack" && chmod 0755 "$DIR/bin/ack"
+fi
+#
+
+cd "$DIR"
+
+# Installing ag
+if [ -f "$DIR/bin/ag" ]; then
+    echo "AG installed"
+else
+    echo "Installing AG..."
+
+    agSourceDir="$DIR/ag"
+    git clone "https://github.com/ggreer/the_silver_searcher.git" "$agSourceDir"
+
+    cd "$agSourceDir"
+
+    autoreconf --install
+    autoheader
+    automake --add-missing
+    ./configure --prefix="$DIR"
+    make
+    make install
+
+    rm -Rf "$agSourceDir"
 fi
 #
 
@@ -210,26 +235,6 @@ else
         export PCRE_CFLAGS="-L$DIR/include/pcre"
     fi
 
-    # Installing ag
-    if [ -f "$DIR/bin/ag" ]; then
-        echo "AG installed"
-    else
-        echo "Installing AG..."
-
-        agSourceDir="$DIR/ag"
-        git clone "https://github.com/ggreer/the_silver_searcher.git" "$agSourceDir"
-
-        cd "$agSourceDir"
-
-        autoconf
-        autoheader
-        automake --add-missing
-        ./configure --prefix="$DIR"
-        make
-        make install
-
-        rm -Rf "$agSourceDir"
-    fi
 
     # Installing Vim
 
@@ -279,5 +284,7 @@ exec $DIR/vim -u "$DIR/../.vimrc" "$@"' > "$DIR/bin/vimf"
 chmod 0777 "$DIR/bin/vimf"
 alias vim="vimf"
 export EDITOR="vimf"
+
+cd "$CWD"
 
 echo "Done."
