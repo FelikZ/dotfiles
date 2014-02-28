@@ -374,5 +374,8 @@ nmap <silent> [c :bp\|bd #<CR>
 nmap <silent> ]c :bn\|bd #<CR>
 " }}}
 
+" Start interactive EasyAlign in visual mode
+vmap <Enter> <Plug>(EasyAlign)
+
 " }}}
 
