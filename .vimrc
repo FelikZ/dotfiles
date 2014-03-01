@@ -330,6 +330,40 @@ if executable("ag")
     let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''.git'' --ignore ''.DS_Store'' --ignore ''node_modules'' --hidden -g ""'
 endif
 
+" Matcher for CtrlP
+let g:path_to_matcher = $curdir.'/bin/matcher'
+
+let g:ctrlp_match_func = { 'match': 'FMatch' }
+
+function! FMatch(items, str, limit, mmode, ispath, crfile, regex)
+
+let s:rez = []
+python << EOF
+import vim, re
+
+items = vim.eval('a:items')
+str = vim.eval('a:str')
+
+rez = vim.bindeval('s:rez')
+
+regex = '.*?'.join(map(re.escape, list(str)))
+
+res = []
+prog = re.compile(regex)
+for line in items:
+    result = prog.search(line)
+    if result:
+        score = 1000.0 / ((1 + result.start()) * (result.end() - result.start() + 1))
+        res.append((score, result.string))
+
+sortedlist = sorted(res, key=lambda x: x[0], reverse=True)[:10]
+sortedlist = [x[1] for x in sortedlist]
+rez.extend(sortedlist)
+
+EOF
+return s:rez
+endfunction
+
 " FuzzFinder
 " nnoremap <Space>p :FufFile<cr>
 
