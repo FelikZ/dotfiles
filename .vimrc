@@ -100,6 +100,7 @@ NeoBundle 'joedicastro/vim-multiple-cursors'
 NeoBundle 'mileszs/ack.vim'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'kien/ctrlp.vim'
+" NeoBundle 'JazzCore/ctrlp-cmatcher'
 
 NeoBundle 'FelikZ/vimpy'
 " NeoBundle 'LimpidTech/vimpy_examples'
@@ -334,34 +335,59 @@ endif
 let g:path_to_matcher = $curdir.'/bin/matcher'
 
 let g:ctrlp_match_func = { 'match': 'FMatch' }
+" let g:ctrlp_match_func = { 'match': 'matcher#cmatch' }
+
 
 function! FMatch(items, str, limit, mmode, ispath, crfile, regex)
 
-let s:rez = []
+    call clearmatches()
+
+    let s:rez = []
+    let s:regex = ''
+
+    if a:str != ''
+
 python << EOF
 import vim, re
+# from datetime import datetime
+
 
 items = vim.eval('a:items')
-str = vim.eval('a:str')
+astr = vim.eval('a:str')
+limit = int(vim.eval('a:limit'))
 
 rez = vim.bindeval('s:rez')
 
-regex = '.*?'.join(map(re.escape, list(str)))
+regex = ''
+for c in astr[:-1]:
+    regex += c + '[^' + c + ']*'
+else:
+    regex += astr[-1]
 
 res = []
 prog = re.compile(regex)
+
+# start = datetime.now()
+
 for line in items:
     result = prog.search(line)
     if result:
         score = 1000.0 / ((1 + result.start()) * (result.end() - result.start() + 1))
         res.append((score, result.string))
 
-sortedlist = sorted(res, key=lambda x: x[0], reverse=True)[:10]
+# rez.extend([str(datetime.now() - start)])
+
+sortedlist = sorted(res, key=lambda x: x[0], reverse=True)[:limit]
 sortedlist = [x[1] for x in sortedlist]
 rez.extend(sortedlist)
 
+vim.command("let s:regex = '%s'" % regex)
 EOF
-return s:rez
+    endif
+
+    call matchadd('CtrlPMatch', '\v'.s:regex)
+    call matchadd('CtrlPLinePre', '^>')
+    return s:rez
 endfunction
 
 " FuzzFinder
