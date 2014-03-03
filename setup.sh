@@ -236,7 +236,7 @@ else
     pythonDest="$DIR/python-$pythonVersion.tar.xz"
     pythonSourceDir="$DIR/Python-$pythonVersion"
 
-    if [ -f "$DIR/bin/python2" ]; then
+    if [ -f "$DIR/bin/python" ] && [ -f "$DIR/bin/python2" ]; then
         echo "Python2 already installed"
     else
         echo "Installing Python2"

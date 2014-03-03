@@ -334,7 +334,11 @@ endif
 " Matcher for CtrlP
 let g:path_to_matcher = $curdir.'/bin/matcher'
 
-let g:ctrlp_match_func = { 'match': 'FMatch' }
+if !has('python')
+    echo 'Sorry, you need +python compiled vim'
+else
+    let g:ctrlp_match_func = { 'match': 'FMatch' }
+endif
 " let g:ctrlp_match_func = { 'match': 'matcher#cmatch' }
 
 
