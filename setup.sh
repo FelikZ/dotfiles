@@ -149,10 +149,12 @@ else
         echo "Ncurses already installed"
     else
         echo "Installing ncurses..."
+        cd "$DIR"
 
         ncursesVersion="5.9"
         ncursesDest="$DIR/ncurses.tar.gz"
         ncursesSourceDir="$DIR/ncurses-$ncursesVersion"
+
 
         wget -O "$ncursesDest" "http://ftp.gnu.org/pub/gnu/ncurses/ncurses-$ncursesVersion.tar.gz"
 
