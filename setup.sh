@@ -7,14 +7,26 @@ cd "$DIR"
 
 # TODO: check and export once
 # exports
-export PATH="$DIR/bin:$PATH"
+if [[ ! "$PATH" =~ "$DIR/bin" ]]; then
+    export PATH="$DIR/bin:$PATH"
+fi
 
-export CPPFLAGS="-I$DIR/include"
-export CPATH="$DIR/include/"
+if [[ ! "$CPPFLAGS" =~ "$DIR/include" ]]; then
+   export CPPFLAGS="-I$DIR/include"
+fi
 
-export LDFLAGS="-L$DIR/lib:$LDFLAGS"
-export LD_LIBRARY_PATH="$DIR/lib:$LD_LIBRARY_PATH"
-export LIBRARY_PATH="$DIR/lib/"
+if [[ ! "$CPATH" =~ "$DIR/include" ]]; then
+   export CPATH="$DIR/include/"
+fi
+
+if [[ ! "$LDFLAGS" =~ "$DIR/lib" ]]; then
+    export LDFLAGS="-L$DIR/lib:$LDFLAGS"
+    export LD_LIBRARY_PATH="$DIR/lib:$LD_LIBRARY_PATH"
+fi
+
+if [[ ! "$LIBRARY_PATH" =~ "$DIR/lib" ]]; then
+    export LIBRARY_PATH="$DIR/lib/"
+fi
 
 
 # TODO: make custom ./configure and make file for installing vim and features
@@ -61,25 +73,58 @@ fi
 
 cd "$DIR"
 
+isAutoReconf=`autoreconf --version 2>/dev/null`
 # Installing ag
 if [ -f "$DIR/bin/ag" ]; then
     echo "AG installed"
 else
-    echo "Installing AG..."
 
-    agSourceDir="$DIR/ag"
-    git clone "https://github.com/ggreer/the_silver_searcher.git" "$agSourceDir"
+    if [ -z "$isAutoReconf" ]; then
+        echo "You need install 'dh-autoreconf' in order to install AG"
+    else
+        # Installing PCRE
+        if [ -f "$DIR/lib/libpcre.so" ]; then
+            echo "PCRE installed"
+        else
+            pcreVersion="8.34"
 
-    cd "$agSourceDir"
+            echo "Installing pcre $pcreVersion"
+            cd "$DIR"
+            pcreDest="$DIR/pcre-$pcreVersion.tar.xz"
+            pcreSourceDir="$DIR/pcre-$pcreVersion"
+            wget -O "$pcreDest" "http://sourceforge.net/projects/pcre/files/pcre/$pcreVersion/pcre-$pcreVersion.tar.bz2/download"
+            tar -jxf "$pcreDest"
+            cd "$pcreSourceDir"
 
-    autoreconf --install
-    autoheader
-    automake --add-missing
-    ./configure --prefix="$DIR"
-    make
-    make install
+            ./configure --prefix="$DIR" \
+                        --disable-cpp
+            make
+            make install
 
-    rm -Rf "$agSourceDir"
+            rm -Rf "$pcreDest"
+            rm -Rf "$pcreSourceDir"
+
+            # export PCRE_LIBS="-L$DIR/lib -lpcre"
+            export PCRE_LIBS="$DIR/lib/libpcre.a"
+            export PCRE_CFLAGS="-L$DIR/include/pcre"
+        fi
+        echo "Installing AG..."
+
+	agSourceDir="$DIR/ag"
+	rm -Rf "$agSourceDir"
+	git clone "https://github.com/ggreer/the_silver_searcher.git" "$agSourceDir"
+
+	cd "$agSourceDir"
+
+	autoreconf --install
+	autoheader
+	automake --add-missing
+	./configure --prefix="$DIR"
+	make
+	make install
+
+	rm -Rf "$agSourceDir"
+    fi
 fi
 #
 
@@ -207,34 +252,6 @@ else
     fi
 
     cd "$DIR"
-
-    # Installing PCRE
-    if [ -f "$DIR/lib/libpcre.so" ]; then
-        echo "PCRE installed"
-    else
-        pcreVersion="8.34"
-
-        echo "Installing pcre $pcreVersion"
-        cd "$DIR"
-        pcreDest="$DIR/pcre-$pcreVersion.tar.xz"
-        pcreSourceDir="$DIR/pcre-$pcreVersion"
-        wget -O "$pcreDest" "http://sourceforge.net/projects/pcre/files/pcre/$pcreVersion/pcre-$pcreVersion.tar.bz2/download"
-        tar -jxf "$pcreDest"
-        cd "$pcreSourceDir"
-
-        ./configure --prefix="$DIR" \
-                    --disable-cpp
-        make
-        make install
-
-        rm -Rf "$pcreDest"
-        rm -Rf "$pcreSourceDir"
-
-        # export PCRE_LIBS="-L$DIR/lib -lpcre"
-        export PCRE_LIBS="$DIR/lib/libpcre.a"
-        export PCRE_CFLAGS="-L$DIR/include/pcre"
-    fi
-
 
     # Installing Vim
 
