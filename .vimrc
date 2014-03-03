@@ -102,7 +102,7 @@ NeoBundle 'rking/ag.vim'
 NeoBundle 'kien/ctrlp.vim'
 " NeoBundle 'JazzCore/ctrlp-cmatcher'
 
-NeoBundle 'FelikZ/vimpy'
+NeoBundle 'FelikZ/vimpy', { 'rev': 'develop'}
 " NeoBundle 'LimpidTech/vimpy_examples'
 
 " NeoBundle 'clones/vim-fuzzyfinder'
