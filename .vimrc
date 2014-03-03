@@ -349,43 +349,53 @@ function! FMatch(items, str, limit, mmode, ispath, crfile, regex)
 
 python << EOF
 import vim, re
-# from datetime import datetime
+from datetime import datetime
 
 
 items = vim.eval('a:items')
 astr = vim.eval('a:str')
+lowAstr = astr.lower()
 limit = int(vim.eval('a:limit'))
 
 rez = vim.bindeval('s:rez')
 
 regex = ''
-for c in astr[:-1]:
+for c in lowAstr[:-1]:
     regex += c + '[^' + c + ']*'
 else:
-    regex += astr[-1]
+    regex += lowAstr[-1]
+
+# rez.extend([regex])
 
 res = []
 prog = re.compile(regex)
 
+# time
 # start = datetime.now()
 
 for line in items:
-    result = prog.search(line)
+    result = prog.search(line.lower())
     if result:
         score = 1000.0 / ((1 + result.start()) * (result.end() - result.start() + 1))
-        res.append((score, result.string))
+        res.append((score, line))
 
+# time
 # rez.extend([str(datetime.now() - start)])
+# start = datetime.now()
 
 sortedlist = sorted(res, key=lambda x: x[0], reverse=True)[:limit]
 sortedlist = [x[1] for x in sortedlist]
+
+# time
+# rez.extend([str(datetime.now() - start)])
+
 rez.extend(sortedlist)
 
 vim.command("let s:regex = '%s'" % regex)
 EOF
     endif
 
-    call matchadd('CtrlPMatch', '\v'.s:regex)
+    call matchadd('CtrlPMatch', '\v\c'.s:regex)
     call matchadd('CtrlPLinePre', '^>')
     return s:rez
 endfunction
