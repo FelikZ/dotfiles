@@ -103,11 +103,16 @@ else
 
             rm -Rf "$pcreDest"
             rm -Rf "$pcreSourceDir"
+        fi
 
-            # export PCRE_LIBS="-L$DIR/lib -lpcre"
+        if [[ ! "$PCRE_LIBS" =~ "$DIR/lib/libpcre.a" ]]; then
             export PCRE_LIBS="$DIR/lib/libpcre.a"
+        fi
+
+        if [[ ! "$PATH" =~ "$DIR/include/pcre" ]]; then
             export PCRE_CFLAGS="-L$DIR/include/pcre"
         fi
+
         echo "Installing AG..."
 
 	agSourceDir="$DIR/ag"
