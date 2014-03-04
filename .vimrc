@@ -286,6 +286,9 @@ map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 map <Leader>l <Plug>(easymotion-lineforward)
 nmap s <Plug>(easymotion-s)
+nmap S <Plug>(easymotion-s2)
+nmap t <Plug>(easymotion-t)
+nmap T <Plug>(easymotion-t2)
 
 " Inspired by https://github.com/tpope/vim-unimpaired "
 " Sets paste on and set nopaste when leaving insert mode "
@@ -464,6 +467,8 @@ autocmd FileType plaintasks nnoremap <buffer> <Enter> :call ToggleComplete()<cr>
 autocmd FileType plaintasks vnoremap <buffer> <Enter> :call ToggleComplete()<cr>
 autocmd FileType plaintasks nnoremap <buffer> + :call NewTask()<cr>
 autocmd FileType plaintasks vnoremap <buffer> + :call NewTask()<cr>
+autocmd FileType plaintasks nnoremap <buffer> - :call ToggleCancel()<cr>
+autocmd FileType plaintasks vnoremap <buffer> - :call ToggleCancel()<cr>
 
 " }}}
 
