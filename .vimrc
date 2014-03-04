@@ -451,5 +451,10 @@ nmap <silent> ]c :bn\|bd #<CR>
 " Start interactive EasyAlign in visual mode
 vmap <Enter> <Plug>(EasyAlign)
 
+autocmd FileType plaintasks nnoremap <buffer> <Enter> :call ToggleComplete()<cr>
+autocmd FileType plaintasks vnoremap <buffer> <Enter> :call ToggleComplete()<cr>
+autocmd FileType plaintasks nnoremap <buffer> + :call NewTask()<cr>
+autocmd FileType plaintasks vnoremap <buffer> + :call NewTask()<cr>
+
 " }}}
 
