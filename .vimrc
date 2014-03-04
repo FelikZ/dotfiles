@@ -102,7 +102,7 @@ NeoBundle 'rking/ag.vim'
 NeoBundle 'kien/ctrlp.vim'
 " NeoBundle 'JazzCore/ctrlp-cmatcher'
 
-NeoBundle 'FelikZ/vimpy'
+NeoBundle 'FelikZ/vimpy', { 'rev': 'develop'}
 " NeoBundle 'LimpidTech/vimpy_examples'
 
 " NeoBundle 'clones/vim-fuzzyfinder'
@@ -120,6 +120,7 @@ NeoBundle 'elzr/vim-json'
 NeoBundle 'shawncplus/phpcomplete.vim'
 NeoBundle 'elentok/plaintasks.vim'
 " NeoBundle 'scrooloose/syntastic'
+" NeoBundle 'yazug/vim-taglist-plus'
 " }}}
 
 " JavaScript {{{
@@ -292,6 +293,12 @@ nmap s <Plug>(easymotion-s)
 nnoremap <silent> yo  :set paste<cr>o
 nnoremap <silent> yO  :set paste<cr>O
 
+" Copy current file path to buffer
+nnoremap <silent> <leader>pc :let @0=expand('%')<cr>
+nnoremap <silent> <leader>pp :let @0=expand('%')<cr>"0P
+nnoremap <silent> <leader>pC :let @0=expand('%:p')<cr>
+nnoremap <silent> <leader>pP :let @0=expand('%:p')<cr>"0P
+
 " Disables paste mode when leaving insert mode
 autocmd InsertLeave *
     \ if &paste == 1 |
@@ -397,10 +404,12 @@ rez.extend(sortedlist)
 
 vim.command("let s:regex = '%s'" % regex)
 EOF
+        call matchadd('CtrlPMatch', '\v\c'.s:regex)
+        call matchadd('CtrlPLinePre', '^>')
+    else
+        let s:rez = a:items[0:a:limit]
     endif
 
-    call matchadd('CtrlPMatch', '\v\c'.s:regex)
-    call matchadd('CtrlPLinePre', '^>')
     return s:rez
 endfunction
 
