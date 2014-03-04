@@ -114,21 +114,22 @@ else
         fi
 
         echo "Installing AG..."
+        cd "$DIR"
 
-	agSourceDir="$DIR/ag"
-	rm -Rf "$agSourceDir"
-	git clone "https://github.com/ggreer/the_silver_searcher.git" "$agSourceDir"
+        agSourceDir="$DIR/ag"
+        rm -Rf "$agSourceDir"
+        git clone "https://github.com/ggreer/the_silver_searcher.git" "$agSourceDir"
 
-	cd "$agSourceDir"
+        cd "$agSourceDir"
 
-	autoreconf --install
-	autoheader
-	automake --add-missing
-	./configure --prefix="$DIR"
-	make
-	make install
+        autoreconf --install
+        autoheader
+        automake --add-missing
+        ./configure --prefix="$DIR"
+        make
+        make install
 
-	rm -Rf "$agSourceDir"
+        rm -Rf "$agSourceDir"
     fi
 fi
 #

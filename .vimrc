@@ -100,7 +100,16 @@ NeoBundle 'joedicastro/vim-multiple-cursors'
 NeoBundle 'mileszs/ack.vim'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'kien/ctrlp.vim'
-" NeoBundle 'JazzCore/ctrlp-cmatcher'
+NeoBundle 'FelikZ/ctrlp-py-matcher'
+" NeoBundle 'JazzCore/ctrlp-cmatcher', {
+" \ 'build' : {
+" \     'windows' : './install_windows.bat',
+" \     'cygwin' : './install_linux.sh',
+" \     'mac' : './install_linux.sh',
+" \     'unix' : './install_linux.sh',
+" \    },
+" \ }
+
 
 NeoBundle 'FelikZ/vimpy', { 'rev': 'develop'}
 " NeoBundle 'LimpidTech/vimpy_examples'
@@ -338,80 +347,13 @@ if executable("ag")
     let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''.git'' --ignore ''.DS_Store'' --ignore ''node_modules'' --hidden -g ""'
 endif
 
-" Matcher for CtrlP
-let g:path_to_matcher = $curdir.'/bin/matcher'
-
+" PyMatcher for CtrlP
 if !has('python')
-    echo 'Sorry, you need +python compiled vim'
+    echo 'In order to use pymatcher plugin, you need +python compiled vim'
 else
-    let g:ctrlp_match_func = { 'match': 'FMatch' }
+    let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 endif
 " let g:ctrlp_match_func = { 'match': 'matcher#cmatch' }
-
-
-function! FMatch(items, str, limit, mmode, ispath, crfile, regex)
-
-    call clearmatches()
-
-    let s:rez = []
-    let s:regex = ''
-
-    if a:str != ''
-
-python << EOF
-import vim, re
-from datetime import datetime
-
-
-items = vim.eval('a:items')
-astr = vim.eval('a:str')
-lowAstr = astr.lower()
-limit = int(vim.eval('a:limit'))
-
-rez = vim.bindeval('s:rez')
-
-regex = ''
-for c in lowAstr[:-1]:
-    regex += c + '[^' + c + ']*'
-else:
-    regex += lowAstr[-1]
-
-# rez.extend([regex])
-
-res = []
-prog = re.compile(regex)
-
-# time
-# start = datetime.now()
-
-for line in items:
-    result = prog.search(line.lower())
-    if result:
-        score = 1000.0 / ((1 + result.start()) * (result.end() - result.start() + 1))
-        res.append((score, line))
-
-# time
-# rez.extend([str(datetime.now() - start)])
-# start = datetime.now()
-
-sortedlist = sorted(res, key=lambda x: x[0], reverse=True)[:limit]
-sortedlist = [x[1] for x in sortedlist]
-
-# time
-# rez.extend([str(datetime.now() - start)])
-
-rez.extend(sortedlist)
-
-vim.command("let s:regex = '%s'" % regex)
-EOF
-        call matchadd('CtrlPMatch', '\v\c'.s:regex)
-        call matchadd('CtrlPLinePre', '^>')
-    else
-        let s:rez = a:items[0:a:limit]
-    endif
-
-    return s:rez
-endfunction
 
 " FuzzFinder
 " nnoremap <Space>p :FufFile<cr>
