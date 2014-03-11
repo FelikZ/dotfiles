@@ -109,6 +109,7 @@ NeoBundle 'FelikZ/ctrlp-py-matcher'
 " \     'unix' : './install_linux.sh',
 " \    },
 " \ }
+" NeoBundle 'Yggdroot/LeaderF'
 
 
 NeoBundle 'FelikZ/vimpy', { 'rev': 'develop'}
@@ -269,6 +270,11 @@ endif
 NeoBundle 'phreaknerd/vim-indexer'
 " }}}
 
+" Visual {{{
+NeoBundle 'vim-scripts/ScreenShot'
+let ScreenShot = {'Icon':0, 'Credits':0}
+" }}}
+
 " Colorschemes {{{
 " NeoBundle 'nanotech/jellybeans.vim'
 " NeoBundle 'marcelbeumer/twilight.vim'
@@ -288,16 +294,6 @@ vnoremap H ^
 nnoremap L $
 vnoremap L $
 " inoremap jk <esc>
-
-" Easy-motion
-map <Leader>h <Plug>(easymotion-linebackward)
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-map <Leader>l <Plug>(easymotion-lineforward)
-nmap s <Plug>(easymotion-s)
-nmap S <Plug>(easymotion-s2)
-nmap t <Plug>(easymotion-t)
-nmap T <Plug>(easymotion-t2)
 
 " Inspired by https://github.com/tpope/vim-unimpaired "
 " Sets paste on and set nopaste when leaving insert mode "
@@ -414,3 +410,45 @@ autocmd FileType plaintasks vnoremap <buffer> - :call ToggleCancel()<cr>
 
 " }}}
 
+" " EN/RU switching&indication " {{{ -------------------------------------------
+" set keymap=russian-jcukenwin    " C-^ lang layout switch
+" set iminsert=0                  " default input layout - english
+" set imsearch=0                  " default search layout - english
+" "
+" " English layout active windows status line is DarkBlue
+" " English layout active windows status line is DarkRed
+" function! MyKeyMapHighlight()
+"   if &iminsert == 0
+"     hi StatusLine ctermfg=DarkBlue guifg=DarkBlue
+"   else
+"     hi StatusLine ctermfg=DarkRed guifg=DarkRed
+"   endif
+" endfunction
+" " call our func on startup and redraw colors
+" call MyKeyMapHighlight()
+" " update layout indication on window change
+" au WinEnter * :call MyKeyMapHighlight()
+"
+" " ru/en lang switch ^f (Ctrl + F)
+" cnoremap <silent> <C-F> <C-^>
+" inoremap <silent> <C-F> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
+" nnoremap <silent> <C-F> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
+" vnoremap <silent> <C-F> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
+" " }}}
+
+" Easy-motion {{{
+map <Leader>h <Plug>(easymotion-linebackward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>l <Plug>(easymotion-lineforward)
+
+nmap s <Plug>(easymotion-s)
+nmap S <Plug>(easymotion-s2)
+nmap t <Plug>(easymotion-t)
+nmap T <Plug>(easymotion-t2)
+
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+" }}}
