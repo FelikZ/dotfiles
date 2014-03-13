@@ -171,6 +171,21 @@ else
         rm -rf "$ncursesDest"
     fi
 
+    # Installing mosh
+
+    # wget -O protobuf.tar.gz https://protobuf.googlecode.com/files/protobuf-2.5.0.tar.gz
+    # tar -zxf protobuf.tar.gz
+    # cd "protobuf-2.5.0"
+    # ./configure --prefix="$DIR"
+    # make && make install
+    #
+    # export PKG_CONFIG_PATH="$DIR"
+    # ./autogen.sh
+    # ./configure --prefix="$DIR"
+    # make && make install
+
+    # export PERL5LIB=$PERL5LIB:"/home/sai/usr/local/lib64/perl5/site_perl/5.8.8/x86_64-linux-thread-multi"
+
     # Installing LUA
     curLuaVersion=`lua -v 2>/dev/null | egrep "Copyright " | sed -E "s/.*([0-9]+)\.([0-9]+)\.([0-9]+).*/\\1\\2\\3/"`
     neededLuaVersion=`echo "$luaVersion" | sed -E "s/.*([0-9]+)\.([0-9]+)\.([0-9]+).*/\\1\\2\\3/"`

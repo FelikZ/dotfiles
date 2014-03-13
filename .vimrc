@@ -92,7 +92,6 @@ NeoBundle 'Lokaltog/vim-easymotion'
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_use_upper = 1
 
-NeoBundle 'goldfeld/vim-seek'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'junegunn/vim-easy-align'
@@ -129,6 +128,7 @@ NeoBundle 'nvie/vim-ini'
 NeoBundle 'elzr/vim-json'
 NeoBundle 'shawncplus/phpcomplete.vim'
 NeoBundle 'elentok/plaintasks.vim'
+NeoBundle 'ekalinin/Dockerfile.vim'
 " NeoBundle 'scrooloose/syntastic'
 " NeoBundle 'yazug/vim-taglist-plus'
 " }}}
@@ -410,31 +410,31 @@ autocmd FileType plaintasks vnoremap <buffer> - :call ToggleCancel()<cr>
 
 " }}}
 
-" " EN/RU switching&indication " {{{ -------------------------------------------
-" set keymap=russian-jcukenwin    " C-^ lang layout switch
-" set iminsert=0                  " default input layout - english
-" set imsearch=0                  " default search layout - english
-" "
-" " English layout active windows status line is DarkBlue
-" " English layout active windows status line is DarkRed
-" function! MyKeyMapHighlight()
-"   if &iminsert == 0
-"     hi StatusLine ctermfg=DarkBlue guifg=DarkBlue
-"   else
-"     hi StatusLine ctermfg=DarkRed guifg=DarkRed
-"   endif
-" endfunction
-" " call our func on startup and redraw colors
-" call MyKeyMapHighlight()
-" " update layout indication on window change
-" au WinEnter * :call MyKeyMapHighlight()
+" EN/RU switching&indication " {{{ -------------------------------------------
+set keymap=russian-jcukenwin    " C-^ lang layout switch
+set iminsert=0                  " default input layout - english
+set imsearch=0                  " default search layout - english
 "
-" " ru/en lang switch ^f (Ctrl + F)
-" cnoremap <silent> <C-F> <C-^>
-" inoremap <silent> <C-F> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
-" nnoremap <silent> <C-F> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
-" vnoremap <silent> <C-F> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
-" " }}}
+" English layout active windows status line is DarkBlue
+" English layout active windows status line is DarkRed
+function! MyKeyMapHighlight()
+  if &iminsert == 0
+    hi StatusLine ctermfg=DarkBlue guifg=DarkBlue
+  else
+    hi StatusLine ctermfg=DarkRed guifg=DarkRed
+  endif
+endfunction
+" call our func on startup and redraw colors
+call MyKeyMapHighlight()
+" update layout indication on window change
+au WinEnter * :call MyKeyMapHighlight()
+
+" ru/en lang switch ^f (Ctrl + F)
+cnoremap <silent> <C-F> <C-^>
+inoremap <silent> <C-F> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
+nnoremap <silent> <C-F> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
+vnoremap <silent> <C-F> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
+" }}}
 
 " Easy-motion {{{
 map <Leader>h <Plug>(easymotion-linebackward)
