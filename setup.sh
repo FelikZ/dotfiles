@@ -28,6 +28,9 @@ if [[ ! "$LIBRARY_PATH" =~ "$DIR/lib" ]]; then
     export LIBRARY_PATH="$DIR/lib/"
 fi
 
+if [[ ! "$LUA_PREFIX" =~ "$DIR" ]]; then
+    export LUA_PREFIX="$DIR"
+fi
 
 # TODO: make custom ./configure and make file for installing vim and features
 # TODO: params to install global / localy / standalone
@@ -122,10 +125,12 @@ else
 
         cd "$agSourceDir"
 
+        # git checkout 0.19.1
+
         autoreconf --install
         autoheader
         automake --add-missing
-        ./configure --prefix="$DIR"
+        ./configure --prefix="$DIR" --disable-zlib --disable-lzma
         make
         make install
 
@@ -228,7 +233,6 @@ else
         rm -rf "$luaSourceDir"
         rm -rf "$luaDest"
 
-        export LUA_PREFIX="$DIR"
     fi
 
     vimsourcedir="$DIR/vim$neededVimVersion"
@@ -263,7 +267,7 @@ else
         echo "Python2 already installed"
     else
         echo "Installing Python2"
-        wget -O "$pythonDest" "http://www.python.org/ftp/python/$pythonVersion/Python-$pythonVersion.tar.xz"
+        wget --no-check-certificate -O "$pythonDest" "http://www.python.org/ftp/python/$pythonVersion/Python-$pythonVersion.tar.xz"
         tar --xz -xf "$pythonDest"
         cd "$pythonSourceDir"
 
