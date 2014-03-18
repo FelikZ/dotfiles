@@ -46,20 +46,15 @@ if [ -f "$DIR/bin/ctags" ]; then
 else
     echo "ctags will be installed."
 
-    wget -O ctags.tar.gz "http://prdownloads.sourceforge.net/ctags/ctags-5.8.tar.gz"
-    tar zxf ctags.tar.gz
+    git clone "https://github.com/FelikZ/ctags" ctags
 
-    # fixing issue described here: http://dfrank.ru/ctags581
-    patch -p1 < "$DIR/ctags_fix.patch"
-
-    cd "ctags-5.8"
+    cd "ctags"
 
     ./configure --prefix="$DIR" \
                 --disable-external-sort
     make && make install
     cd "$DIR"
-    rm -Rf "ctags-5.8"
-    rm -Rf "ctags.tar.gz"
+    rm -Rf "ctags"
 fi
 #
 

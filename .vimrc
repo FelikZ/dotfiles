@@ -55,7 +55,7 @@ set ttyscroll=3
 set lazyredraw
 set nocursorcolumn
 set nocursorline
-set synmaxcol=400
+set synmaxcol=1000
 " let loaded_matchparen = 1
 let g:matchparen_timeout = 10
 let g:matchparen_insert_timeout = 10
