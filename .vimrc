@@ -147,6 +147,13 @@ let g:used_javascript_libs = 'jquery,underscore,backbone,angularjs,jasmine'
 " }}}
 
 " Completion {{{
+NeoBundle 'xolox/vim-misc'
+" NeoBundle 'xolox/vim-easytags'
+set tags=./tags,./TAGS,tags;~,TAGS;~
+"let g:easytags_events = ['BufWritePost']
+"let g:easytags_dynamic_files = 2
+"let g:easytags_file = $curdir.'/.vimtags'
+
 NeoBundle 'Shougo/neocomplete.vim'
 
 let g:neocomplete#enable_at_startup = 1
@@ -160,6 +167,37 @@ let g:neocomplete#data_directory = $curdir.'/tmp/neocomplete'
 " disable the auto select feature by default to speed up writing without
 " obstacles (is optimal for certain situations)
 let g:neocomplete#enable_auto_select = 0
+
+if !exists('g:neocomplete#sources')
+    let g:neocomplete#sources = {}
+endif
+let g:neocomplete#sources._ = ['buffer', 'include']
+
+if !exists('let g:neocomplete#sources#dictionary#dictionaries')
+    let g:neocomplete#sources#dictionary#dictionaries = {}
+endif
+let g:neocomplete#sources#dictionary#dictionaries._ = &tags
+
+" let g:neocomplete#sources#tags#cache_limit_size = 200327685
+
+if !exists('g:neocomplete#sources#file_include#exprs')
+    let g:neocomplete#sources#file_include#exprs = {}
+endif
+
+if !exists('g:neocomplete#sources#file_include#exts')
+    let g:neocomplete#sources#file_include#exts = {}
+endif
+
+let g:neocomplete#sources#file_include#exprs.php =
+\ 'substitute(v:fname, "\.php$", "", "")'
+let g:neocomplete#sources#file_include#exts.php =
+\ ['php']
+
+let g:neocomplete#sources#file_include#exprs.javascript =
+\ 'substitute(v:fname, "\.js$", "", "")'
+let g:neocomplete#sources#file_include#exts.javascript =
+\ ['javascript']
+
 
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
@@ -244,14 +282,6 @@ NeoBundleLazy 'Shougo/unite-outline', {'autoload': {'unite_sources': 'outline'}}
 " let g:unite_source_rec_max_cache_files=0
 " }}}
 
-" Tags {{{
-NeoBundle 'xolox/vim-misc'
-" NeoBundle 'xolox/vim-easytags'
-set tags=./tags,./TAGS,tags;~,TAGS;~
-"let g:easytags_events = ['BufWritePost']
-"let g:easytags_dynamic_files = 2
-"let g:easytags_file = $curdir.'/.vimtags'
-" }}}
 
 " Projects and indexing {{{
 NeoBundle 'tbknl/vimproject'
