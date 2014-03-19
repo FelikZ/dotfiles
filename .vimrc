@@ -1,7 +1,9 @@
+" Init {{{
 let $curdir=escape(expand("<sfile>:h"), '\,')
 let $vimhome=$curdir.'/.vim'
 let $neoplugin=$curdir.'/.vim/bundle/neobundle.vim'
 let $cwd=getcwd()
+" }}}
 
 " Vim Settings {{{
 set nocp
@@ -47,6 +49,7 @@ set nojoinspaces
 set splitbelow
 set splitright
 set noeol
+set foldmethod=marker
 
 " Performance
 set regexpengine=2
@@ -69,7 +72,6 @@ if !filereadable(neobundle_readme)
     silent !mkdir -p $vimhome'/bundle'
     silent !git clone https://github.com/Shougo/neobundle.vim $vimhome'/bundle/neobundle.vim'
 endif
-" }}}
 
 if has('vim_starting')
     let &runtimepath.=','.$vimhome.','.$neoplugin
@@ -80,7 +82,9 @@ let neobundledir=$curdir.'/.vim/bundle'
 call neobundle#rc(neobundledir)
 
 NeoBundleFetch 'Shougo/neobundle.vim'
+" }}}
 
+" Libraries {{{
 NeoBundle 'FelikZ/vimproc.vim', {
 \ 'build' : {
 \     'windows' : 'make -f make_mingw32.mak',
@@ -89,7 +93,9 @@ NeoBundle 'FelikZ/vimproc.vim', {
 \     'unix' : 'make -f make_unix.mak',
 \    },
 \ }
+" }}}
 
+" General {{{
 NeoBundle 'vim-scripts/visualrepeat'
 NeoBundle 'vim-scripts/tComment'
 NeoBundle 'tpope/vim-sensible'
@@ -106,6 +112,9 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'joedicastro/vim-multiple-cursors'
+" }}}
+
+" Matching / Searching {{{
 NeoBundle 'mileszs/ack.vim'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'kien/ctrlp.vim'
@@ -119,7 +128,7 @@ NeoBundle 'FelikZ/ctrlp-py-matcher'
 " \    },
 " \ }
 " NeoBundle 'Yggdroot/LeaderF'
-
+" }}}
 
 NeoBundle 'FelikZ/vimpy', { 'rev': 'develop'}
 " NeoBundle 'LimpidTech/vimpy_examples'
@@ -257,7 +266,6 @@ NeoBundleLazy 'Shougo/unite-outline', {'autoload': {'unite_sources': 'outline'}}
 " let g:unite_source_rec_max_cache_files=0
 " }}}
 
-
 " Projects and indexing {{{
 NeoBundle 'tbknl/vimproject'
 NeoBundle 'vim-scripts/DfrankUtil'
@@ -285,6 +293,10 @@ let ScreenShot = {'Icon':0, 'Credits':0}
 " NeoBundle 'marcelbeumer/twilight.vim'
 " NeoBundle 'altercation/vim-colors-solarized'
 " NeoBundle 'goatslacker/mango.vim'
+" }}}
+
+" File system {{{
+NeoBundle 'AlexJF/rename.vim'
 " }}}
 
 filetype plugin indent on
@@ -416,8 +428,6 @@ autocmd FileType plaintasks vnoremap <buffer> + :call NewTask()<cr>
 autocmd FileType plaintasks nnoremap <buffer> - :call ToggleCancel()<cr>
 autocmd FileType plaintasks vnoremap <buffer> - :call ToggleCancel()<cr>
 
-" }}}
-
 " EN/RU switching&indication " {{{ -------------------------------------------
 set keymap=russian-jcukenwin    " C-^ lang layout switch
 set iminsert=0                  " default input layout - english
@@ -444,19 +454,25 @@ nnoremap <silent> <C-F> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
 vnoremap <silent> <C-F> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
 " }}}
 
-" Easy-motion {{{
+" Easy-motion " {{{ --------------------------------------
 map <Leader>h <Plug>(easymotion-linebackward)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 map <Leader>l <Plug>(easymotion-lineforward)
 
-nmap s <Plug>(easymotion-s)
-nmap S <Plug>(easymotion-s2)
-nmap t <Plug>(easymotion-t)
-nmap T <Plug>(easymotion-t2)
+nmap S <Plug>(easymotion-s)
+nmap s <Plug>(easymotion-s2)
+nmap T <Plug>(easymotion-t)
+nmap t <Plug>(easymotion-t2)
 
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
+"}}}
+
+" Fn keys {{{
+nmap <F2> :w<cr>
+nmap <F10> :q<cr>
+" }}}
 " }}}
