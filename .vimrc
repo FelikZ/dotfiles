@@ -38,7 +38,6 @@ set ttimeoutlen=120
 set hidden
 set wildmenu
 set wildmode=full
-set synmaxcol=800
 set noerrorbells
 set novisualbell
 set noeb vb t_vb=
@@ -47,6 +46,7 @@ set nostartofline
 set nojoinspaces
 set splitbelow
 set splitright
+set noeol
 
 " Performance
 set regexpengine=2
@@ -73,12 +73,22 @@ endif
 
 if has('vim_starting')
     let &runtimepath.=','.$vimhome.','.$neoplugin
+    " autocmd BufEnter * let &path=expand('%:p:h')
 endif
 
 let neobundledir=$curdir.'/.vim/bundle'
 call neobundle#rc(neobundledir)
 
 NeoBundleFetch 'Shougo/neobundle.vim'
+
+NeoBundle 'FelikZ/vimproc.vim', {
+\ 'build' : {
+\     'windows' : 'make -f make_mingw32.mak',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make -f make_mac.mak',
+\     'unix' : 'make -f make_unix.mak',
+\    },
+\ }
 
 NeoBundle 'vim-scripts/visualrepeat'
 NeoBundle 'vim-scripts/tComment'
@@ -158,53 +168,27 @@ NeoBundle 'Shougo/neocomplete.vim'
 
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#enable_ignore_case = 1
 let g:neocomplete#enable_refresh_always = 1
+
 let g:neocomplete#max_list = 30
-let g:neocomplete#min_keyword_length = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 1
+let g:neocomplete#min_keyword_length = 3
+let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#data_directory = $curdir.'/tmp/neocomplete'
 
-" disable the auto select feature by default to speed up writing without
-" obstacles (is optimal for certain situations)
 let g:neocomplete#enable_auto_select = 0
+let g:neocomplete#skip_auto_completion_time = '0.2'
 
-if !exists('g:neocomplete#sources')
-    let g:neocomplete#sources = {}
-endif
-let g:neocomplete#sources._ = ['buffer', 'include']
-
-if !exists('let g:neocomplete#sources#dictionary#dictionaries')
-    let g:neocomplete#sources#dictionary#dictionaries = {}
-endif
-let g:neocomplete#sources#dictionary#dictionaries._ = &tags
+" let g:neocomplete#sources._ = ['vim', 'omni', 'include', 'buffer', 'file/include']
 
 " let g:neocomplete#sources#tags#cache_limit_size = 200327685
 
-if !exists('g:neocomplete#sources#file_include#exprs')
-    let g:neocomplete#sources#file_include#exprs = {}
-endif
-
-if !exists('g:neocomplete#sources#file_include#exts')
-    let g:neocomplete#sources#file_include#exts = {}
-endif
-
-let g:neocomplete#sources#file_include#exprs.php =
-\ 'substitute(v:fname, "\.php$", "", "")'
-let g:neocomplete#sources#file_include#exts.php =
-\ ['php']
-
-let g:neocomplete#sources#file_include#exprs.javascript =
-\ 'substitute(v:fname, "\.js$", "", "")'
-let g:neocomplete#sources#file_include#exts.javascript =
-\ ['javascript']
-
-
+NeoBundle 'honza/vim-snippets'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 let g:neosnippet#enable_snipmate_compatibility = 1
 let g:neosnippet#snippets_directory=$curdir.'/.vim/bundle/vim-snippets/snippets'
 
-NeoBundle 'honza/vim-snippets'
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -227,15 +211,6 @@ NeoBundle 'hojberg/vest'
 NeoBundle 'Shougo/vesting'
 NeoBundle 'vim-scripts/Decho'
 " }}}
-
-NeoBundle 'FelikZ/vimproc.vim', {
-\ 'build' : {
-\     'windows' : 'make -f make_mingw32.mak',
-\     'cygwin' : 'make -f make_cygwin.mak',
-\     'mac' : 'make -f make_mac.mak',
-\     'unix' : 'make -f make_unix.mak',
-\    },
-\ }
 
 " Unite {{{
 NeoBundle 'Shougo/unite.vim'
@@ -342,6 +317,9 @@ autocmd InsertLeave *
     \ if &paste == 1 |
     \     set nopaste |
     \ endif
+" Disables new EOL at the end of file
+autocmd BufWritePre * setl binary noendofline
+autocmd BufWritePost * setl nobinary
 
 nnoremap <tab> >>
 vnoremap <tab> >gv
