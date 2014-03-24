@@ -296,7 +296,7 @@ let ScreenShot = {'Icon':0, 'Credits':0}
 " }}}
 
 " File system {{{
-NeoBundle 'AlexJF/rename.vim'
+NeoBundle 'danro/rename.vim'
 " }}}
 
 filetype plugin indent on
@@ -376,9 +376,6 @@ endif
 
 " FuzzFinder
 " nnoremap <Space>p :FufFile<cr>
-
-" enable same functions to ; as :
-nnoremap ; :
 
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -469,6 +466,9 @@ map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
+
+map <expr> ; EasyMotion#is_active() ? '<Plug>(easymotion-next)' : ';'
+map <expr> , EasyMotion#is_active() ? '<Plug>(easymotion-prev)' : ','
 "}}}
 
 " Fn keys {{{
