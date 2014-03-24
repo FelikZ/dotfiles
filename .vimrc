@@ -148,6 +148,7 @@ NeoBundle 'elzr/vim-json'
 NeoBundle 'shawncplus/phpcomplete.vim'
 NeoBundle 'elentok/plaintasks.vim'
 NeoBundle 'ekalinin/Dockerfile.vim'
+NeoBundle 'vim-scripts/dbext.vim'
 " NeoBundle 'scrooloose/syntastic'
 " NeoBundle 'yazug/vim-taglist-plus'
 " }}}
@@ -205,6 +206,7 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType sql setlocal omnifunc=sqlcomplete#Complete
 " }}}
 
 " Airline {{{
@@ -324,11 +326,16 @@ nnoremap <silent> <leader>pp :let @0=expand('%')<cr>"0P
 nnoremap <silent> <leader>pC :let @0=expand('%:p')<cr>
 nnoremap <silent> <leader>pP :let @0=expand('%:p')<cr>"0P
 
+" Copy current file name (tail of path) to buffer
+nnoremap <silent> <leader>pt :let @0=expand('%:t')<cr>
+nnoremap <silent> <leader>pT :let @0=expand('%:t')<cr>"0P
+
 " Disables paste mode when leaving insert mode
 autocmd InsertLeave *
     \ if &paste == 1 |
     \     set nopaste |
     \ endif
+
 " Disables new EOL at the end of file
 autocmd BufWritePre * setl binary noendofline
 autocmd BufWritePost * setl nobinary
@@ -337,6 +344,8 @@ nnoremap <tab> >>
 vnoremap <tab> >gv
 nnoremap <s-tab> <<
 vnoremap <s-tab> <gv
+imap <S-Tab> <Esc><<Hi
+
 nnoremap <leader><cr> :noh<cr>
 
 " Move throught wrap lines
