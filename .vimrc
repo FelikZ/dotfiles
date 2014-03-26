@@ -59,6 +59,7 @@ set lazyredraw
 set nocursorcolumn
 set nocursorline
 set synmaxcol=1000
+
 " let loaded_matchparen = 1
 let g:matchparen_timeout = 10
 let g:matchparen_insert_timeout = 10
@@ -102,14 +103,19 @@ NeoBundle 'tpope/vim-sensible'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-abolish'
-NeoBundle 'tpope/vim-endwise'
 
 NeoBundle 'Lokaltog/vim-easymotion'
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_use_upper = 1
+hi link EasyMotionMoveHL Search
 
 NeoBundle 'tpope/vim-surround'
+
 NeoBundle 'Raimondi/delimitMate'
+let g:delimitMate_expand_cr = 1
+" NeoComplete compatibility
+imap <expr> <CR> pumvisible() ? neocomplete#smart_close_popup() : '<Plug>delimitMateCR'
+
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'joedicastro/vim-multiple-cursors'
 " }}}
@@ -482,6 +488,8 @@ map <expr> , EasyMotion#is_active() ? '<Plug>(easymotion-prev)' : ','
 
 " Fn keys {{{
 nmap <F2> :w<cr>
+imap <F2> <Esc>:w<cr>a
 nmap <F10> :q<cr>
+imap <F10> <Esc>:q<cr>
 " }}}
 " }}}
