@@ -50,6 +50,8 @@ set splitbelow
 set splitright
 set noeol
 set foldmethod=marker
+set ssop-=options
+set ssop-=folds
 
 " Performance
 set regexpengine=2
@@ -154,7 +156,7 @@ NeoBundle 'elzr/vim-json'
 NeoBundle 'shawncplus/phpcomplete.vim'
 NeoBundle 'elentok/plaintasks.vim'
 NeoBundle 'ekalinin/Dockerfile.vim'
-NeoBundle 'vim-scripts/dbext.vim'
+" NeoBundle 'vim-scripts/dbext.vim'
 " NeoBundle 'scrooloose/syntastic'
 " NeoBundle 'yazug/vim-taglist-plus'
 " }}}
