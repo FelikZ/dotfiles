@@ -50,8 +50,8 @@ set splitbelow
 set splitright
 set noeol
 set foldmethod=marker
-set ssop-=options
-set ssop-=folds
+set ssop-=options    " do not store global and local values in a session
+set ssop-=folds      " do not store folds
 
 " Performance
 set regexpengine=2
@@ -307,6 +307,8 @@ let ScreenShot = {'Icon':0, 'Credits':0}
 
 " File system {{{
 NeoBundle 'danro/rename.vim'
+let g:PreserveNoEOL = 1
+NeoBundle 'vim-scripts/PreserveNoEOL'
 " }}}
 
 filetype plugin indent on
@@ -345,8 +347,8 @@ autocmd InsertLeave *
     \ endif
 
 " Disables new EOL at the end of file
-autocmd BufWritePre * setl binary noendofline
-autocmd BufWritePost * setl nobinary
+" autocmd BufWritePre * setl binary noendofline
+" autocmd BufWritePost * setl nobinary
 
 nnoremap <tab> >>
 vnoremap <tab> >gv
