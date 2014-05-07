@@ -116,7 +116,7 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'Raimondi/delimitMate'
 let g:delimitMate_expand_cr = 1
 " NeoComplete compatibility
-imap <expr> <CR> pumvisible() ? neocomplete#smart_close_popup() : '<Plug>delimitMateCR'
+imap <expr> <CR> pumvisible() ? neocomplete#close_popup() : '<Plug>delimitMateCR'
 
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'joedicastro/vim-multiple-cursors'
