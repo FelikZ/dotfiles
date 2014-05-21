@@ -106,6 +106,11 @@ NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-abolish'
 
+NeoBundle 'xolox/vim-session'
+let g:session_autosave_periodic = 2
+let g:session_directory = $curdir.'/.vim/sessions'
+let g:session_autosave = 'no'
+
 NeoBundle 'Lokaltog/vim-easymotion'
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_use_upper = 1
@@ -226,8 +231,8 @@ let g:airline_theme='serene'
 " }}}
 
 " Testing {{{
-NeoBundle 'hojberg/vest'
-NeoBundle 'Shougo/vesting'
+" NeoBundle 'hojberg/vest'
+" NeoBundle 'Shougo/vesting'
 NeoBundle 'vim-scripts/Decho'
 " }}}
 
@@ -391,7 +396,6 @@ if !has('python')
 else
     let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 endif
-" let g:ctrlp_match_func = { 'match': 'matcher#cmatch' }
 
 " FuzzFinder
 " nnoremap <Space>p :FufFile<cr>
