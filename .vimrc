@@ -279,7 +279,7 @@ NeoBundleLazy 'Shougo/unite-outline', {'autoload': {'unite_sources': 'outline'}}
 " }}}
 
 " Projects and indexing {{{
-NeoBundle 'tbknl/vimproject'
+" NeoBundle 'tbknl/vimproject'
 NeoBundle 'vim-scripts/DfrankUtil'
 NeoBundle 'FelikZ/vimprj'
 let g:indexer_ctagsWriteFilelist = 1
