@@ -148,7 +148,7 @@ NeoBundle 'FelikZ/vimpy', { 'rev': 'develop'}
 
 " NeoBundle 'clones/vim-fuzzyfinder'
 " NeoBundle 'vim-scripts/L9'
-" NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/nerdtree'
 
 " All-lang syntax {{{
 NeoBundle 'vim-scripts/SyntaxComplete'
@@ -174,6 +174,11 @@ NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascr
 NeoBundleLazy 'pangloss/vim-javascript', {'autoload':{'filetypes':['javascript']}}
 NeoBundleLazy 'othree/javascript-libraries-syntax.vim', {'autoload':{'filetypes':['javascript','coffee','coffeescript','typescript']}}
 let g:used_javascript_libs = 'jquery,underscore,backbone,angularjs,jasmine'
+
+NeoBundleLazy 'Shutnik/jshint2.vim', {'autoload':{'filetypes':['javascript']}}
+let jshint2_save = 1
+let jshint2_height = 3
+let jshint2_read = 0
 
 " "Node.js
 " NeoBundle 'guileen/vim-node-dict'
@@ -379,6 +384,7 @@ vnoremap <down> g<down>
 " CtrlP
 let g:ctrlp_map = '<Space>p'
 let g:ctrlp_cmd = 'CtrlPCurWD'
+let g:ctrlp_open_multiple_files = 'ri'
 
 " let g:ctrlp_by_filename = 1
 let g:ctrlp_match_window = 'top,order:ttb,min:1,max:10,results:20'
