@@ -14,6 +14,7 @@ echo "Setting up environment..."
 
 # dirs
 mkdir -p "$DIR/tmp/vimswap"
+mkdir -p "$DIR/bin"
 
 # files
 echo '#!/bin/bash
