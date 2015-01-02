@@ -116,6 +116,20 @@ let g:EasyMotion_smartcase = 1
 let g:EasyMotion_use_upper = 1
 hi link EasyMotionMoveHL Search
 
+" viv
+NeoBundle 'gorkunov/smartpairs.vim'
+let g:smartpairs_key = 'm'
+let g:smartpairs_nextpairs_key = 'm'
+let g:smartpairs_nextpairs_key_i = '<leader>m'
+let g:smartpairs_nextpairs_key_a = '<leader>M'
+
+NeoBundle 'FooSoft/vim-argwrap'
+nnoremap <silent> <leader>w :call argwrap#toggle()<CR>
+
+NeoBundle 'othree/eregex.vim'
+let g:eregex_forward_delim = '<leader>/'
+let g:eregex_backward_delim = '\?'
+
 NeoBundle 'tpope/vim-surround'
 
 NeoBundle 'Raimondi/delimitMate'
@@ -163,6 +177,7 @@ NeoBundle 'elentok/plaintasks.vim'
 NeoBundle 'ekalinin/Dockerfile.vim'
 NeoBundle 'vim-scripts/nginx.vim'
 NeoBundle 'apeschel/vim-syntax-apache'
+NeoBundle 'jeroenbourgois/vim-actionscript'
 " NeoBundle 'vim-scripts/dbext.vim'
 " NeoBundle 'scrooloose/syntastic'
 " NeoBundle 'yazug/vim-taglist-plus'
@@ -231,7 +246,7 @@ autocmd FileType sql setlocal omnifunc=sqlcomplete#Complete
 
 " Airline {{{
 " NeoBundle 'bling/vim-bufferline'
-NeoBundle 'bling/vim-airline'
+NeoBundle 'bling/vim-airline', '727192ad6a4421e19294faf1c58ca75a624fda30'
 let g:airline#extensions#tabline#enabled = 1
 " serene, wombat
 let g:airline_theme='serene'
@@ -439,7 +454,7 @@ nnoremap <silent> <leader>DC :exe ":profile continue"<cr>
 nnoremap <silent> <leader>DQ :exe ":profile pause"<cr>:noautocmd qall!<cr>
 
 " Show color of current symbol
-map <leader>/  :call SyntaxAttr()<CR>
+map <leader>'  :call SyntaxAttr()<CR>
 
 " Close prev/next buffer
 nmap <silent> [c :bp\|bd #<CR>
