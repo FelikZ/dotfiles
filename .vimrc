@@ -162,7 +162,7 @@ NeoBundle 'FelikZ/vimpy', { 'rev': 'develop'}
 
 " NeoBundle 'clones/vim-fuzzyfinder'
 " NeoBundle 'vim-scripts/L9'
-NeoBundle 'scrooloose/nerdtree'
+" NeoBundle 'scrooloose/nerdtree'
 
 " All-lang syntax {{{
 NeoBundle 'vim-scripts/SyntaxComplete'
@@ -246,8 +246,10 @@ autocmd FileType sql setlocal omnifunc=sqlcomplete#Complete
 
 " Airline {{{
 " NeoBundle 'bling/vim-bufferline'
-NeoBundle 'bling/vim-airline', '727192ad6a4421e19294faf1c58ca75a624fda30'
+" NeoBundle 'bling/vim-airline', '727192ad6a4421e19294faf1c58ca75a624fda30'
+NeoBundle 'bling/vim-airline'
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_tabs = 0
 " serene, wombat
 let g:airline_theme='serene'
 " }}}
