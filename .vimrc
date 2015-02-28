@@ -124,7 +124,8 @@ let g:smartpairs_nextpairs_key_i = '<leader>m'
 let g:smartpairs_nextpairs_key_a = '<leader>M'
 
 NeoBundle 'FooSoft/vim-argwrap'
-nnoremap <silent> <leader>w :call argwrap#toggle()<CR>
+nnoremap <silent> <leader>w :ArgWrap<CR>
+let g:argwrap_padded_braces = '{'
 
 NeoBundle 'othree/eregex.vim'
 let g:eregex_forward_delim = '<leader>/'
@@ -156,6 +157,7 @@ NeoBundle 'FelikZ/ctrlp-py-matcher'
 " \ }
 " NeoBundle 'Yggdroot/LeaderF'
 " }}}
+" NeoBundle 'tacahiroy/ctrlp-funky'
 
 NeoBundle 'FelikZ/vimpy', { 'rev': 'develop'}
 " NeoBundle 'LimpidTech/vimpy_examples'
