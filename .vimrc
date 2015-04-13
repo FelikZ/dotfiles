@@ -82,7 +82,7 @@ if has('vim_starting')
 endif
 
 let neobundledir=$curdir.'/.vim/bundle'
-call neobundle#rc(neobundledir)
+call neobundle#begin(neobundledir)
 
 NeoBundleFetch 'Shougo/neobundle.vim'
 " }}}
@@ -183,6 +183,7 @@ NeoBundle 'jeroenbourgois/vim-actionscript'
 " NeoBundle 'vim-scripts/dbext.vim'
 " NeoBundle 'scrooloose/syntastic'
 " NeoBundle 'yazug/vim-taglist-plus'
+au BufRead,BufNewFile *.twig setfiletype html
 " }}}
 
 " JavaScript {{{
@@ -341,6 +342,8 @@ NeoBundle 'danro/rename.vim'
 let g:PreserveNoEOL = 1
 NeoBundle 'vim-scripts/PreserveNoEOL'
 " }}}
+
+call neobundle#end()
 
 filetype plugin indent on
 NeoBundleCheck
