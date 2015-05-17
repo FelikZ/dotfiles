@@ -180,6 +180,7 @@ NeoBundle 'ekalinin/Dockerfile.vim'
 NeoBundle 'vim-scripts/nginx.vim'
 NeoBundle 'apeschel/vim-syntax-apache'
 NeoBundle 'jeroenbourgois/vim-actionscript'
+NeoBundle 'markcornick/vim-vagrant'
 " NeoBundle 'vim-scripts/dbext.vim'
 " NeoBundle 'scrooloose/syntastic'
 " NeoBundle 'yazug/vim-taglist-plus'
@@ -193,7 +194,7 @@ NeoBundleLazy 'pangloss/vim-javascript', {'autoload':{'filetypes':['javascript']
 NeoBundleLazy 'othree/javascript-libraries-syntax.vim', {'autoload':{'filetypes':['javascript','coffee','coffeescript','typescript']}}
 let g:used_javascript_libs = 'jquery,underscore,backbone,angularjs,jasmine'
 
-NeoBundleLazy 'Shutnik/jshint2.vim', {'autoload':{'filetypes':['javascript']}}
+" NeoBundleLazy 'Shutnik/jshint2.vim', {'autoload':{'filetypes':['javascript']}}
 let jshint2_save = 1
 let jshint2_height = 3
 let jshint2_read = 0
@@ -380,6 +381,12 @@ autocmd InsertLeave *
     \     set nopaste |
     \ endif
 
+" Disable tmp files for crontab
+autocmd filetype crontab setlocal nobackup nowritebackup
+
+" EJS syntax
+autocmd BufNewFile,BufRead *.ejs set filetype=html
+
 " Disables new EOL at the end of file
 " autocmd BufWritePre * setl binary noendofline
 " autocmd BufWritePost * setl nobinary
@@ -498,10 +505,10 @@ call MyKeyMapHighlight()
 au WinEnter * :call MyKeyMapHighlight()
 
 " ru/en lang switch ^f (Ctrl + F)
-cnoremap <silent> <C-F> <C-^>
-inoremap <silent> <C-F> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
-nnoremap <silent> <C-F> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
-vnoremap <silent> <C-F> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
+" cnoremap <silent> <C-F> <C-^>
+" inoremap <silent> <C-F> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
+" nnoremap <silent> <C-F> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
+" vnoremap <silent> <C-F> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
 " }}}
 
 " Easy-motion " {{{ --------------------------------------
