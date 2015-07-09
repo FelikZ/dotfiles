@@ -6,6 +6,9 @@ let $cwd=getcwd()
 " }}}
 
 " Vim Settings {{{
+set t_Co=256
+highlight Normal ctermbg=NONE
+highlight nonText ctermbg=NONE
 set nocp
 set number
 set cursorline
@@ -132,6 +135,8 @@ let g:eregex_forward_delim = '<leader>/'
 let g:eregex_backward_delim = '\?'
 
 NeoBundle 'tpope/vim-surround'
+vmap "   <Plug>VSurround"
+vmap '   <Plug>VSurround'
 
 NeoBundle 'Raimondi/delimitMate'
 let g:delimitMate_expand_cr = 1
@@ -140,6 +145,11 @@ imap <expr> <CR> pumvisible() ? neocomplete#close_popup() : '<Plug>delimitMateCR
 
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'joedicastro/vim-multiple-cursors'
+" }}}
+
+" Text objects {{{
+NeoBundle 'kana/vim-textobj-user'
+NeoBundle 'kana/vim-textobj-line'
 " }}}
 
 " Matching / Searching {{{
@@ -185,6 +195,7 @@ NeoBundle 'markcornick/vim-vagrant'
 " NeoBundle 'scrooloose/syntastic'
 " NeoBundle 'yazug/vim-taglist-plus'
 au BufRead,BufNewFile *.twig setfiletype html
+au FileType gitcommit set tw=72
 " }}}
 
 " JavaScript {{{
