@@ -135,8 +135,8 @@ let g:eregex_forward_delim = '<leader>/'
 let g:eregex_backward_delim = '\?'
 
 NeoBundle 'tpope/vim-surround'
-vmap "   <Plug>VSurround"
-vmap '   <Plug>VSurround'
+vmap <leader>"   <Plug>VSurround"
+vmap <leader>'   <Plug>VSurround'
 
 NeoBundle 'Raimondi/delimitMate'
 let g:delimitMate_expand_cr = 1
@@ -479,7 +479,7 @@ nnoremap <silent> <leader>DC :exe ":profile continue"<cr>
 nnoremap <silent> <leader>DQ :exe ":profile pause"<cr>:noautocmd qall!<cr>
 
 " Show color of current symbol
-map <leader>'  :call SyntaxAttr()<CR>
+" map <leader>'  :call SyntaxAttr()<CR>
 
 " Close prev/next buffer
 nmap <silent> [c :bp\|bd #<CR>
