@@ -7,6 +7,7 @@ let $cwd=getcwd()
 
 " Vim Settings {{{
 set t_Co=256
+set t_ut=
 highlight Normal ctermbg=NONE
 highlight nonText ctermbg=NONE
 set nocp
@@ -365,7 +366,7 @@ syntax on
 " colorscheme felikz_twilight
 " let g:solarized_contrast="high"
 " let g:solarized_termtrans=0
-let g:solarized_termcolors=256
+" let g:solarized_termcolors=256
 let g:solarized_visibility="normal"
 colorscheme solarized
 
