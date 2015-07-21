@@ -2,6 +2,7 @@
 .netrwhist
 /*.log
 /.vim/bundle
+/.vim/sessions
 !/.vim/bundle/neobundle.vim
 /bin
 /share

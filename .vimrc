@@ -267,7 +267,7 @@ NeoBundle 'bling/vim-airline'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_tabs = 0
 " serene, wombat
-let g:airline_theme='serene'
+let g:airline_theme='solarized'
 " }}}
 
 " Testing {{{
@@ -346,7 +346,7 @@ let ScreenShot = {'Icon':0, 'Credits':0}
 " Colorschemes {{{
 " NeoBundle 'nanotech/jellybeans.vim'
 " NeoBundle 'marcelbeumer/twilight.vim'
-" NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'altercation/vim-colors-solarized'
 " NeoBundle 'goatslacker/mango.vim'
 " }}}
 
@@ -362,7 +362,12 @@ filetype plugin indent on
 NeoBundleCheck
 
 syntax on
-colorscheme felikz_twilight
+" colorscheme felikz_twilight
+" let g:solarized_contrast="high"
+" let g:solarized_termtrans=0
+let g:solarized_termcolors=256
+let g:solarized_visibility="normal"
+colorscheme solarized
 
 " Key bindings {{{
 nnoremap H ^

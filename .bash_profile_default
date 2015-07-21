@@ -1,0 +1,21 @@
+# lang
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+# colors
+export CLICOLOR=1
+export TERM=xterm-256color
+export LSCOLORS=cxGxBxDxCxEgEdxbxgxccA
+export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[34m\]\h:\[\033[0;36m\]\w\[\033[m\] \[\033[0;37m\]\$ "
+# export LSCOLORS=GxFxCxDxBxegedabagaced
+# export PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+
+printf '\x1B]4;234;rgb:00/2b/36;235;rgb:07/36/42;240;rgb:58/6e/75;241;rgb:65/7b/83;244;rgb:83/94/96;245;rgb:93/a1/a1;254;rgb:ee/e8/d5;230;rgb:fd/f6/e3;136;rgb:b5/89/00;166;rgb:cb/4b/16;160;rgb:dc/32/2f;125;rgb:d3/36/82;61;rgb:6c/71/c4;33;rgb:26/8b/d2;37;rgb:2a/a1/98;64;rgb:85/99/00\a'
+
+eval `dircolors ~/.dircolors`
+alias ls="ls --color=always"
+
+# ssh-agent | bash
+# if [ -z "$STY" ]; then
+#     screen -q
+# fi

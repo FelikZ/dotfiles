@@ -1,0 +1,7 @@
+#!/bin/bash
+#wait for the desktop to settle
+sleep 5
+# turn off mouse acceleration
+# xinput set-prop 14 273 -1
+xinput --set-prop 9 'Device Accel Profile' -1
+xinput --set-prop 9 'Device Accel Constant Deceleration' 1
