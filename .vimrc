@@ -349,6 +349,13 @@ let ScreenShot = {'Icon':0, 'Credits':0}
 " NeoBundle 'marcelbeumer/twilight.vim'
 NeoBundle 'altercation/vim-colors-solarized'
 " NeoBundle 'goatslacker/mango.vim'
+hi link EasyMotionTarget Type
+hi link EasyMotionShade  Comment
+hi link EasyMotionTarget2First Statement
+hi link EasyMotionTarget2Second Statement
+hi link EasyMotionIncSearch PreProc
+hi link EasyMotionIncCursor Normal
+hi link EasyMotionMoveHL Constant
 " }}}
 
 " File system {{{
