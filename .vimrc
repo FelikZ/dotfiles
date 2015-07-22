@@ -12,7 +12,6 @@ highlight Normal ctermbg=NONE
 highlight nonText ctermbg=NONE
 set nocp
 set number
-set cursorline
 set background=dark
 set ts=4 sts=4 sw=4
 set expandtab
@@ -34,7 +33,6 @@ set ignorecase
 set smartcase
 set hlsearch
 set incsearch
-set showmatch
 set gdefault
 set scrolloff=5
 set laststatus=2
@@ -64,7 +62,10 @@ set ttyscroll=3
 set lazyredraw
 set nocursorcolumn
 set nocursorline
-set synmaxcol=1000
+set norelativenumber
+syntax sync minlines=256
+set synmaxcol=300
+set noshowmatch
 
 " let loaded_matchparen = 1
 let g:matchparen_timeout = 10
@@ -454,7 +455,7 @@ if executable("ag")
 endif
 
 " PyMatcher for CtrlP
-if !has('python')
+if !has('python') && !has('python3')
     echo 'In order to use pymatcher plugin, you need +python compiled vim'
 else
     let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
