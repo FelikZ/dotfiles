@@ -197,7 +197,7 @@ NeoBundle 'stephpy/vim-yaml'
 " NeoBundle 'vim-scripts/dbext.vim'
 " NeoBundle 'scrooloose/syntastic'
 " NeoBundle 'yazug/vim-taglist-plus'
-au BufRead,BufNewFile *.twig setfiletype html
+au BufRead,BufNewFile *.twig,*.rt,*.ejs setfiletype html
 au FileType gitcommit set tw=72
 " }}}
 
@@ -259,7 +259,9 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType sql setlocal omnifunc=sqlcomplete#Complete
+" autocmd FileType sql setlocal omnifunc=sqlcomplete#Complete
+let g:omni_sql_no_default_maps = 1
+let g:ftplugin_sql_omni_key = '<Plug>DisableSqlOmni'
 " }}}
 
 " Airline {{{
@@ -410,8 +412,8 @@ autocmd InsertLeave *
 " Disable tmp files for crontab
 autocmd filetype crontab setlocal nobackup nowritebackup
 
-" EJS syntax
-autocmd BufNewFile,BufRead *.ejs set filetype=html
+" Auto reload files
+autocmd FocusGained,BufEnter * :silent! !
 
 " Disables new EOL at the end of file
 " autocmd BufWritePre * setl binary noendofline
@@ -519,17 +521,17 @@ set imsearch=0                  " default search layout - english
 "
 " English layout active windows status line is DarkBlue
 " English layout active windows status line is DarkRed
-function! MyKeyMapHighlight()
-  if &iminsert == 0
-    hi StatusLine ctermfg=DarkBlue guifg=DarkBlue
-  else
-    hi StatusLine ctermfg=DarkRed guifg=DarkRed
-  endif
-endfunction
-" call our func on startup and redraw colors
-call MyKeyMapHighlight()
-" update layout indication on window change
-au WinEnter * :call MyKeyMapHighlight()
+" function! MyKeyMapHighlight()
+"   if &iminsert == 0
+"     hi StatusLine ctermfg=DarkBlue guifg=DarkBlue
+"   else
+"     hi StatusLine ctermfg=DarkRed guifg=DarkRed
+"   endif
+" endfunction
+" " call our func on startup and redraw colors
+" call MyKeyMapHighlight()
+" " update layout indication on window change
+" au WinEnter * :call MyKeyMapHighlight()
 
 " ru/en lang switch ^f (Ctrl + F)
 " cnoremap <silent> <C-F> <C-^>
