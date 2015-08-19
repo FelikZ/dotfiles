@@ -20,3 +20,8 @@ alias ls="ls --color=always"
 # if [ -z "$STY" ]; then
 #     screen -q
 # fi
+
+if [ ! -f /etc/bash_completion.d/git-completion.bash ]; then
+    sudo curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o /etc/bash_completion.d/git-completion.bash
+fi
+source /etc/bash_completion
