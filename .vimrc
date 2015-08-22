@@ -205,6 +205,7 @@ au FileType gitcommit set tw=72
 " NeoBundle 'vim-scripts/JavaScript-Indent'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript','coffee','coffeescript','typescript']}}
 NeoBundleLazy 'pangloss/vim-javascript', {'autoload':{'filetypes':['javascript']}}
+NeoBundleLazy 'mxw/vim-jsx', {'autoload':{'filetypes':['javascript']}}
 NeoBundleLazy 'othree/javascript-libraries-syntax.vim', {'autoload':{'filetypes':['javascript','coffee','coffeescript','typescript']}}
 let g:used_javascript_libs = 'jquery,underscore,backbone,angularjs,jasmine'
 
