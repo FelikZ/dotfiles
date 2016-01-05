@@ -169,7 +169,9 @@ NeoBundle 'FelikZ/ctrlp-py-matcher'
 " \ }
 " NeoBundle 'Yggdroot/LeaderF'
 " }}}
-" NeoBundle 'tacahiroy/ctrlp-funky'
+nnoremap <Leader>fu :CtrlPFunky<Cr>
+let g:ctrlp_funky_multi_buffers = 1
+NeoBundle 'tacahiroy/ctrlp-funky'
 
 NeoBundle 'FelikZ/vimpy', { 'rev': 'develop'}
 " NeoBundle 'LimpidTech/vimpy_examples'
@@ -187,6 +189,23 @@ NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'nvie/vim-ini'
 NeoBundle 'elzr/vim-json'
 NeoBundle 'shawncplus/phpcomplete.vim'
+NeoBundle 'joonty/vdebug'
+let g:vdebug_keymap = {
+\    "run" : "<F5>",
+\    "run_to_cursor" : "<F7>",
+\    "step_over" : "<F9>",
+\    "step_into" : "<F10>",
+\    "step_out" : "<F8>",
+\    "close" : "<F6>",
+\    "detach" : "<F11>",
+\    "set_breakpoint" : "<F4>",
+\    "get_context" : "<F3>",
+\    "eval_under_cursor" : "<F12>",
+\    "eval_visual" : "<Leader>e",
+\}
+let g:vdebug_options = {}
+let g:vdebug_options['path_maps'] = {"/var/www/html": $cwd}
+
 NeoBundle 'elentok/plaintasks.vim'
 NeoBundle 'ekalinin/Dockerfile.vim'
 NeoBundle 'vim-scripts/nginx.vim'
@@ -564,7 +583,5 @@ map <expr> , EasyMotion#is_active() ? '<Plug>(easymotion-prev)' : ','
 " Fn keys {{{
 nmap <F2> :w<cr>
 imap <F2> <Esc>:w<cr>a
-nmap <F10> :q<cr>
-imap <F10> <Esc>:q<cr>
 " }}}
 " }}}
