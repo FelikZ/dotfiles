@@ -115,6 +115,7 @@ NeoBundle 'xolox/vim-session'
 let g:session_autosave_periodic = 2
 let g:session_directory = $curdir.'/.vim/sessions'
 let g:session_autosave = 'no'
+let g:session_autoload = 'no'
 
 NeoBundle 'Lokaltog/vim-easymotion'
 let g:EasyMotion_smartcase = 1
