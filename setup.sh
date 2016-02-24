@@ -2,7 +2,15 @@
 ############################
 
 CWD="$(pwd)"
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+if [ "$BASH_SOURCE" != "" ]
+then
+    DIR="$( cd "$( dirname "$BASH_SOURCE" )" && pwd )"
+elif [ "$DASH_SOURCE" != "" ]
+then
+    DIR="$( cd "$( dirname "$DASH_SOURCE" )" && pwd )"
+else
+    DIR="$( cd "$( dirname "$0" )" && pwd )"
+fi
 cd "$DIR"
 
 # TODO: check and export once
