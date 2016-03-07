@@ -219,6 +219,7 @@ NeoBundle 'stephpy/vim-yaml'
 " NeoBundle 'yazug/vim-taglist-plus'
 au BufRead,BufNewFile *.twig,*.rt,*.ejs setfiletype html
 au FileType gitcommit set tw=72
+NeoBundle 'bogado/file-line'
 " }}}
 
 " JavaScript {{{
