@@ -29,7 +29,6 @@ export DBUS_SESSION_BUS_ADDRESS=""
 # printf '\x1B]4;234;rgb:00/2b/36;235;rgb:07/36/42;240;rgb:58/6e/75;241;rgb:65/7b/83;244;rgb:83/94/96;245;rgb:93/a1/a1;254;rgb:ee/e8/d5;230;rgb:fd/f6/e3;136;rgb:b5/89/00;166;rgb:cb/4b/16;160;rgb:dc/32/2f;125;rgb:d3/36/82;61;rgb:6c/71/c4;33;rgb:26/8b/d2;37;rgb:2a/a1/98;64;rgb:85/99/00\a'
 
 eval `dircolors "$DIR/.dircolors"`
-alias ls="ls --color=always"
 
 if [ ! -f "~/.tmux.conf" ]; then
     ln -sf "$(cd $DIR && pwd)/.tmux.conf" "$(cd ~ && pwd)/.tmux.conf"
@@ -39,6 +38,12 @@ fi
 # if [ -z "$STY" ]; then
 #     screen -q
 # fi
+
+# aliases
+alias docker-rm-images="docker rmi $(docker images --filter 'dangling=true' -q --no-trunc)"
+alias docker-rm-containers="docker rm $(docker ps -qa --no-trunc --filter 'status=exited')"
+alias docker-rm-volumes="docker volume rm $(docker volume ls -qf 'dangling=true')"
+alias ls="ls --color=always"
 
 if [ ! -f /etc/bash_completion.d/git-completion.bash ]; then
     sudo curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o /etc/bash_completion.d/git-completion.bash

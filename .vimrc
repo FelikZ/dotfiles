@@ -439,6 +439,8 @@ autocmd InsertLeave *
 " Disable tmp files for crontab
 autocmd filetype crontab setlocal nobackup nowritebackup
 
+autocmd filetype yaml setlocal autoindent sw=4 ts=4 expandtab
+
 " Auto reload files
 autocmd FocusGained,BufEnter * :silent! !
 
