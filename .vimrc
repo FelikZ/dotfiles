@@ -106,16 +106,16 @@ NeoBundle 'FelikZ/vimproc.vim', {
 " General {{{
 NeoBundle 'vim-scripts/visualrepeat'
 NeoBundle 'vim-scripts/tComment'
+
+" This should be before vim-abolish because of *:S* synonym duplicate
+NeoBundle 'othree/eregex.vim'
+let g:eregex_forward_delim = '<leader>/'
+let g:eregex_backward_delim = '\?'
+
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-abolish'
-
-NeoBundle 'xolox/vim-session'
-let g:session_autosave_periodic = 2
-let g:session_directory = $curdir.'/.vim/sessions'
-let g:session_autosave = 'no'
-let g:session_autoload = 'no'
 
 NeoBundle 'Lokaltog/vim-easymotion'
 let g:EasyMotion_smartcase = 1
@@ -132,10 +132,6 @@ let g:smartpairs_nextpairs_key_a = '<leader>M'
 NeoBundle 'FooSoft/vim-argwrap'
 nnoremap <silent> <leader>w :ArgWrap<CR>
 let g:argwrap_padded_braces = '{'
-
-NeoBundle 'othree/eregex.vim'
-let g:eregex_forward_delim = '<leader>/'
-let g:eregex_backward_delim = '\?'
 
 NeoBundle 'tpope/vim-surround'
 vmap <leader>"   <Plug>VSurround"
@@ -241,8 +237,16 @@ let jshint2_read = 0
 " NeoBundle 'ahayman/vim-nodejs-complete
 " }}}
 
-" Completion {{{
+" xolox stuff {{{
 NeoBundle 'xolox/vim-misc'
+NeoBundle 'xolox/vim-session'
+let g:session_autosave_periodic = 2
+let g:session_directory = $curdir.'/.vim/sessions'
+let g:session_autosave = 'no'
+let g:session_autoload = 'no'
+" }}}
+
+" Completion {{{
 " NeoBundle 'xolox/vim-easytags'
 set tags=./tags,./TAGS,tags;~,TAGS;~
 "let g:easytags_events = ['BufWritePost']
@@ -373,6 +377,7 @@ let ScreenShot = {'Icon':0, 'Credits':0}
 " NeoBundle 'nanotech/jellybeans.vim'
 " NeoBundle 'marcelbeumer/twilight.vim'
 NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'vim-airline/vim-airline-themes'
 " NeoBundle 'goatslacker/mango.vim'
 hi link EasyMotionTarget Type
 hi link EasyMotionShade  Comment
