@@ -30,10 +30,6 @@ export DBUS_SESSION_BUS_ADDRESS=""
 
 eval `dircolors "$DIR/.dircolors"`
 
-if [ ! -f "~/.tmux.conf" ]; then
-    ln -sf "$(cd $DIR && pwd)/.tmux.conf" "$(cd ~ && pwd)/.tmux.conf"
-fi
-
 # ssh-agent | bash
 # if [ -z "$STY" ]; then
 #     screen -q
