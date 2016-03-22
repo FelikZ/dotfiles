@@ -17,7 +17,6 @@ ln -sf "$DIR/.tmux.conf" "$HOME/.tmux.conf"
 cat $HOME/.bashrc | grep -q "source\ ${HOME}/.bash_profile_default"
 NOT_FOUND=$?
 
-echo $NOT_FOUND
 if [ $NOT_FOUND = 1 ]; then
     echo "source $HOME/.bash_profile_default" >> "$HOME/.bashrc"
 fi
@@ -25,7 +24,6 @@ fi
 cat $HOME/.bashrc | grep -q "source\ ${DIR}/light-setup.sh"
 NOT_FOUND=$?
 
-echo $NOT_FOUND
 if [ $NOT_FOUND = 1 ]; then
     echo "source ${DIR}/light-setup.sh" >> "$HOME/.bashrc"
 fi
