@@ -36,9 +36,9 @@ eval `dircolors "$DIR/.dircolors"`
 # fi
 
 # aliases
-alias docker-rm-images="docker rmi $(docker images --filter 'dangling=true' -q --no-trunc)"
-alias docker-rm-containers="docker rm $(docker ps -qa --no-trunc --filter 'status=exited')"
-alias docker-rm-volumes="docker volume rm $(docker volume ls -qf 'dangling=true')"
+alias docker-rm-images='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
+alias docker-rm-containers='docker rm $(docker ps -qa --no-trunc --filter "status=exited")'
+alias docker-rm-volumes='docker volume rm $(docker volume ls -qf "dangling=true")'
 alias ls="ls --color=always"
 
 ssh() {
