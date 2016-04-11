@@ -3,3 +3,5 @@ termcapinfo xterm*|screen* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm:ti@:te@'
 term 'screen-256color'
 defbce "on"
 altscreen
+unsetenv SSH_AUTH_SOCK
+setenv SSH_AUTH_SOCK $HOME/.ssh/ssh-auth-sock.$HOSTNAME
