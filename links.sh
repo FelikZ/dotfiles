@@ -18,6 +18,7 @@ cat $HOME/.bashrc | grep -q "source\ ${HOME}/.bash_profile_default"
 NOT_FOUND=$?
 
 if [ $NOT_FOUND = 1 ]; then
+    echo '[[ $- == *i* ]] || return' >> "$HOME/.bashrc"
     echo "source $HOME/.bash_profile_default" >> "$HOME/.bashrc"
 fi
 

@@ -18,8 +18,6 @@ fi
 
 cd "$DIR"
 
-echo "Setting up environment..."
-
 # dirs
 mkdir -p "$DIR/tmp/vimswap"
 mkdir -p "$DIR/bin"
@@ -36,5 +34,3 @@ alias vim="vimf"
 export EDITOR="vimf"
 
 cd "$CWD"
-
-echo "Done."
