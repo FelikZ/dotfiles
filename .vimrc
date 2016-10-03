@@ -154,7 +154,7 @@ NeoBundle 'kana/vim-textobj-line'
 " Matching / Searching {{{
 NeoBundle 'mileszs/ack.vim'
 NeoBundle 'rking/ag.vim'
-NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'FelikZ/ctrlp-py-matcher'
 " NeoBundle 'JazzCore/ctrlp-cmatcher', {
 " \ 'build' : {
@@ -480,6 +480,7 @@ let g:ctrlp_lazy_update = 350
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_cache_dir = $curdir.'/tmp/ctrlp'
 let g:ctrlp_max_files = 0
+" let g:ctrlp_match_current_file = 0
 if executable("ag")
     set grepprg=ag\ --nogroup\ --nocolor
     " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
