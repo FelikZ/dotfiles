@@ -415,6 +415,9 @@ nnoremap L $
 vnoremap L $
 " inoremap jk <esc>
 
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %
+
 " Inspired by https://github.com/tpope/vim-unimpaired "
 " Sets paste on and set nopaste when leaving insert mode "
 " using an autocommand "
