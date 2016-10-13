@@ -50,6 +50,7 @@ alias docker-rm-volumes='docker volume rm $(docker volume ls -qf "dangling=true"
 alias ls="ls --color=always"
 alias screen='_ssh_auth_save ; export HOSTNAME=$(hostname) ; screen'
 alias tmux='_ssh_auth_save ; export HOSTNAME=$(hostname) ; tmux'
+alias lock='sleep 2 && xtrlock'
 
 if [ ! -f /etc/bash_completion.d/git-completion.bash ]; then
     sudo curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o /etc/bash_completion.d/git-completion.bash
