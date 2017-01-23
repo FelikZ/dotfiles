@@ -45,6 +45,8 @@ _ssh_fix_env() {
 # aliases
 alias git-clean='git pull -p && git branch --merged | grep -Ev "\*.*?|master" | xargs -n 1 git branch -d'
 alias git-remote-authors='git for-each-ref --format="%(committerdate) %09 %(authorname) %09 %(refname)" | sort -k5n -k2M -k3n -k4n'
+# ncdu
+# lsof | grep "/var" | grep deleted
 alias docker-rm-images='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
 alias docker-rm-containers='docker rm $(docker ps -qa --no-trunc --filter "status=exited")'
 alias docker-rm-volumes='docker volume rm $(docker volume ls -qf "dangling=true")'
@@ -52,6 +54,8 @@ alias ls="ls --color=always"
 alias screen='_ssh_auth_save ; export HOSTNAME=$(hostname) ; screen'
 alias tmux='_ssh_auth_save ; export HOSTNAME=$(hostname) ; tmux'
 alias lock='sleep 2 && xtrlock'
+
+alias bench-disk='fio --randrepeat=1 --ioengine=libaio --direct=1 --gtod_reduce=1 --name=test --filename=test --bs=4k --iodepth=64 --size=4G --readwrite=randrw --rwmixread=75'
 
 if [ ! -f /etc/bash_completion.d/git-completion.bash ]; then
     sudo curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o /etc/bash_completion.d/git-completion.bash
