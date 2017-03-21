@@ -1,0 +1,131 @@
+" vim:set et sts=0 sw=4 ts=4 tw=80 foldmethod=marker:
+let mapleader="\"
+set scrolloff=5
+
+set surround
+set incsearch
+
+set title
+" Turn on numbering and relativenumber
+set number " Can be toggled with 'con'
+" Automatically scroll when I reach within 3 lines towards end of screen
+set sidescrolloff=3
+set scrolloff=3
+" Sync with OS clipboard
+set clipboard=unnamed
+set history=50
+" Undo history
+set undolevels=1000
+" Don't show bells
+set novisualbell
+" Easier Regex
+set magic
+" Don't delay when you hit esc
+set timeoutlen=1000 ttimeoutlen=5
+" Show command and mode at the bottom
+set showcmd
+set showmode
+" Set splits to the right
+set splitright
+set splitbelow
+" '%' matching
+set matchpairs
+" Ignore case sensitivity
+set ignorecase " Can be toggled with unimpaired's 'coi'
+set smartcase
+" Highlight search incrementally
+set hlsearch " Can be toggled with unimpaired's 'coh'
+set incsearch
+
+" general
+nnoremap H ^
+vnoremap H ^
+nnoremap L $
+vnoremap L $
+nnoremap <tab> >>
+vnoremap <tab> >gv
+nnoremap <s-tab> <<
+vnoremap <s-tab> <gv
+imap <S-Tab> <Esc><<Hi
+nnoremap <leader><cr> :noh<cr>
+
+nnoremap <silent> yo  :set paste<cr>o
+nnoremap <silent> yO  :set paste<cr>O
+" Copy current file path to buffer
+nnoremap <silent> <leader>pc :let @0=expand('%')<cr>
+nnoremap <silent> <leader>pp :let @0=expand('%')<cr>"0P
+nnoremap <silent> <leader>pC :let @0=expand('%:p')<cr>
+nnoremap <silent> <leader>pP :let @0=expand('%:p')<cr>"0P
+
+" Copy current file name (tail of path) to buffer
+nnoremap <silent> <leader>pt :let @0=expand('%:t')<cr>
+nnoremap <silent> <leader>pT :let @0=expand('%:t')<cr>"0P
+
+" Move throught wrap lines
+nnoremap <up> g<up>
+nnoremap <down> g<down>
+vnoremap <up> g<up>
+vnoremap <down> g<down>
+
+" unimpaired mappings
+nnoremap [o O<esc>j
+nnoremap ]o o<esc>k
+nnoremap [<space> O<esc>0C<esc>j
+nnoremap ]<space> o<esc>0C<esc>k
+nnoremap <space>[ i<space><esc>l
+nnoremap <space>] a<space><esc>h
+nnoremap [q :action PreviousOccurence<cr>
+nnoremap ]q :action NextOccurence<cr>
+nnoremap [m :action MethodUp<cr>
+nnoremap ]m :action MethodDown<cr>
+nnoremap [c :action VcsShowPrevChangeMarker<cr>
+nnoremap ]c :action VcsShowNextChangeMarker<cr>
+nnoremap [l :action GotoPreviousError<CR>
+nnoremap ]l :action GotoNextError<CR>
+" nnoremap ]e :action MoveStatementDown<CR>
+" nnoremap [e :action MoveStatementUp<CR>
+nnoremap [e :action MoveLineUp<cr>
+nnoremap ]e :action MoveLineDown<cr>
+vnoremap <leader>e :action MoveStatementUp<cr>
+vnoremap <leader>e :action MoveStatementDown<cr>
+
+" code navigation
+nnoremap <C-]> :action GotoImplementation<cr>
+nnoremap <C-t> :action GotoSuperMethod<cr>
+nnoremap <space>u :action FindUsages<cr>
+nnoremap <space>t :action GotoTest<cr>
+nnoremap <space>k :action HighlightUsagesInFile<cr>
+nnoremap <space>h :action RunClass<cr>
+nnoremap <space>m :action Run<cr>
+nnoremap <space>l :action DebugClass<cr>
+nnoremap <space>d :action Debug<cr>
+nnoremap <space>c :action CheckStyleCurrentFileAction<cr>
+nnoremap <space>p :action GotoFile<cr>
+nnoremap <space>x :action GotoSymbol<cr>
+nnoremap K :action GotoDeclaration<cr>
+nnoremap gK :action GotoTypeDeclaration<cr>
+
+map <leader>a :action $SelectAll<CR>
+map <leader>b :action GotoDeclaration<CR>
+map <leader>c :action $Copy<CR>
+map <leader>d :action EditorDuplicate<CR>
+map <leader>e :action RecentFiles<CR>
+map <leader>f :action Find<CR>
+map <leader>g :action GotoLine<CR>
+map <leader>h :action TypeHierarchy<CR>
+map <leader>i :action ImplementMethods<CR>
+map <leader>m :action EditorScrollToCenter<CR>
+map <leader>n :action FileChooser.NewFolder<CR>
+map <leader>o :action MethodHierarchy.OverrideMethodAction<CR>
+map <leader>p :action ParameterInfo<CR>
+map <leader>q :action GuiDesigner.QuickJavadoc<CR>
+map <leader>r :action Replace<CR>
+map <leader>s :action SaveAll<CR>
+map <leader>t :action Vcs.UpdateProject<CR>
+map <leader>u :action GotoSuperMethod<CR>
+map <leader>v :action VimVisualToggleBlockMode<CR>
+map <leader>w :action EditorSelectWord<CR>
+map <leader>x :action $Cut<CR>
+map <leader>y :action EditorDeleteLine<CR>
+"map <leader>[ :action EditorCodeBlockStart<CR>
+"map <leader>] :action EditorCodeBlockEnd<CR>

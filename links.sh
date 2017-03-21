@@ -13,6 +13,7 @@ fi
 ln -sf "$DIR/.bash_profile_default" "$HOME/.bash_profile_default"
 ln -sf "$DIR/.dircolors" "$HOME/.dircolors"
 ln -sf "$DIR/.tmux.conf" "$HOME/.tmux.conf"
+ln -sf "$DIR/.ideavimrc" "$HOME/.ideavimrc"
 
 cat $HOME/.bashrc | grep -q "source\ ${HOME}/.bash_profile_default"
 NOT_FOUND=$?
