@@ -1,5 +1,7 @@
 #!/bin/bash
 
+shopt -s extglob
+
 if [ "$BASH_SOURCE" != "" ]
 then
     DIR="$( cd "$( dirname "$BASH_SOURCE" )" && pwd )"
