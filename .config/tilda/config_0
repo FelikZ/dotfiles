@@ -1,7 +1,7 @@
 tilda_config_version = "1.1.11"
 # command = ""
 font = "Droid Sans Mono 11"
-key = "<Primary>grave"
+key = "<Primary><Alt>grave"
 addtab_key = "<Primary><Shift>t"
 fullscreen_key = "F11"
 toggle_transparency_key = "F12"

@@ -472,7 +472,7 @@ vnoremap <down> g<down>
 " nnoremap <Space>/ :Unite grep:.<cr>
 
 " CtrlP
-let g:ctrlp_map = '<Space>p'
+let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlPCurWD'
 let g:ctrlp_switch_buffer = 'et'
 let g:ctrlp_open_multiple_files = 'ri'
