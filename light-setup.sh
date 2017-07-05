@@ -23,27 +23,25 @@ mkdir -p "$DIR/tmp/vimswap"
 mkdir -p "$DIR/bin"
 if [ "$OSTYPE" = "linux-gnu" ]; then
     # ...
-    echo "$OSTYPE"
-
+    true
 elif [[ "$OSTYPE" =~ "darwin" ]]; then
     # Mac OSX
-    echo "$OSTYPE"
     ln -sf "$DIR/scripts/osx/google-chrome.sh" "$DIR/bin/google-chrome-work.sh"
 elif [ "$OSTYPE" = "cygwin" ]; then
     # POSIX compatibility layer and Linux environment emulation for Windows
-    echo "$OSTYPE"
+    true
 elif [ "$OSTYPE" = "msys" ]; then
     # Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
-    echo "$OSTYPE"
+    true
 elif [ "$OSTYPE" = "win32" ]; then
-    echo "$OSTYPE"
+    true
     # I'm not sure this can happen.
 elif [[ "$OSTYPE" =~ "freebsd" ]]; then
     # ...
-    echo "$OSTYPE"
+    true
 else
     # Unknown.
-    echo "$OSTYPE"
+    true
 fi
 
 # files
