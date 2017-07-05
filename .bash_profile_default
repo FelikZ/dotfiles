@@ -73,14 +73,23 @@ alias bench-disk='fio --randrepeat=1 --ioengine=libaio --direct=1 --gtod_reduce=
 ## extended trace route monitoring for packet loss detection
 # mtr
 
+if hash brew 2>/dev/null && [ ! -f "$(brew --prefix)/etc/bash_completion" ]; then
+    brew install bash-completion
+    brew reinstall git
+fi
+
+if hash brew 2>/dev/null && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
+    source "$(brew --prefix)/etc/bash_completion"
+fi
+
 if [ ! -f /etc/bash_completion.d/git-completion.bash ]; then
     sudo curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o /etc/bash_completion.d/git-completion.bash
 fi
 
-if [ ! -d ~/.tmux/plugins/tpm ]; then
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-fi
-
 if [ -f /etc/bash_completion ]; then
     source /etc/bash_completion
+fi
+
+if [ ! -d ~/.tmux/plugins/tpm ]; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
