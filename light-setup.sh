@@ -22,11 +22,11 @@ cd "$DIR"
 mkdir -p "$DIR/tmp/vimswap"
 mkdir -p "$DIR/bin"
 if [ "$OSTYPE" = "linux-gnu" ]; then
-    # ...
-    true
+    # Linux
+    ln -sf "$DIR/scripts/linux/google-chrome.sh" "$DIR/bin/google-chrome-work"
 elif [[ "$OSTYPE" =~ "darwin" ]]; then
     # Mac OSX
-    ln -sf "$DIR/scripts/osx/google-chrome.sh" "$DIR/bin/google-chrome-work.sh"
+    ln -sf "$DIR/scripts/osx/google-chrome.sh" "$DIR/bin/google-chrome-work"
 elif [ "$OSTYPE" = "cygwin" ]; then
     # POSIX compatibility layer and Linux environment emulation for Windows
     true
