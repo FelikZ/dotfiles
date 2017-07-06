@@ -38,7 +38,7 @@ EOF
 fi
 
 # Profile directory
-USER_DIR="/Users/${USER}/Library/Application Support/Google/Chrome/${PROFILE_NAME}"
+USER_DIR="/Users/${USER}/Library/Application Support/Google/Chrome-${PROFILE_NAME}"
 echo "Using ${USER_DIR}"
 
 # Execute Google Chrome (in the background)
