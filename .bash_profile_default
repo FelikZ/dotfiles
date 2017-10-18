@@ -45,7 +45,7 @@ if [ ! -z "${TMUX_PANE}" ]; then
 fi
 
 _ssh_auth_save() {
-    ln -sf "$SSH_AUTH_SOCK" "$HOME/.ssh/ssh-auth-sock.$HOSTNAME"
+    ln -sf "$SSH_AUTH_SOCK" "$HOME/ssh-auth-sock.$HOSTNAME"
 }
 _ssh_fix_env() {
     eval $(tmux show-environment -t 0 | grep '^SSH_AUTH_SOCK')
@@ -57,8 +57,8 @@ alias git-remote-authors='git for-each-ref --format="%(committerdate) %09 %(auth
 alias docker-rm-images='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
 alias docker-rm-containers='docker rm $(docker ps -qa --no-trunc --filter "status=exited")'
 alias docker-rm-volumes='docker volume rm $(docker volume ls -qf "dangling=true")'
-alias screen='_ssh_auth_save ; export HOSTNAME=$(hostname) ; screen'
-alias tmux='_ssh_auth_save ; export HOSTNAME=$(hostname) ; tmux'
+alias screen='export HOSTNAME=$(hostname) ; _ssh_auth_save ; screen'
+alias tmux='export HOSTNAME=$(hostname) ;_ssh_auth_save ; tmux'
 alias lock='sleep 2 && xtrlock'
 alias json='python -mjson.tool'
 

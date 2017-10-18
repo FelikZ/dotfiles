@@ -29,3 +29,10 @@ NOT_FOUND=$?
 if [ $NOT_FOUND = 1 ]; then
     echo "source ${DIR}/light-setup.sh" >> "$HOME/.bashrc"
 fi
+
+cat $HOME/.bashrc | grep -q "source\ ${DIR}/auto-ssh-agent.sh"
+NOT_FOUND=$?
+
+if [ $NOT_FOUND = 1 ]; then
+    echo "source ${DIR}/auto-ssh-agent.sh" >> "$HOME/.bashrc"
+fi
