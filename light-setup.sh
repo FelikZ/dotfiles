@@ -53,6 +53,10 @@ exec $VIMLOC -u "$DIR/../.vimrc" "$@"' > "$DIR/bin/vimf"
 # aliases
 chmod 0777 "$DIR/bin/vimf"
 alias vim="vimf"
-export EDITOR="vimf"
+
+# skip EDITOR for vscode
+if [ "$EDITOR" != "code" ]; then
+    export EDITOR="vimf"
+fi
 
 cd "$CWD"
