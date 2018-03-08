@@ -55,7 +55,8 @@ chmod 0777 "$DIR/bin/vimf"
 alias vim="vimf"
 
 # skip EDITOR for vscode
-if [ "$EDITOR" != "code" ]; then
+if [ "${EDITOR:0:4}" != "code" ]; then
+    echo "$EDITOR"
     export EDITOR="vimf"
 fi
 
