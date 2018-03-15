@@ -56,7 +56,6 @@ alias vim="vimf"
 
 # skip EDITOR for vscode
 if [ "${EDITOR:0:4}" != "code" ]; then
-    echo "$EDITOR"
     export EDITOR="vimf"
 fi
 
