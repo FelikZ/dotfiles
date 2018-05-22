@@ -74,6 +74,25 @@ date-cmd() {
 
 alias bench-disk='fio --randrepeat=1 --ioengine=libaio --direct=1 --gtod_reduce=1 --name=test --filename=test --bs=4k --iodepth=64 --size=4G --readwrite=randrw --rwmixread=75'
 
+# https://github.com/ahmetb/kubectx
+if ! hash kubens 2>/dev/null; then
+    echo 'Installing kubens'
+    if hash brew 2>/dev/null; then
+        brew install kubectx
+    else
+        set -e
+        sudo bash --noprofile --norc -ci 'cd /opt ; git clone https://github.com/ahmetb/kubectx'
+        sudo bash --noprofile --norc -ci 'cd /opt/kubectx; git checkout f986c148b25b04ae282378f1c4ef3df3fe738628'
+        sudo ln -sf /opt/kubectx/kubectx /usr/local/bin/kubectx
+        sudo ln -sf /opt/kubectx/kubens /usr/local/bin/kubens
+        set +e
+    fi
+fi
+if [ -d "/opt/kubectx/completion" ]; then
+    source "/opt/kubectx/completion/kubectx.bash"
+    source "/opt/kubectx/completion/kubens.bash"
+fi
+
 ## how to find what eats space
 # ncdu
 
