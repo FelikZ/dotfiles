@@ -102,6 +102,12 @@ fi
 ## extended trace route monitoring for packet loss detection
 # mtr
 
+## Check diskspace and if less then 50G
+# if [ $(df -BG / | tail -1 | awk '{print $4}' | sed -En 's/^([0-9]+).*/\1/p') -lt 50 ]; then echo yes; fi
+
+## Singleton rsync with speed limit to /remote/dir/projects
+# flock -x -n -w 3500 /tmp/projects_sync timeout -k 9 1h rsync -rav --exclude='directory' --bwlimit=25000 --delete /home/test/projects /remote/dir
+
 if hash brew 2>/dev/null && [ ! -f "$(brew --prefix)/etc/bash_completion" ]; then
     brew install bash-completion
     brew reinstall git
