@@ -7,8 +7,9 @@ brew cask install osxfuse
 brew install encfs
 
 # install software
-# http://www.usboverdrive.com/USBOverdrive/Download.html - mouse accel fix
 # http://triq.net/articles/mouse-acceleration-download
+# https://pilotmoon.com/scrollreverser/
+# https://pqrs.org/osx/karabiner/complex_modifications/#mouse_button
 # defaults write .GlobalPreferences com.apple.mouse.scaling -1
 # defaults write -g KeyRepeat -int 1
 # defaults write -g InitialKeyRepeat -int 1
