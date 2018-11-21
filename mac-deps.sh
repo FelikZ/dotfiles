@@ -2,7 +2,8 @@
 brew tap discoteq/discoteq
 brew install flock \
     git \
-    bash-completion
+    bash-completion \
+    watch
 brew cask install osxfuse
 brew install encfs
 
