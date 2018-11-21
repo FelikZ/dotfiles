@@ -6,6 +6,7 @@ brew install flock \
     watch
 brew cask install osxfuse
 brew install encfs
+brew install gettext ; brew link --force gettext
 
 # install software
 # http://triq.net/articles/mouse-acceleration-download
