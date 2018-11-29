@@ -8,6 +8,13 @@ brew cask install osxfuse
 brew install encfs
 brew install gettext ; brew link --force gettext
 
+echo "Please install Docker and then:"
+read -n 1 -s -r -p "Press any key to continue" ; echo
+
+find /Applications/Docker.app \
+    -type f -name "*.bash-completion" \
+    -exec ln -sf "{}" "$(brew --prefix)/etc/bash_completion.d/" \;
+
 # install software
 # http://triq.net/articles/mouse-acceleration-download
 # https://pilotmoon.com/scrollreverser/
