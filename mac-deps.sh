@@ -15,6 +15,11 @@ find /Applications/Docker.app \
     -type f -name "*.bash-completion" \
     -exec ln -sf "{}" "$(brew --prefix)/etc/bash_completion.d/" \;
 
+# tricks
+
+## Disable app sleep for specific app
+# defaults write com.google.Chrome NSAppSleepDisabled -bool YES
+
 # install software
 # http://triq.net/articles/mouse-acceleration-download
 # https://pilotmoon.com/scrollreverser/
