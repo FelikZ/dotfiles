@@ -36,6 +36,8 @@ export DBUS_SESSION_BUS_ADDRESS="/dev/null"
 
 if [ hash dircolors 2>/dev/null ]; then
     eval `dircolors "$DIR/.dircolors"`
+else
+    export CLICOLOR=1
 fi
 
 if [ ! -z "${TMUX_PANE}" ]; then

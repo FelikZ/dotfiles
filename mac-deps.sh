@@ -7,6 +7,8 @@ brew install flock \
 brew cask install osxfuse
 brew install encfs
 brew install gettext ; brew link --force gettext
+brew install flock
+brew install terraform
 
 echo "Please install Docker and then:"
 read -n 1 -s -r -p "Press any key to continue" ; echo
