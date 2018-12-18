@@ -65,8 +65,7 @@ alias docker-rm-images='docker rmi $(docker images --filter "dangling=true" -q -
 alias docker-rm-containers='docker rm $(docker ps -qa --no-trunc --filter "status=exited")'
 alias docker-rm-volumes='docker volume rm $(docker volume ls -qf "dangling=true")'
 alias docker-clean='docker-rm-containers; docker-rm-images; docker-rm-volumes'
-alias docker-ips="docker ps -q | xargs -n 1 docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} {{ .Name }}' | sed 's/ \// /'
-"
+alias docker-ips="docker ps -q | xargs -n 1 docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} {{ .Name }}' | sed 's/ \// /'"
 # docker-heal
 # /var/lib/docker/devicemapper/ext
 # find /proc/*/mounts | xargs grep -E "01fac2f"
