@@ -1,6 +1,7 @@
 #!/bin/bash
 brew tap discoteq/discoteq
 brew install flock \
+    bash \
     git \
     bash-completion \
     watch
