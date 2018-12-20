@@ -114,6 +114,16 @@ fi
 ## Singleton rsync with speed limit to /remote/dir/projects
 # flock -x -n -w 3500 /tmp/projects_sync timeout -k 9 1h rsync -rav --exclude='directory' --bwlimit=25000 --delete /home/test/projects /remote/dir
 
+## Multiline sed
+# sed -i.bak -E \
+#     -e '/<logger name="com.googlecode.flyway">/ {' \
+#     -e 'n; s/<level value=".*" \/>/<level value="INFO" \/>/' \
+#     -e '}' \
+#     file.xml
+
+## Check OS Type
+# if [ "${OSTYPE#*darwin}" != "$OSTYPE" ]; then echo 1; fi
+
 if hash brew 2>/dev/null && [ ! -f "$(brew --prefix)/etc/bash_completion" ]; then
     brew install bash-completion
     brew reinstall git
