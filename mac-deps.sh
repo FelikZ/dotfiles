@@ -2,6 +2,7 @@
 brew tap discoteq/discoteq
 brew install flock \
     bash \
+    tree \
     git \
     bash-completion \
     watch
