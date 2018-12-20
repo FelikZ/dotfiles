@@ -124,6 +124,15 @@ fi
 ## Check OS Type
 # if [ "${OSTYPE#*darwin}" != "$OSTYPE" ]; then echo 1; fi
 
+## Key value dict in bash 4.x
+# declare -A config
+# config["key"]="value"
+
+# for key in ${!config[@]}; do
+#     val=${config["$key"]}
+#     echo "$key=$value"
+# done
+
 if hash brew 2>/dev/null && [ ! -f "$(brew --prefix)/etc/bash_completion" ]; then
     brew install bash-completion
     brew reinstall git
