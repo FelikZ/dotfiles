@@ -70,6 +70,8 @@ alias docker-ips="docker ps -q | xargs -n 1 docker inspect --format '{{range .Ne
 # /var/lib/docker/devicemapper/ext
 # find /proc/*/mounts | xargs grep -E "01fac2f"
 # kill -9 ids
+# lsof -i tcp:80
+alias lsof-tcp='lsof -iTCP -sTCP:LISTEN -P -n'
 alias screen='export HOSTNAME=$(hostname) ; _ssh_auth_save ; screen'
 alias tmux='export HOSTNAME=$(hostname) ;_ssh_auth_save ; tmux'
 alias lock='sleep 2 && xtrlock'
