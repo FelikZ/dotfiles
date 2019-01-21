@@ -14,5 +14,6 @@ Vim standalone alpha, do not fork me.
     
     ```
     . ~/dotfiles/setup.sh
+3. [Install font](https://github.com/hbin/top-programming-fonts/raw/master/Menlo-Regular.ttf)
 
 - - -
