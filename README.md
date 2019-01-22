@@ -1,10 +1,7 @@
-DOTFILES
-========
+# Dotfiles
 
-Vim standalone alpha, do not fork me.
+Unix/linux friendly scripts and shell goodness.
 
-
-##TO INSTALL:
 1. Clone the repo
     
     ```
@@ -14,6 +11,9 @@ Vim standalone alpha, do not fork me.
     
     ```
     . ~/dotfiles/setup.sh
-3. [Install font](https://github.com/hbin/top-programming-fonts/raw/master/Menlo-Regular.ttf)
+    ```
+3. Install fonts:
 
-- - -
+    ```
+    ls -l ~/dotfiles/fonts
+    ```
