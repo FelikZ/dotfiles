@@ -4,8 +4,22 @@
     name = Alexey Shevchenko
     email = thefelikz@gmail.com
 [alias]
+    alias = "config --get-regexp ^alias\\."
+    ## https://stackoverflow.com/q/8475448/734493
+    # git find-merge <SHA-1>
+    # git find-merge <SHA-1> master
     find-merge = "!sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 | uniq -f1 -d | sort -n | tail -1 | cut -f2'"
     show-merge = "!sh -c 'merge=$(git find-merge $0 $1) && [ -n \"$merge\" ] && git show $merge'"
+    # git cleanup
+    cleanup = "!sh -c 'git pull -p && git branch --merged | grep -Ev \"\\*.*?|master\" | xargs -n 1 git branch -d'"
+    # git cleanup-remote
+    cleanup-remote = "!sh -c 'git branch -r --merged | grep -v master | sed \"s/origin\\///\" | xargs -n 1 git push --delete origin'"
+    # git remote-authors
+    remote-authors = "!sh -c 'git for-each-ref --format=\"%(committerdate) %09 %(authorname) %09 %(refname)\" | sort -k5n -k2M -k3n -k4n'"
+    # git remote-branches
+    remote-branches = "!sh -c 'for branch in `git branch -r | grep -v HEAD`;do echo `git show --format=\"%ci %cr\" $branch | head -n 1` \\\\t$branch; done | sort -r'"
+    # git clone-branch develop git@github.com:whatever/repo.git 1
+    clone-branch = "!sh -c 'git clone -b $0 --single-branch $1 --depth ${2:-1}'"
 [merge]
     tool = vscode
 [mergetool "vscode"]

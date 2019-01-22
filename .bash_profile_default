@@ -56,11 +56,6 @@ _ssh_fix_env() {
 }
 
 # aliases
-alias git-clean='git pull -p && git branch --merged | grep -Ev "\*.*?|master" | xargs -n 1 git branch -d'
-alias git-clean-remote='git branch -r --merged | grep -v master | sed "s/origin\///" | xargs -n 1 git push --delete origin'
-alias git-remote-authors='git for-each-ref --format="%(committerdate) %09 %(authorname) %09 %(refname)" | sort -k5n -k2M -k3n -k4n'
-alias git-clone-branch='echo "git clone -b <branch> --single-branch <url> --depth <number of commits>"'
-alias git-remote-branches='for branch in `git branch -r | grep -v HEAD`;do echo -e `git show --format="%ci %cr" $branch | head -n 1` \\t$branch; done | sort -r'
 alias pip-requirements="cat requirements.txt | sed -n -E 's/^([^=]+).*/\1/p' | tr '[:upper:]' '[:lower:]' | xargs -L 1 -I {} bash -c 'pip list | grep {}'"
 alias docker-rm-images='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
 alias docker-rm-containers='docker rm $(docker ps -qa --no-trunc --filter "status=exited")'
