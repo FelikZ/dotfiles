@@ -13,7 +13,7 @@ Unix/linux friendly scripts and shell goodness.
     . ~/dotfiles/setup.sh
     ```
 3. Install fonts:
-
+    
     ```
     ls -l ~/dotfiles/fonts
     ```
