@@ -14,6 +14,10 @@ fi
 
 # PATH
 export PATH="$PATH:./node_modules/.bin"
+if [ "${OSTYPE#*msys}" != "$OSTYPE" ]; then
+    export PATH="$PATH:$(cd ~ ; pwd)/scoop/shims"
+fi
+
 
 # lang
 export LANG=en_US.UTF-8
@@ -80,18 +84,20 @@ alias bench-disk='fio --randrepeat=1 --ioengine=libaio --direct=1 --gtod_reduce=
 
 # https://github.com/ahmetb/kubectx
 if ! hash kubens 2>/dev/null; then
-    echo 'Installing kubens'
     if hash brew 2>/dev/null; then
+        echo 'Installing kubens...'
         brew install kubectx
-    else
-        set -e
+    elif [ "${OSTYPE#*linux}" != "$OSTYPE" ]; then
+        echo 'Installing kubens...'
+        set -x
         sudo bash --noprofile --norc -ci 'cd /opt ; git clone https://github.com/ahmetb/kubectx'
         sudo bash --noprofile --norc -ci 'cd /opt/kubectx; git checkout f986c148b25b04ae282378f1c4ef3df3fe738628'
         sudo ln -sf /opt/kubectx/kubectx /usr/local/bin/kubectx
         sudo ln -sf /opt/kubectx/kubens /usr/local/bin/kubens
-        set +e
+        set +x
     fi
 fi
+
 if [ -d "/opt/kubectx/completion" ]; then
     source "/opt/kubectx/completion/kubectx.bash"
     source "/opt/kubectx/completion/kubens.bash"
@@ -131,17 +137,45 @@ fi
 #     echo "$key=$value"
 # done
 
-if hash brew 2>/dev/null && [ ! -f "$(brew --prefix)/etc/bash_completion" ]; then
-    brew install bash-completion
-    brew reinstall git
+if [ "${OSTYPE#*msys}" != "$OSTYPE" ]; then
+    if hash scoop 2>/dev/null; then
+        echo 'Installing scoop...'
+        powershell -Command 'Set-ExecutionPolicy RemoteSigned -scope CurrentUser; iex (new-object net.webclient).downloadstring("https://get.scoop.sh")'
+        scoop update
+    fi
+
+    if hash shfmt 2>/dev/null; then
+        scoop install shfmt
+    fi
+
+    if hash shfmt 2>/dev/null; then
+        scoop install shellcheck
+    fi
 fi
 
-if hash brew 2>/dev/null && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
-    source "$(brew --prefix)/etc/bash_completion"
+if [ "${OSTYPE#*darwin}" != "$OSTYPE" ]; then
+    if [ ! -f "$(brew --prefix)/etc/bash_completion" ]; then
+        brew install bash-completion
+        brew reinstall git
+    fi
+
+    if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
+        source "$(brew --prefix)/etc/bash_completion"
+    fi
+
+    if hash shfmt 2>/dev/null; then
+        brew install shfmt
+    fi
+
+    if hash shfmt 2>/dev/null; then
+        brew install shellcheck
+    fi
 fi
 
-if [ ! -f /etc/bash_completion.d/git-completion.bash ] && [ ! -f $(brew --prefix)/etc/bash_completion ]; then
-    sudo curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o /etc/bash_completion.d/git-completion.bash
+if [ ! "${OSTYPE#*msys}" != "$OSTYPE" ]; then
+    if [ ! -f /etc/bash_completion.d/git-completion.bash ] && [ ! -f $(brew --prefix)/etc/bash_completion ]; then
+        sudo curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o /etc/bash_completion.d/git-completion.bash
+    fi
 fi
 
 if [ -f /etc/bash_completion ]; then
