@@ -161,9 +161,9 @@ if [ "${OSTYPE#*msys}" != "$OSTYPE" ]; then
         scoop install make
     fi
 
-    if hash rsync 2>/dev/null; then
-        scoop install ../scripts/win/rsync-via-git.json
-    fi
+    # if hash rsync 2>/dev/null; then
+    #     scoop install ../scripts/win/rsync-via-git.json
+    # fi
 
     if hash python 2>/dev/null; then
         scoop install python
