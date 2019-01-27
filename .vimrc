@@ -6,6 +6,7 @@ let $cwd=getcwd()
 " }}}
 
 " Vim Settings {{{
+set term=builtin_ansi
 set t_Co=256
 set t_ut=
 highlight Normal ctermbg=NONE
