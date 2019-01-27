@@ -157,6 +157,10 @@ if [ "${OSTYPE#*msys}" != "$OSTYPE" ]; then
         scoop install shellcheck
     fi
 
+    if hash make 2>/dev/null; then
+        scoop install make
+    fi
+
     if hash python 2>/dev/null; then
         scoop install python
         pip install --upgrade pip
