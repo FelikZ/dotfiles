@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # shellcheck disable=SC2002
 
 shopt -s extglob
@@ -153,8 +153,17 @@ if [ "${OSTYPE#*msys}" != "$OSTYPE" ]; then
         scoop install shfmt
     fi
 
-    if hash shfmt 2>/dev/null; then
+    if hash shellcheck 2>/dev/null; then
         scoop install shellcheck
+    fi
+
+    if hash python 2>/dev/null; then
+        scoop install python
+        pip install --upgrade pip
+    fi
+
+    if hash pre-commit 2>/dev/null; then
+        pip install pre-commit
     fi
 fi
 
@@ -173,8 +182,12 @@ if [ "${OSTYPE#*darwin}" != "$OSTYPE" ]; then
         brew install shfmt
     fi
 
-    if hash shfmt 2>/dev/null; then
+    if hash shellcheck 2>/dev/null; then
         brew install shellcheck
+    fi
+
+    if hash pre-commit 2>/dev/null; then
+        pip install pre-commit
     fi
 fi
 
