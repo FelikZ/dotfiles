@@ -143,34 +143,34 @@ fi
 # done
 
 if [ "${OSTYPE#*msys}" != "$OSTYPE" ]; then
-    if hash scoop 2>/dev/null; then
+    if ! hash scoop 2>/dev/null; then
         echo 'Installing scoop...'
         powershell -Command 'Set-ExecutionPolicy RemoteSigned -scope CurrentUser; iex (new-object net.webclient).downloadstring("https://get.scoop.sh")'
         scoop update
     fi
 
-    if hash shfmt 2>/dev/null; then
+    if ! hash shfmt 2>/dev/null; then
         scoop install shfmt
     fi
 
-    if hash shellcheck 2>/dev/null; then
+    if ! hash shellcheck 2>/dev/null; then
         scoop install shellcheck
     fi
 
-    if hash make 2>/dev/null; then
+    if ! hash make 2>/dev/null; then
         scoop install make
     fi
 
-    # if hash rsync 2>/dev/null; then
+    # if ! hash rsync 2>/dev/null; then
     #     scoop install ../scripts/win/rsync-via-git.json
     # fi
 
-    if hash python 2>/dev/null; then
+    if ! hash python 2>/dev/null; then
         scoop install python
         pip install --upgrade pip
     fi
 
-    if hash pre-commit 2>/dev/null; then
+    if ! hash pre-commit 2>/dev/null; then
         pip install pre-commit
     fi
 fi
@@ -186,15 +186,15 @@ if [ "${OSTYPE#*darwin}" != "$OSTYPE" ]; then
         source "$(brew --prefix)/etc/bash_completion"
     fi
 
-    if hash shfmt 2>/dev/null; then
+    if ! hash shfmt 2>/dev/null; then
         brew install shfmt
     fi
 
-    if hash shellcheck 2>/dev/null; then
+    if ! hash shellcheck 2>/dev/null; then
         brew install shellcheck
     fi
 
-    if hash pre-commit 2>/dev/null; then
+    if ! hash pre-commit 2>/dev/null; then
         pip install pre-commit
     fi
 fi
