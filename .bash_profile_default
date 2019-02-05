@@ -161,6 +161,10 @@ if [ "${OSTYPE#msys}" != "$OSTYPE" ]; then
         scoop install make
     fi
 
+    if hash telnet 2>/dev/null; then
+        scoop install telnet
+    fi
+
     # if ! hash rsync 2>/dev/null; then
     #     scoop install ../scripts/win/rsync-via-git.json
     # fi
