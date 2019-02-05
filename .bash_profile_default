@@ -13,7 +13,7 @@ fi
 
 # PATH
 export PATH="$PATH:./node_modules/.bin"
-if [ "${OSTYPE#*msys}" != "$OSTYPE" ]; then
+if [ "${OSTYPE#msys}" != "$OSTYPE" ]; then
     PATH="$PATH:$(
         # shellcheck disable=SC2164
         cd ~
@@ -90,7 +90,7 @@ if ! hash kubens 2>/dev/null; then
     if hash brew 2>/dev/null; then
         echo 'Installing kubens...'
         brew install kubectx
-    elif [ "${OSTYPE#*linux}" != "$OSTYPE" ]; then
+    elif [ "${OSTYPE#linux}" != "$OSTYPE" ]; then
         echo 'Installing kubens...'
         set -x
         sudo bash --noprofile --norc -ci 'cd /opt ; git clone https://github.com/ahmetb/kubectx'
@@ -131,7 +131,7 @@ fi
 #     file.xml
 
 ## Check OS Type
-# if [ "${OSTYPE#*darwin}" != "$OSTYPE" ]; then echo 1; fi
+# if [ "${OSTYPE#darwin}" != "$OSTYPE" ]; then echo 1; fi
 
 ## Key value dict in bash 4.x
 # declare -A config
@@ -142,7 +142,7 @@ fi
 #     echo "$key=$value"
 # done
 
-if [ "${OSTYPE#*msys}" != "$OSTYPE" ]; then
+if [ "${OSTYPE#msys}" != "$OSTYPE" ]; then
     if ! hash scoop 2>/dev/null; then
         echo 'Installing scoop...'
         powershell -Command 'Set-ExecutionPolicy RemoteSigned -scope CurrentUser; iex (new-object net.webclient).downloadstring("https://get.scoop.sh")'
@@ -175,7 +175,7 @@ if [ "${OSTYPE#*msys}" != "$OSTYPE" ]; then
     fi
 fi
 
-if [ "${OSTYPE#*darwin}" != "$OSTYPE" ]; then
+if [ "${OSTYPE#darwin}" != "$OSTYPE" ]; then
     if [ ! -f "$(brew --prefix)/etc/bash_completion" ]; then
         brew install bash-completion
         brew reinstall git
@@ -199,7 +199,7 @@ if [ "${OSTYPE#*darwin}" != "$OSTYPE" ]; then
     fi
 fi
 
-if [ ! "${OSTYPE#*msys}" != "$OSTYPE" ]; then
+if [ ! "${OSTYPE#msys}" != "$OSTYPE" ]; then
     if [ ! -f /etc/bash_completion.d/git-completion.bash ] && [ ! -f "$(brew --prefix)/etc/bash_completion" ]; then
         sudo curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o /etc/bash_completion.d/git-completion.bash
     fi
