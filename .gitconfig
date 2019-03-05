@@ -3,6 +3,8 @@
 [user]
     name = Alexey Shevchenko
     email = thefelikz@gmail.com
+[includeIf "gitdir:~/projects/"]
+    path = ~/projects/.gitconfig
 [alias]
     alias = "config --get-regexp ^alias\\."
     ## https://stackoverflow.com/q/8475448/734493
