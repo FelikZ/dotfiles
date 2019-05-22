@@ -79,6 +79,8 @@ alias screen='export HOSTNAME=$(hostname) ; _ssh_auth_save ; screen'
 alias tmux='export HOSTNAME=$(hostname) ;_ssh_auth_save ; tmux'
 alias lock='sleep 2 && xtrlock'
 alias json='python -mjson.tool'
+alias gif-lossy='gifsicle -j --colors=16 -O3 --lossy=50'
+alias gif-lossy-scaled='gifsicle -j --colors=16 -O3 --lossy=50 --scale=0.75'
 date-cmd() {
     "$@" | while read -r pong; do echo "$(date '+%Y-%m-%d %H:%M:%S (%:z)'): $pong"; done
 }

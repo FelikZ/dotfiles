@@ -6,6 +6,7 @@ brew install flock \
     git \
     bash-completion \
     jq \
+    gifsicle \
     watch
 brew cask install osxfuse
 brew install encfs
