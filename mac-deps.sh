@@ -20,11 +20,15 @@ brew install terraform
 # less /Library/Logs/com.cloudflare.cloudflared.err.log
 mkdir -p /usr/local/etc/cloudflared
 cat <<EOF >/usr/local/etc/cloudflared/config.yml
+metrics: localhost:11111
 no-autoupdate: true
 proxy-dns: true
+logfile: cloudflared.log
 proxy-dns-upstream:
- - https://1.1.1.1/dns-query
- - https://1.0.0.1/dns-query
+  - https://1.1.1.1/dns-query
+  - https://1.0.0.1/dns-query
+  - https://2606:4700:4700::1111/dns-query
+  - https://2606:4700:4700::1001/dns-query
 EOF
 sudo cloudflared --config /usr/local/etc/cloudflared/config.yml service install
 sudo launchctl start com.cloudflare.cloudflared
