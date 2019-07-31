@@ -15,6 +15,21 @@ brew link --force gettext
 brew install flock
 brew install terraform
 
+# DNS
+# https://developers.cloudflare.com/argo-tunnel/downloads/
+# less /Library/Logs/com.cloudflare.cloudflared.err.log
+mkdir -p /usr/local/etc/cloudflared
+cat <<EOF >/usr/local/etc/cloudflared/config.yml
+no-autoupdate: true
+proxy-dns: true
+proxy-dns-upstream:
+ - https://1.1.1.1/dns-query
+ - https://1.0.0.1/dns-query
+EOF
+sudo cloudflared --config /usr/local/etc/cloudflared/config.yml service install
+sudo launchctl start com.cloudflare.cloudflared
+dig +short @127.0.0.1 cloudflare.com AAAA
+
 echo "Please install Docker and then:"
 read -n 1 -s -r -p "Press any key to continue"
 echo
