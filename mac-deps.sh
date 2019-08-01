@@ -23,7 +23,7 @@ cat <<EOF >/usr/local/etc/cloudflared/config.yml
 metrics: localhost:11111
 no-autoupdate: true
 proxy-dns: true
-logfile: cloudflared.log
+logfile: /usr/local/etc/cloudflared/cloudflared.log
 proxy-dns-upstream:
   - https://1.1.1.1/dns-query
   - https://1.0.0.1/dns-query
