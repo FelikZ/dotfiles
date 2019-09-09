@@ -1,9 +1,16 @@
-#!/bin/bash -x
-sudo mkdir -p /Volumes/Work
-sudo chown felikz /Volumes/Work
-encfs /Users/felikz/Dropbox/Work /Volumes/Work
-chmod -R 0700 /Volumes/Work/Secure/.ssh/
-find /Volumes/Work/Secure/.ssh -type d | xargs chmod +x
+#!/usr/bin/env bash
+
+ENCFS_MOUNT_SOURCE=${ENCFS_MOUNT_SOURCE:-"/Users/${USER}/Google Drive/Secure"}
+ENCFS_MOUNT_DEST="/Volumes/Work"
+
+ENCFS_SSH_DIR="${ENCFS_MOUNT_DEST}/.ssh"
+
+sudo mkdir -p "${ENCFS_MOUNT_DEST}"
+sudo chown "${USER}" "${ENCFS_MOUNT_DEST}"
+encfs "${ENCFS_MOUNT_SOURCE}" "${ENCFS_MOUNT_DEST}"
+
+chmod -R 0700 "${ENCFS_SSH_DIR}"
+find "${ENCFS_SSH_DIR}" -type d -print0 | xargs -0 chmod +x
 unlink ~/.ssh 2>/dev/null || true
 rmdir ~/.ssh 2>/dev/null || true
-ln -sf /Volumes/Work/Secure/.ssh ~
+ln -sf "${ENCFS_SSH_DIR}" ~
