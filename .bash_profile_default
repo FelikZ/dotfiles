@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2002
-
 shopt -s extglob
 
 if [ "${BASH_SOURCE[0]}" != "" ]; then
@@ -163,8 +162,13 @@ if [ "${OSTYPE#msys}" != "$OSTYPE" ]; then
         scoop install make
     fi
 
-    if hash telnet 2>/dev/null; then
+    if ! hash telnet 2>/dev/null; then
         scoop install telnet
+    fi
+
+    if ! hash pngcrush 2>/dev/null; then
+        # pngcrush -rem gAMA -rem cHRM -rem iCCP -rem sRGB infile.png outfile.png
+        scoop install pngcrush
     fi
 
     # if ! hash rsync 2>/dev/null; then
