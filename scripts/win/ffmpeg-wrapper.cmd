@@ -69,10 +69,10 @@ REM     -b:a 256k ^
 REM     -pass 2 ^
 REM      C:\Data\Projects\Italy\Italy1-5_422_10b.mp4
 
-REM 4k 444 10b
+REM 4k 422 10b
 ffmpeg.exe ^
     -y ^
-    -i "C:\Data\Projects\Italy\Italy1-5_444_10b.mov" ^
+    -i "C:\Data\Projects\Italy\Night\422_10b.mov" ^
     -framerate 24 ^
     -b:v 20000k ^
     -c:v libx265 ^
@@ -90,7 +90,7 @@ ffmpeg.exe ^
 
 ffmpeg.exe ^
     -y ^
-    -i "C:\Data\Projects\Italy\Italy1-5_444_10b.mov" ^
+    -i "C:\Data\Projects\Italy\Night\422_10b.mov" ^
     -framerate 24 ^
     -b:v 20000k ^
     -c:v libx265 ^
@@ -105,7 +105,7 @@ ffmpeg.exe ^
     -c:a aac ^
     -b:a 256k ^
     -x265-params pass=2 ^
-    C:\Data\Projects\Italy\Italy1-5_422_10b.mp4
+    C:\Data\Projects\Italy\Night\Baveno_Night_422_10b.mp4
 
 REM 4k 444 10b
 REM ffmpeg.exe ^
@@ -235,4 +235,5 @@ REM webm -> mp4
 REM "C:\Program Files\StaxRip\Apps\Encoders\ffmpeg\ffmpeg.exe" -fflags +genpts -r 24 -i "C:\Users\Home\Downloads\Bmpcc 4k metabones speedbooster vs m43 speedbooster-iEX1hVlbFqg.webm" 1.mp4
 
 REM download audio from youtube
+REM youtube-dl -F
 REM youtube-dl -f best -x --audio-format wav --audio-quality 0 https://www.youtube.com/watch?v=bllKLAiLo6g
