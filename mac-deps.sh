@@ -7,13 +7,13 @@ brew install flock \
     bash-completion \
     jq \
     gifsicle \
+    ncdu \
+    encfs \
+    gettext \
+    terraform \
     watch
 brew cask install osxfuse
-brew install encfs
-brew install gettext
 brew link --force gettext
-brew install flock
-brew install terraform
 
 # DNS
 # https://developers.cloudflare.com/argo-tunnel/downloads/
