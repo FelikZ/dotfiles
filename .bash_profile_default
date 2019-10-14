@@ -171,6 +171,10 @@ if [ "${OSTYPE#msys}" != "$OSTYPE" ]; then
         scoop install pngcrush
     fi
 
+    if ! hash terraform 2>/dev/null; then
+        scoop install terraform
+    fi
+
     # if ! hash rsync 2>/dev/null; then
     #     scoop install ../scripts/win/rsync-via-git.json
     # fi
