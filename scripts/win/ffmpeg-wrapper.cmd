@@ -10,9 +10,9 @@ REM     -f mp4 ^
 REM     -preset medium ^
 REM     -profile:v high ^
 REM     -pix_fmt yuv420p ^
-REM     -filter:v colorspace=all=bt709:irange=pc:range=pc ^
+REM     -filter:v colorspace=all=bt709:irange=pc:range=tv ^
 REM     -colorspace bt709 ^
-REM     -color_range pc ^
+REM     -color_range tv ^
 REM     -an ^
 REM     -pass 1 ^
 REM     NUL
@@ -26,9 +26,9 @@ REM     -f mp4 ^
 REM     -preset medium ^
 REM     -profile:v high ^
 REM     -pix_fmt yuv420p ^
-REM     -filter:v colorspace=all=bt709:irange=pc:range=pc ^
+REM     -filter:v colorspace=all=bt709:irange=pc:range=tv ^
 REM     -colorspace bt709 ^
-REM     -color_range pc ^
+REM     -color_range tv ^
 REM     -c:a aac ^
 REM     -b:a 256k ^
 REM     -pass 2 ^
@@ -45,9 +45,9 @@ REM     -f mp4 ^
 REM     -preset medium ^
 REM     -profile:v high422 ^
 REM     -pix_fmt yuv422p10le ^
-REM     -filter:v colorspace=all=bt709:irange=pc:range=pc ^
+REM     -filter:v colorspace=all=bt709:irange=pc:range=tv ^
 REM     -colorspace bt709 ^
-REM     -color_range pc ^
+REM     -color_range tv ^
 REM     -an ^
 REM     -pass 1 ^
 REM     NUL
@@ -61,18 +61,19 @@ REM     -f mp4 ^
 REM     -preset medium ^
 REM     -profile:v high422 ^
 REM     -pix_fmt yuv422p10le ^
-REM     -filter:v colorspace=all=bt709:irange=pc:range=pc ^
+REM     -filter:v colorspace=all=bt709:irange=pc:range=tv ^
 REM     -colorspace bt709 ^
-REM     -color_range pc ^
+REM     -color_range tv ^
 REM     -c:a aac ^
 REM     -b:a 256k ^
 REM     -pass 2 ^
 REM      C:\Data\Projects\Italy\Italy1-5_422_10b.mp4
 
 REM 4k 422 10b
+REM -ss 00:01:25 -to 00:01:30 ^
 ffmpeg.exe ^
     -y ^
-    -i "C:\Data\Projects\Italy\Night\422_10b.mov" ^
+    -i "C:\Data\Projects\Testing\Fields\Source.mov" ^
     -framerate 24 ^
     -b:v 20000k ^
     -c:v libx265 ^
@@ -81,16 +82,17 @@ ffmpeg.exe ^
     -preset faster ^
     -profile:v main422-10 ^
     -pix_fmt yuv422p10le ^
-    -filter:v colorspace=all=bt709:irange=pc:range=pc ^
+    -filter:v colorspace=all=bt709:irange=pc:range=tv ^
     -colorspace bt709 ^
-    -color_range pc ^
+    -color_range tv ^
     -an ^
     -x265-params pass=1 ^
     NUL
 
+REM -ss 00:01:25 -to 00:01:30 ^
 ffmpeg.exe ^
     -y ^
-    -i "C:\Data\Projects\Italy\Night\422_10b.mov" ^
+    -i "C:\Data\Projects\Testing\Fields\Source.mov" ^
     -framerate 24 ^
     -b:v 20000k ^
     -c:v libx265 ^
@@ -99,13 +101,13 @@ ffmpeg.exe ^
     -preset faster ^
     -profile:v main422-10 ^
     -pix_fmt yuv422p10le ^
-    -filter:v colorspace=all=bt709:irange=pc:range=pc ^
+    -filter:v colorspace=all=bt709:irange=pc:range=tv ^
     -colorspace bt709 ^
-    -color_range pc ^
+    -color_range tv ^
     -c:a aac ^
     -b:a 256k ^
     -x265-params pass=2 ^
-    C:\Data\Projects\Italy\Night\Baveno_Night_422_10b.mp4
+    C:\Data\Projects\Testing\Fields\Render_422_10b.mp4
 
 REM 4k 444 10b
 REM ffmpeg.exe ^
@@ -119,9 +121,9 @@ REM     -tune grain ^
 REM     -preset faster ^
 REM     -profile:v main444-10 ^
 REM     -pix_fmt yuv444p10le ^
-REM     -filter:v colorspace=all=bt709:irange=pc:range=pc ^
+REM     -filter:v colorspace=all=bt709:irange=pc:range=tv ^
 REM     -colorspace bt709 ^
-REM     -color_range pc ^
+REM     -color_range tv ^
 REM     -an ^
 REM     -x265-params pass=1 ^
 REM     NUL
@@ -137,9 +139,9 @@ REM     -tune grain ^
 REM     -preset faster ^
 REM     -profile:v main444-10 ^
 REM     -pix_fmt yuv444p10le ^
-REM     -filter:v colorspace=all=bt709:irange=pc:range=pc ^
+REM     -filter:v colorspace=all=bt709:irange=pc:range=tv ^
 REM     -colorspace bt709 ^
-REM     -color_range pc ^
+REM     -color_range tv ^
 REM     -c:a aac ^
 REM     -b:a 256k ^
 REM     -x265-params pass=2 ^
@@ -157,9 +159,9 @@ REM     -tune grain ^
 REM     -preset faster ^
 REM     -profile:v main444-10 ^
 REM     -pix_fmt yuv444p10le ^
-REM     -filter:v colorspace=all=bt709:irange=pc:range=pc ^
+REM     -filter:v colorspace=all=bt709:irange=pc:range=tv ^
 REM     -colorspace bt709 ^
-REM     -color_range pc ^
+REM     -color_range tv ^
 REM     -an ^
 REM     -x265-params pass=1 ^
 REM     NUL
@@ -175,9 +177,9 @@ REM     -tune grain ^
 REM     -preset faster ^
 REM     -profile:v main444-10 ^
 REM     -pix_fmt yuv444p10le ^
-REM     -filter:v colorspace=all=bt709:irange=pc:range=pc ^
+REM     -filter:v colorspace=all=bt709:irange=pc:range=tv ^
 REM     -colorspace bt709 ^
-REM     -color_range pc ^
+REM     -color_range tv ^
 REM     -c:a aac ^
 REM     -b:a 256k ^
 REM     -x265-params pass=2 ^
@@ -199,9 +201,9 @@ REM     -profile:v high ^
 REM     -pix_fmt yuv420p ^
 REM     -coder 1 ^
 REM     -movflags +faststart -g 30 -bf 2 ^
-REM     -filter:v colorspace=all=bt709:irange=pc:range=pc,scale=1920:-1 ^
+REM     -filter:v colorspace=all=bt709:irange=pc:range=tv,scale=1920:-1 ^
 REM     -colorspace bt709 ^
-REM     -color_range pc ^
+REM     -color_range tv ^
 REM     -an ^
 REM     -pass 1 ^
 REM     NUL
@@ -217,9 +219,9 @@ REM     -profile:v high ^
 REM     -pix_fmt yuv420p ^
 REM     -coder 1 ^
 REM     -movflags +faststart -g 30 -bf 2 ^
-REM     -filter:v colorspace=all=bt709:irange=pc:range=pc,scale=1920:-1 ^
+REM     -filter:v colorspace=all=bt709:irange=pc:range=tv,scale=1920:-1 ^
 REM     -colorspace bt709 ^
-REM     -color_range pc ^
+REM     -color_range tv ^
 REM     -c:a aac ^
 REM     -b:a 256k ^
 REM     -pass 2 ^
@@ -236,4 +238,4 @@ REM "C:\Program Files\StaxRip\Apps\Encoders\ffmpeg\ffmpeg.exe" -fflags +genpts -
 
 REM download audio from youtube
 REM youtube-dl -F
-REM youtube-dl -f best -x --audio-format wav --audio-quality 0 https://www.youtube.com/watch?v=bllKLAiLo6g
+REM youtube-dl -f 251 -x --audio-format wav --audio-quality 0 https://www.youtube.com/watch?v=bllKLAiLo6g

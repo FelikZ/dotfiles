@@ -3,13 +3,13 @@ setlocal ENABLEDELAYEDEXPANSION
 
 REM for %%f in (%*) do (
 for %%f in (
-    "C:\Data\Projects\EyeContact\Eye-Contact-Experiment-2019.mov"
+    "C:\Data\Projects\Italy\Video3\Italy-Lago-Maggiore.mov"
 ) do (
     REM %%~nf
     set in_file=%%~f
 
     REM set out_file=%%~dpf%%~nf-final.mp4
-    set out_file=C:\Data\GDrive\Video\FelikZ\EyeContact2019\%%~nf-final.mp4
+    set out_file=C:\Data\GDrive\Video\FelikZ\Italy-Islands\%%~nf-final.mp4
 
     echo "!in_file! -> !out_file!"
 
@@ -25,7 +25,7 @@ for %%f in (
         -c:a copy ^
         -f mp4 ^
         -tune grain ^
-        -preset faster ^
+        -preset medium ^
         -profile:v main422-10 ^
         -pix_fmt yuv422p10le ^
         -vf scale=in_range=tv:out_range=tv ^
@@ -43,7 +43,7 @@ for %%f in (
         -c:v libx265 ^
         -f mp4 ^
         -tune grain ^
-        -preset faster ^
+        -preset medium ^
         -profile:v main422-10 ^
         -pix_fmt yuv422p10le ^
         -vf scale=in_range=tv:out_range=tv ^
