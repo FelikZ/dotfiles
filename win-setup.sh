@@ -9,11 +9,6 @@ test -f ~/.profile && . ~/.profile
 test -f ~/.bashrc && . ~/.bashrc
 
 source ~/dotfiles/scripts/win/fix_docker.sh
-# Workaround for Docker for Windows in Git Bash.
-docker()
-{
-        (export MSYS_NO_PATHCONV=1; "docker.exe" "$@")
-}
 export PATH="$PATH:/c/Program Files/StaxRip/Apps/Encoders/ffmpeg"
 
 EOF
