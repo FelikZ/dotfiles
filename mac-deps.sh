@@ -5,15 +5,21 @@ brew install flock \
     tree \
     git \
     bash-completion \
+    shellcheck \
+    shfmt \
     jq \
     gifsicle \
     ncdu \
     encfs \
     gettext \
     terraform \
+    kubectx \
     watch
+brew reinstall git
 brew cask install osxfuse
 brew link --force gettext
+
+pip install pre-commit
 
 # DNS
 # https://developers.cloudflare.com/argo-tunnel/downloads/
@@ -41,6 +47,10 @@ echo
 find /Applications/Docker.app \
     -type f -name "*.bash-completion" \
     -exec ln -sf "{}" "$(brew --prefix)/etc/bash_completion.d/" \;
+
+# zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+chsh -s "$(command -v zsh)"
 
 # tricks
 

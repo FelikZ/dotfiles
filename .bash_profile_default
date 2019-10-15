@@ -2,104 +2,26 @@
 # shellcheck disable=SC2002
 shopt -s extglob
 
-if [ "${BASH_SOURCE[0]}" != "" ]; then
-    DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-elif [ "$DASH_SOURCE" != "" ]; then
-    DIR="$(cd "$(dirname "$DASH_SOURCE")" && pwd)"
-else
-    DIR="$(cd "$(dirname "$0")" && pwd)"
-fi
+source ~/.profile_default
 
-# PATH
-export PATH="$PATH:./node_modules/.bin"
-if [ "${OSTYPE#msys}" != "$OSTYPE" ]; then
-    PATH="$PATH:$(
-        # shellcheck disable=SC2164
-        cd ~
-        pwd
-    )/scoop/shims"
-    export PATH
-fi
+# Bash only
 
-# lang
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-
-# colors
-export CLICOLOR=1
-export TERM=xterm-256color
-export LSCOLORS=cxGxBxDxCxEgEdxbxgxccA
 export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[34m\]\h:\[\033[0;36m\]\w\[\033[m\] \[\033[0;37m\]\$ "
 # export LSCOLORS=GxFxCxDxBxegedabagaced
 # export PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
-# Ubuntu dropbox fix
-# eval `dbus-launch`
-export DBUS_SESSION_BUS_ADDRESS="/dev/null"
-
-# vim solarized fix
-# printf '\x1B]4;234;rgb:00/2b/36;235;rgb:07/36/42;240;rgb:58/6e/75;241;rgb:65/7b/83;244;rgb:83/94/96;245;rgb:93/a1/a1;254;rgb:ee/e8/d5;230;rgb:fd/f6/e3;136;rgb:b5/89/00;166;rgb:cb/4b/16;160;rgb:dc/32/2f;125;rgb:d3/36/82;61;rgb:6c/71/c4;33;rgb:26/8b/d2;37;rgb:2a/a1/98;64;rgb:85/99/00\a'
-
-if hash dircolors 2>/dev/null; then
-    eval "$(dircolors "${DIR}"/.dircolors)"
-else
-    export CLICOLOR=1
-fi
-
-if [ -n "${TMUX_PANE}" ]; then
-    ssh() {
-        tmux rename-window -t"${TMUX_PANE}" "$*"
-        command ssh "$@"
-        tmux rename-window -t"${TMUX_PANE}" "bash"
-    }
-fi
-
-_ssh_auth_save() {
-    ln -sf "$SSH_AUTH_SOCK" "$HOME/ssh-auth-sock.$HOSTNAME"
-}
-_ssh_fix_env() {
-    eval "$(tmux show-environment -t 0 | grep '^SSH_AUTH_SOCK')"
-}
-
-# aliases
-alias pip-requirements="cat requirements.txt | sed -n -E 's/^([^=]+).*/\1/p' | tr '[:upper:]' '[:lower:]' | xargs -L 1 -I {} bash -c 'pip list | grep {}'"
-alias docker-rm-images='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
-alias docker-rm-containers='docker rm $(docker ps -qa --no-trunc --filter "status=exited")'
-alias docker-rm-volumes='docker volume rm $(docker volume ls -qf "dangling=true")'
-alias docker-clean='docker-rm-containers; docker-rm-images; docker-rm-volumes'
-alias docker-ips="docker ps -q | xargs -n 1 docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} {{ .Name }}' | sed 's/ \// /'"
-# docker-heal
-# /var/lib/docker/devicemapper/ext
-# find /proc/*/mounts | xargs grep -E "01fac2f"
-# kill -9 ids
-# lsof -i tcp:80
-alias lsof-tcp='lsof -iTCP -sTCP:LISTEN -P -n'
-alias screen='export HOSTNAME=$(hostname) ; _ssh_auth_save ; screen'
-alias tmux='export HOSTNAME=$(hostname) ;_ssh_auth_save ; tmux'
-alias lock='sleep 2 && xtrlock'
-alias json='python -mjson.tool'
-alias gif-lossy='gifsicle -j --colors=16 -O3 --lossy=50'
-alias gif-lossy-scaled='gifsicle -j --colors=16 -O3 --lossy=50 --scale=0.75'
-date-cmd() {
-    "$@" | while read -r pong; do echo "$(date '+%Y-%m-%d %H:%M:%S (%:z)'): $pong"; done
-}
-
-alias bench-disk='fio --randrepeat=1 --ioengine=libaio --direct=1 --gtod_reduce=1 --name=test --filename=test --bs=4k --iodepth=64 --size=4G --readwrite=randrw --rwmixread=75'
-
-# https://github.com/ahmetb/kubectx
-if ! hash kubens 2>/dev/null; then
-    if hash brew 2>/dev/null; then
-        echo 'Installing kubens...'
-        brew install kubectx
-    elif [ "${OSTYPE#linux}" != "$OSTYPE" ]; then
-        echo 'Installing kubens...'
-        set -x
-        sudo bash --noprofile --norc -ci 'cd /opt ; git clone https://github.com/ahmetb/kubectx'
-        sudo bash --noprofile --norc -ci 'cd /opt/kubectx; git checkout f986c148b25b04ae282378f1c4ef3df3fe738628'
-        sudo ln -sf /opt/kubectx/kubectx /usr/local/bin/kubectx
-        sudo ln -sf /opt/kubectx/kubens /usr/local/bin/kubens
-        set +x
+if [ ! "${OSTYPE#msys}" != "$OSTYPE" ]; then
+    if [ ! -f /etc/bash_completion.d/git-completion.bash ] && [ ! -f "$(brew --prefix)/etc/bash_completion" ]; then
+        sudo curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o /etc/bash_completion.d/git-completion.bash
     fi
+elif [ "${OSTYPE#darwin}" != "$OSTYPE" ]; then
+    if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
+        # shellcheck source=/dev/null
+        source "$(brew --prefix)/etc/bash_completion"
+    fi
+elif [ -f /etc/bash_completion ]; then
+    # shellcheck source=/dev/null
+    source /etc/bash_completion
 fi
 
 if [ -d "/opt/kubectx/completion" ]; then
@@ -108,6 +30,18 @@ if [ -d "/opt/kubectx/completion" ]; then
     # shellcheck source=/dev/null
     source "/opt/kubectx/completion/kubens.bash"
 fi
+
+_complete_ssh_hosts() {
+    local cur prev opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD - 1]}"
+    opts=$(grep '^Host' ~/.ssh/config ~/.ssh/config.d/* 2>/dev/null | grep -v '[?*]' | cut -d ' ' -f 2-)
+
+    COMPREPLY=($(compgen -W "$opts" -- ${cur}))
+    return 0
+}
+complete -F _complete_ssh_hosts ssh
 
 ## how to find what eats space
 # ncdu
@@ -142,100 +76,3 @@ fi
 #     val=${config["$key"]}
 #     echo "$key=$value"
 # done
-
-if [ "${OSTYPE#msys}" != "$OSTYPE" ]; then
-    if ! hash scoop 2>/dev/null; then
-        echo 'Installing scoop...'
-        powershell -Command 'Set-ExecutionPolicy RemoteSigned -scope CurrentUser; iex (new-object net.webclient).downloadstring("https://get.scoop.sh")'
-        scoop update
-    fi
-
-    if ! hash shfmt 2>/dev/null; then
-        scoop install shfmt
-    fi
-
-    if ! hash shellcheck 2>/dev/null; then
-        scoop install shellcheck
-    fi
-
-    if ! hash make 2>/dev/null; then
-        scoop install make
-    fi
-
-    if ! hash telnet 2>/dev/null; then
-        scoop install telnet
-    fi
-
-    if ! hash pngcrush 2>/dev/null; then
-        # pngcrush -rem gAMA -rem cHRM -rem iCCP -rem sRGB infile.png outfile.png
-        scoop install pngcrush
-    fi
-
-    if ! hash terraform 2>/dev/null; then
-        scoop install terraform
-    fi
-
-    # if ! hash rsync 2>/dev/null; then
-    #     scoop install ../scripts/win/rsync-via-git.json
-    # fi
-
-    if ! hash python 2>/dev/null; then
-        scoop install python
-        pip install --upgrade pip
-    fi
-
-    if ! hash pre-commit 2>/dev/null; then
-        pip install pre-commit
-    fi
-fi
-
-if [ "${OSTYPE#darwin}" != "$OSTYPE" ]; then
-    if [ ! -f "$(brew --prefix)/etc/bash_completion" ]; then
-        brew install bash-completion
-        brew reinstall git
-    fi
-
-    if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
-        # shellcheck source=/dev/null
-        source "$(brew --prefix)/etc/bash_completion"
-    fi
-
-    if ! hash shfmt 2>/dev/null; then
-        brew install shfmt
-    fi
-
-    if ! hash shellcheck 2>/dev/null; then
-        brew install shellcheck
-    fi
-
-    if ! hash pre-commit 2>/dev/null; then
-        pip install pre-commit
-    fi
-fi
-
-if [ ! "${OSTYPE#msys}" != "$OSTYPE" ]; then
-    if [ ! -f /etc/bash_completion.d/git-completion.bash ] && [ ! -f "$(brew --prefix)/etc/bash_completion" ]; then
-        sudo curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o /etc/bash_completion.d/git-completion.bash
-    fi
-fi
-
-if [ -f /etc/bash_completion ]; then
-    # shellcheck source=/dev/null
-    source /etc/bash_completion
-fi
-
-_complete_ssh_hosts() {
-    local cur prev opts
-    COMPREPLY=()
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    prev="${COMP_WORDS[COMP_CWORD - 1]}"
-    opts=$(grep '^Host' ~/.ssh/config ~/.ssh/config.d/* 2>/dev/null | grep -v '[?*]' | cut -d ' ' -f 2-)
-
-    COMPREPLY=($(compgen -W "$opts" -- ${cur}))
-    return 0
-}
-complete -F _complete_ssh_hosts ssh
-
-if [ ! -d ~/.tmux/plugins/tpm ]; then
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-fi

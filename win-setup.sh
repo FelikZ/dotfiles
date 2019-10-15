@@ -21,3 +21,47 @@ source ~/dotfiles/light-setup.sh
 source ~/dotfiles/auto-ssh-agent.sh
 
 EOF
+
+if ! hash scoop 2>/dev/null; then
+    echo 'Installing scoop...'
+    powershell -Command 'Set-ExecutionPolicy RemoteSigned -scope CurrentUser; iex (new-object net.webclient).downloadstring("https://get.scoop.sh")'
+    scoop update
+fi
+
+if ! hash shfmt 2>/dev/null; then
+    scoop install shfmt
+fi
+
+if ! hash shellcheck 2>/dev/null; then
+    scoop install shellcheck
+fi
+
+if ! hash make 2>/dev/null; then
+    scoop install make
+fi
+
+if ! hash telnet 2>/dev/null; then
+    scoop install telnet
+fi
+
+if ! hash pngcrush 2>/dev/null; then
+    # pngcrush -rem gAMA -rem cHRM -rem iCCP -rem sRGB infile.png outfile.png
+    scoop install pngcrush
+fi
+
+if ! hash terraform 2>/dev/null; then
+    scoop install terraform
+fi
+
+# if ! hash rsync 2>/dev/null; then
+#     scoop install ../scripts/win/rsync-via-git.json
+# fi
+
+if ! hash python 2>/dev/null; then
+    scoop install python
+    pip install --upgrade pip
+fi
+
+if ! hash pre-commit 2>/dev/null; then
+    pip install pre-commit
+fi
