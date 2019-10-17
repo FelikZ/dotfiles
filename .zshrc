@@ -24,7 +24,7 @@ source "$ZSH/oh-my-zsh.sh"
 setopt prompt_subst
 # $(git_prompt_info)
 USER_PS='%{$fg[cyan]%}%n'
-if [ "${USER}" = 'felikz' ]; then
+if [ "${USER}" = 'root' ]; then
     USER_PS='%{$fg_bold[red]%}%n'
 fi
 # shellcheck disable=2154
