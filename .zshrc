@@ -32,3 +32,4 @@ export PS1=${USER_PS}'%{$reset_color%}@%{$fg[yellow]%}%m:%{$fg[green]%}$(shrink_
 
 source "$HOME/.profile_default"
 source "$HOME/dotfiles/auto-ssh-agent.sh"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
