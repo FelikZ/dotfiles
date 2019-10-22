@@ -3,6 +3,7 @@
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
 ln -sf "$DIR/.zshrc" "$HOME/.zshrc"
+ln -sf "$DIR/.zprofile" "$HOME/.zprofile"
 ln -sf "$DIR/.bash_profile_default" "$HOME/.bash_profile_default"
 ln -sf "$DIR/.profile_default" "$HOME/.profile_default"
 ln -sf "$DIR/.dircolors" "$HOME/.dircolors"
