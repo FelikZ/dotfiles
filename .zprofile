@@ -6,4 +6,4 @@ eval "$(jenv init - --no-rehash)"
 # (jenv rehash &) 2> /dev/null
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && source "/usr/local/opt/nvm/nvm.sh"  --no-use  # This loads nvm
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && source "/usr/local/opt/nvm/nvm.sh" # This loads nvm
