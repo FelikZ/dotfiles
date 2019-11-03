@@ -1,19 +1,32 @@
-sudo apt-get remove vim vim-runtime gvim vim-tiny vim-common vim-gui-common
-sudo apt-get install lua5.1 liblua5.1-dev libncurses5-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev libatk1.0-dev make
+#!/usr/bin/env bash
 
-wget -O "vim-7.4.tar.bz2" "ftp://ftp.vim.org/pub/vim/unix/vim-7.4.tar.bz2"
-tar -jxf "vim-7.4.tar.bz2"
-cd "vim74"
-./configure --with-features=huge \
-            --enable-multibyte \
-            --enable-rubyinterp \
-            --enable-pythoninterp \
-            --with-python-config-dir=/usr/lib/python2.7/config \
-            --enable-perlinterp \
-            --enable-luainterp \
-            --enable-cscope --prefix=/usr
-make VIMRUNTIMEDIR=/usr/share/vim/vim74
-sudo make install
+# zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+chsh -s "$(command -v zsh)"
 
-cd ".."
-rm -Rf "vim74" "vim-7.4.tar.bz2"
+sudo add-apt-repository ppa:longsleep/golang-backports
+sudo apt-get update -y
+sudo apt-get install -y python3-pip \
+    golang-go
+
+go get -u mvdan.cc/sh/cmd/shfmt
+
+scversion="v0.6.0" # or "v0.4.7", or "latest"
+wget -qO- "https://storage.googleapis.com/shellcheck/shellcheck-${scversion?}.linux.x86_64.tar.xz" | tar -xJv
+sudo cp "shellcheck-${scversion}/shellcheck" /usr/local/bin/
+sudo chown $USER /usr/local/bin/shellcheck
+sudo chmod +x /usr/local/bin/shellcheck
+rm -rf shellcheck-*
+
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 10
+sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 10
+#sudo ln -sf "$(which pip3)" /usr/bin/pip
+#sudo chmod +x /usr/bin/pip
+
+python -m pip install --upgrade pip
+
+pip install --user pre-commit
+(cd ~/dotfiles && pre-commit install)
+
+source links.sh
+source mount.sh

@@ -2,6 +2,8 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
 
 # PATH
 export PATH="$PATH:./node_modules/.bin"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
 if [ "${OSTYPE#msys}" != "$OSTYPE" ]; then
     PATH="$PATH:$(
         # shellcheck disable=SC2164
