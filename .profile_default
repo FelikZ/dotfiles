@@ -66,6 +66,13 @@ date-cmd() {
 
 alias bench-disk='fio --randrepeat=1 --ioengine=libaio --direct=1 --gtod_reduce=1 --name=test --filename=test --bs=4k --iodepth=64 --size=4G --readwrite=randrw --rwmixread=75'
 
+if [ "$(which landscape >/dev/null ; echo $?)" = '1' ]; then
+    # git clone https://github.com/coinbase/terraform-landscape.git
+    # cd terraform-landscape
+    # docker build -t landscape .
+    alias landscape="docker run -i --rm landscape"
+fi
+
 # Tmux
 if [ -n "${TMUX_PANE}" ]; then
     ssh() {
