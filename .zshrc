@@ -24,6 +24,7 @@ plugins=(
 source "$ZSH/oh-my-zsh.sh"
 
 setopt prompt_subst
+setopt no_share_history
 # $(git_prompt_info)
 USER_PS='%{$fg[cyan]%}%n'
 if [ "${USER}" = 'root' ]; then
