@@ -1,20 +1,32 @@
 @echo off
 setlocal ENABLEDELAYEDEXPANSION
 
+REM Directory NAME matters for the output dir
 REM for %%f in (%*) do (
 for %%f in (
-    "C:\Data\Projects\Italy\Video3\Italy-Lago-Maggiore.mov"
+    "C:\Data\Projects\Italy\Video4\Source.mov"
 ) do (
     REM %%~nf
     set in_file=%%~f
 
-    REM set out_file=%%~dpf%%~nf-final.mp4
-    set out_file=C:\Data\GDrive\Video\FelikZ\Italy-Islands\%%~nf-final.mp4
+    for %%a in (%%~f) do for %%b in ("%%~dpa\.") do set "parent=%%~nxb"
 
-    echo "!in_file! -> !out_file!"
+    set out_dir=C:\Data\GDrive\Video\FelikZ\!parent!
+
+    echo.
+    echo Creating "!out_dir!"
+    mkdir "!out_dir!"
+
+    set out_file=!out_dir!\%%~nf-final.mp4
+
+    echo.
+    echo Writting
+    echo ** !in_file!
+    echo ++ !out_file!
 
     REM -ss 00:01:25 -to 00:01:30 ^
-    REM -c:a copy ^
+    REM -c:a aac ^
+    REM -b:a 256k ^
 
     ffmpeg.exe ^
         -y ^
@@ -41,6 +53,7 @@ for %%f in (
         -framerate 24 ^
         -b:v 20000k ^
         -c:v libx265 ^
+        -c:a copy ^
         -f mp4 ^
         -tune grain ^
         -preset medium ^
@@ -49,10 +62,8 @@ for %%f in (
         -vf scale=in_range=tv:out_range=tv ^
         -colorspace bt709 ^
         -color_range tv ^
-        -c:a aac ^
-        -b:a 256k ^
         -x265-params pass=2 ^
         "!out_file!"
 )
 
-REM shutdown -s -t 1800
+REM shutdown -s -t 3600
