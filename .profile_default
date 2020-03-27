@@ -1,3 +1,4 @@
+# shellcheck disable=2148
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
 
 # PATH
@@ -71,6 +72,12 @@ if [ "$(which landscape >/dev/null ; echo $?)" = '1' ]; then
     # cd terraform-landscape
     # docker build -t landscape .
     alias landscape="docker run -i --rm landscape"
+fi
+
+# Windows WSL
+if [ -d /mnt/c ] && [ "$OSTYPE" = "linux-gnu" ] && ! hash docker 2>/dev/null; then
+    alias docker=docker.exe
+    alias docker-compose=docker-compose.
 fi
 
 # Tmux
