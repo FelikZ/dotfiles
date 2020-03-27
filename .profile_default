@@ -77,7 +77,7 @@ fi
 # Windows WSL
 if [ -d /mnt/c ] && [ "$OSTYPE" = "linux-gnu" ] && ! hash docker 2>/dev/null; then
     alias docker=docker.exe
-    alias docker-compose=docker-compose.
+    alias docker-compose=docker-compose.exe
 fi
 
 # Tmux
