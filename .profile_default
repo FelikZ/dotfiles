@@ -76,8 +76,7 @@ fi
 
 # Windows WSL
 if [ -d /mnt/c ] && [ "$OSTYPE" = "linux-gnu" ] && ! hash docker 2>/dev/null; then
-    alias docker=docker.exe
-    alias docker-compose=docker-compose.exe
+    export DOCKER_HOST=tcp://localhost:2375
 fi
 
 # Tmux
