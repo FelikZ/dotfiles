@@ -10,6 +10,8 @@ CASE_SENSITIVE="true"
 # shellcheck disable=2034
 DISABLE_AUTO_UPDATE="true"
 # shellcheck disable=2034
+ZSH_DOTENV_PROMPT="true"
+# shellcheck disable=2034
 plugins=(
     git
     gitfast
