@@ -109,6 +109,48 @@ ffmpeg.exe ^
     -x265-params pass=2 ^
     C:\Data\Projects\Testing\Fields\Render_422_10b.mp4
 
+
+REM NVENC 2 pass
+REM 4k 422 10b
+REM -ss 00:01:25 -to 00:01:30 ^
+REM ffmpeg.exe ^
+REM     -y ^
+REM     -i "C:\Data\Projects\Chai\YouTube.mov" ^
+REM     -framerate 24 ^
+REM     -b:v 20000k ^
+REM     -c:v nvenc_hevc ^
+REM     -f mp4 ^
+REM     -preset medium ^
+REM     -profile:v main10 ^
+REM     -pix_fmt yuv420p ^
+REM     -colorspace bt709 ^
+REM     -color_range tv ^
+REM     -an ^
+REM     -rc vbr_2pass ^
+REM     -ss 00:01:25 -to 00:01:30 ^
+REM     -pass 1 ^
+REM     -2pass -1 ^
+REM     C:\Data\Projects\Chai\Render_420_8b.mp4
+
+REM ffmpeg.exe ^
+REM     -y ^
+REM     -i "C:\Data\Projects\Chai\YouTube.mov" ^
+REM     -framerate 24 ^
+REM     -b:v 20000k ^
+REM     -c:v nvenc_hevc ^
+REM     -f mp4 ^
+REM     -preset medium ^
+REM     -profile:v main10 ^
+REM     -pix_fmt yuv420p ^
+REM     -colorspace bt709 ^
+REM     -color_range tv ^
+REM     -c:a aac ^
+REM     -rc vbr_2pass ^
+REM     -ss 00:01:25 -to 00:01:30 ^
+REM     -pass 2 ^
+REM     -2pass -1 ^
+REM     C:\Data\Projects\Chai\Render_420_8b.mp4
+
 REM 4k 444 10b
 REM ffmpeg.exe ^
 REM     -y ^

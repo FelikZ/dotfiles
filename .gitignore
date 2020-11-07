@@ -12,3 +12,5 @@
 /lib
 /man
 tags
+.vscode
+*.log
