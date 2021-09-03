@@ -27,6 +27,10 @@ fi
 export TERM=xterm-256color
 export LSCOLORS=cxGxBxDxCxEgEdxbxgxccA
 
+# OSX python fix
+export CRYPTOGRAPHY_DONT_BUILD_RUST=1
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
 # Ubuntu dropbox fix
 # eval `dbus-launch`
 export DBUS_SESSION_BUS_ADDRESS="/dev/null"
