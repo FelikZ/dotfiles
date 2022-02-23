@@ -35,6 +35,8 @@ fi
 # shellcheck disable=2154
 export PS1=${USER_PS}'%{$reset_color%}@%{$fg[yellow]%}%m:%{$fg[green]%}$(shrink_path -f)%{$reset_color%} %(!.#.$) '
 
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 source "$HOME/.profile_default"
 source "$HOME/dotfiles/auto-ssh-agent.sh"
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
