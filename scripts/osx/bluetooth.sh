@@ -8,6 +8,8 @@ brew services start noclamshell
 # disable bluetooth
 # https://forums.macrumors.com/threads/monterey-bluetooth-wake-issue.2319613/page-2?post=30819437#post-30819437
 brew install sleepwatcher && brew install blueutil
-echo "/opt/homebrew/bin/blueutil -p 0" >~/.sleep && echo "/opt/homebrew/bin/blueutil -p 1" >~/.wakeup
-chmod 755 ~/.sleep && chmod 755 ~/.wakeup
+echo "$(which blueutil) -p 0" >~/.sleep
+echo "$(which blueutil) -p 1" >~/.wakeup
+chmod 755 ~/.sleep
+chmod 755 ~/.wakeup
 brew services restart sleepwatcher
