@@ -13,3 +13,12 @@ echo "$(which blueutil) -p 1" >~/.wakeup
 chmod 755 ~/.sleep
 chmod 755 ~/.wakeup
 brew services restart sleepwatcher
+
+# wake at 09/05/22 08:50:19 by 'com.apple.alarm.user-visible-Weekly Usage Report'
+sudo pmset schedule cancelall
+
+# disable wake up and find my mac
+sudo pmset -a tcpkeepalive 0
+sudo pmset -a powernap 0
+
+# pmset -g log |grep -B 3 -A 10 "Wake Request"
