@@ -18,7 +18,7 @@ brew services restart sleepwatcher
 sudo pmset schedule cancelall
 
 # disable wake up and find my mac
-sudo pmset -a tcpkeepalive 0
+#sudo pmset -a tcpkeepalive 0
 sudo pmset -a powernap 0
 
 # pmset -g log |grep -B 3 -A 10 "Wake Request"
