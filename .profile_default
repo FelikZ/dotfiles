@@ -45,6 +45,26 @@ _ssh_auth_save() {
 _ssh_fix_env() {
     eval "$(tmux show-environment -t 0 | grep '^SSH_AUTH_SOCK')"
 }
+# Call the function to make sure that it is loaded.
+# shellcheck disable=2218
+_ssh 2>/dev/null
+# Save the original function.
+functions["_ssh-orig"]=${functions["_ssh"]}
+# Redefine your completion function referencing the original.
+# shellcheck disable=2120
+_ssh() {
+    ec="0"
+    ec=_ssh-orig "$@"
+
+    if [ -f /tmp/ssh_shim.cache ]; then
+        local -a _values
+        # shellcheck disable=2207
+        _values=($(awk -F',' '{print $4}' </tmp/ssh_shim.cache | sort | uniq | tr -d '"'))
+        compadd -a _values
+    fi
+
+    return "${ec}"
+}
 
 # aliases
 alias pip-requirements="cat requirements.txt | sed -n -E 's/^([^=]+).*/\1/p' | tr '[:upper:]' '[:lower:]' | xargs -L 1 -I {} bash -c 'pip list | grep {}'"
