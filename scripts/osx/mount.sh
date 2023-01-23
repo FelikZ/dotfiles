@@ -8,7 +8,7 @@ ENCFS_SSH_DIR="${ENCFS_MOUNT_DEST}/.ssh"
 sudo mkdir -p "${ENCFS_MOUNT_DEST}"
 sudo chown "${USER}" "${ENCFS_MOUNT_DEST}"
 
-umount "${ENCFS_MOUNT_DEST}" || true
+umount "${ENCFS_MOUNT_DEST}" 2>/dev/null || true
 encfs "${ENCFS_MOUNT_SOURCE}" "${ENCFS_MOUNT_DEST}"
 
 chmod -R 0700 "${ENCFS_SSH_DIR}"
