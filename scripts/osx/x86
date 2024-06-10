@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+eval "$(/usr/local/bin/brew shellenv)"
+arch -x86_64 zsh
+eval "$(/usr/local/bin/brew shellenv)"

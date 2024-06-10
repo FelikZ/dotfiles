@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # shellcheck disable=2016,1090
 
+DISABLE_MAGIC_FUNCTIONS=true
+
 export ZSH="$HOME/.oh-my-zsh"
 
 # shellcheck disable=2034
@@ -18,7 +20,7 @@ plugins=(
     git-extras
     bundler
     dotenv
-    osx
+    macos
     docker
     shrink-path
 )
