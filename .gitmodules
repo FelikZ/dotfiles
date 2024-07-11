@@ -1,0 +1,3 @@
+[submodule "scripts/osx/docker-volume-snapshot"]
+	path = scripts/osx/docker-volume-snapshot
+	url = https://github.com/junedkhatri31/docker-volume-snapshot
